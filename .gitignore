@@ -1,2 +1,7 @@
 .kitchen
+.modules
+.resource_types
 vendor
+.plan_cache.json
+.task_cache.json
+bolt-debug.log
