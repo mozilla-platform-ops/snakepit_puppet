@@ -1,0 +1,29 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+  privileged: true
+  # provision_command:
+  # - apt-get update
+  # - apt-get install -y ruby
+
+provisioner:
+  name: puppet_bolt
+  bolt_version: 2.40.2  # last that works with ruby <2.5.3 (1804)
+
+platforms:
+  - name: ubuntu-18.04
+    driver_config:
+      image: ubuntu:bionic
+      platform: ubuntu
+
+verifier:
+  name: inspec
+
+suites:
+  - name: snakepit-head
+    provisioner:
+      bolt_commands:
+      - bolt --help
+      - bolt --version
+  # - name: snakepit-worker
