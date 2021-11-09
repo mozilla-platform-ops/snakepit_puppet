@@ -11,4 +11,8 @@ class roles::snakepit_head {
       munge_key_content => base64('decode', lookup('munge::munge_key_content'))
     }
 
+    class { 'moz_slurm':
+      slurm_version => '21.08'
+    }
+
 }
