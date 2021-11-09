@@ -9,5 +9,8 @@ defaults:
 
 hierarchy:
 
+  - name: "Per-node data"
+    path: "nodes/%{facts.hostname}.yaml"
+
   - name: "Common data to all"
     path: "common.yaml"
