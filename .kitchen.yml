@@ -46,9 +46,16 @@ suites:
       hostname: mlchead-kitchen
     provisioner:
       custom_options: '-e "include roles::snakepit_head"'
+  # - name: snakepit-worker
+  #   driver_config:
+  #     hostname: mlc0-kitchen
+  #   provisioner:
+  #     custom_options: '-e "include roles::snakepit_worker"'
+
+  # kitchen-puppet puppet_bolt options
   #     bolt_commands:
   #     - bolt --help
   #     - bolt --version
   #     - bolt apply manifests/snakepit_head.pp
   #     - bolt task show
-  # # - name: snakepit-worker
+  # how does it get hostname (to run locally)? or how do files get to the host (to run remotely)?
