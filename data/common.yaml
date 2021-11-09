@@ -1,2 +1,6 @@
 # Example hiera data file
 # Docs Reference: https://puppet.com/docs/bolt/latest/applying_manifest_blocks.html#concept-4446
+
+# slurm::install_torque_wrapper: true
+# slurm::install_pam: true
+# slurm::slurm_group_gid: 93
