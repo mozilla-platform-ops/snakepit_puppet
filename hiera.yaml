@@ -1,2 +1,13 @@
 # Example hiera configuration file
 # Docs Reference: https://puppet.com/docs/puppet/latest/hiera_config_yaml_5.html
+
+---
+version: 5
+defaults:
+  data_hash: yaml_data
+  datadir: data
+
+hierarchy:
+
+  - name: "Common data to all"
+    path: "common.yaml"

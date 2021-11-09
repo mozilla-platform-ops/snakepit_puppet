@@ -1,6 +1,39 @@
 # Example hiera data file
 # Docs Reference: https://puppet.com/docs/bolt/latest/applying_manifest_blocks.html#concept-4446
 
-# slurm::install_torque_wrapper: true
-# slurm::install_pam: true
-# slurm::slurm_group_gid: 93
+# test values, replaced with values from vault in prod
+
+munge::munge_key_content: !binary |-
+  Pljvv73ljprjvKrvv73vv71eIhZW77+977+9IO+/ve+/vXLvv71x77+977+9JO+/vXHGmduBCu+/
+  vc6d77+9Rxvvv73vv73vv71zcWfvv70B77+9Je+/vR7vv71BRu+/ve+/ve+/ve+/ve+/ve+/vX0s
+  Tw7vv73vv71aE++/ve+/vUPvv73vv71w77+9Ae+/vVREbW1y77+977+9cU8vHu+/ve+/ve+/vXJO
+  77+977+9be+/vUkCfGBK77+9KhLvv73vv70SGO+/vX0KUzQude+/vRrvv73vv73vv73vv71u77+9
+  M0si77+977+977+9HAptdu+/vW4ty6suXXZO77+9A3vvv715H3Dvv71TVlvvv71HWBTvv73vv70E
+  Awzvv71/77+9E++/ve+/vTLvv70577+977+9F1Dvv73vv73SkO+/vRNYIO+/vcKY77+977+977+9
+  Nyfvv70m77+9WxZpdFNB77+90q7vv73vv73vv71W77+9aDkf77+977+977+9fzZ977+9a3Hvv71+
+  NO+/ve+/vWPvv73vv73vv73vv71LMDXIm++/ve+/ve+/vcmZLe+/ve+/vR/vv70K77+9S++/ve+/
+  ve+/vQ5HCxDvv73vv71XVTdX77+9Yu+/vT3vv73vv70PIjN277+9ABYY77+977+9amt277+977+9
+  M++/vSDvv71i77+977+9Oe+/vVMyATFHCu+/vV3vv73vv71477+9Me+/vUPjjbYmcO+/vRYQde+/
+  ve+/ve+/vSdM77+9AABi77+9GELvv70IPjcPZ++/vVbvv73vv73vv73vv73murtK77+977+977+9
+  Z++/vS1y77+9Dlzvv71mfArvv73vv70A77+977+95rmLeDfvv73vv73vv70V77+9VRdI77+977+9
+  YVvvv70377+977+9Jh3vv70AMH4/Hu+/vQk277+9Bn5APxpB77+977+9JWNcfmjvv70G77+9MNey
+  77+977+977+9Yu+/ve+/vQlzchvvv73vv73vv70877+977+977+977+977+9JO+/vQBVS2Xvv73v
+  v719y6Lvv71w77+9Cjrvv70pUxkqce+/ve+/vUHYnu+/vURmQ3Hvv70+77+9S0BPPe+/ve+/vVNu
+  77+95rirSu+/ve+/vW15Ggfvv71YeO+/vQow77+9IO+/vQ5877+9QC7Spe+/veaCke+/ve+/vUjv
+  v71ZNe+/vX/vv73vv70Y77+9Ie+/ve+/vVXPju+/vQLvv70K77+9Ee+/vR5L77+977+9ZVQuSw/v
+  v73ZrdeISSPvv73vv704de+/ve+/vX/vv73vv70W77+977+9NhnOq++/ve+/vXBCRu+/vRItLO+/
+  vVBG77+9eu+/vQTvv73vv70E77+9BXPvv70S77+9dXR9DDML77+977+9BFjvv73oq5/vv73vv73v
+  v71RQSnvv71I77+9Dn3vv71Y77+9Gznvv71LEFEv77+9Q+iXjBJM77+977+9GdCw77+9M1Pvv73v
+  v702S2gB77+9FHXvv70pee+/vVRKVA5977+9fEIUVe+/vTB777+977+977+9Ce+/ve+/vd6+JS/v
+  v70l77+9MO+/vU/vv70D77+9bzUW77+96YqDyJfvv73vv73vv71dK2vvv70nGu+/vRkxae+/ve+/
+  vUzvv70I77+9CTPvv71h77+977+977+9RBTvv73vv73vv73vv71cN++/vTY3aVHPtxggSO+/vVbv
+  v70WaO+/ve+/vR48IO+/ve+/ve+/vV0xFgLvv70DMe+/vWhV77+9GAdc77+9AgLvv73vv73vv71p
+  77+977+9Me+/vQ7vv71bSO+/ve+/vTrvv71TKXPvv70PJ3/vv71g77+977+9HXdW77+977+9G3lv
+  VmAAG++/ve+/vR/vv73vv73vv70y77+9xLlHEe+/vd+e77+977+9Bn/vv73vv73vv73vv73TuO+/
+  vTco77+9Mu+/ve+/vQfvv70+77+9AO+/ve+/vXbvv70GAe+/ve+/ve+/vUDvv73vv73vv73vv70n
+  aO+/ve+/ve+/vUDvv73vv71iEmLvv70h77+977+977+977+977+9Z9yK77+9ZWLvv73vv73vv71Z
+  77+977+9QO+/vS/qqpQs77+9dO+/ve+/ve+/ve+/vWx077+977+977+977+9e++/vVAX77+9XGdo
+  77+9C2xj77+9UuePszLvv70+77+977+9MHPvv73vv70D77+9Ge+/vW/vv71977+977+977+9K++/
+  vQpp77+9Ge+/vT/aiO+/ve+/ve+/vVpK77+96aOF77+977+9Ci3vv718bjMr77+977+9AiXvv70K
+  77+9a++/vVBCThU/Ne+/ve+/vR9uN3jvv70n77+9CdCbamzvv73foDEO77+977+9Du+/vX4Q77+9
+  77+9

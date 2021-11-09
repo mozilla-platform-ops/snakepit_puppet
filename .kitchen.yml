@@ -7,6 +7,9 @@ driver:
 
 provisioner:
   name: puppet_apply
+  hiera_data_path: data
+  hiera_data_remote_path: /tmp/kitchen/data
+  hiera_deep_merge: true
   resolve_with_librarian_puppet: false
   manifests_path: manifests
   resolve_with_r10k: false

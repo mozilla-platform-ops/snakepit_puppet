@@ -3,6 +3,7 @@
 name: snakepit_puppet
 modules:
   - name: puppetlabs/facts
+  - name: puppetlabs/stdlib
   - git: https://github.com/puppetlabs/puppetlabs-service
     ref: main
   - git: https://github.com/treydock/puppet-slurm
