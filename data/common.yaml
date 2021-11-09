@@ -4,6 +4,7 @@
 # test values, replaced with values from vault in prod
 
 slurm::manage_firewall: false
+slurm::slurm_user_shell: /usr/sbin/nologin
 
 munge::munge_key_content: !binary |-
   Pljvv73ljprjvKrvv73vv71eIhZW77+977+9IO+/ve+/vXLvv71x77+977+9JO+/vXHGmduBCu+/
