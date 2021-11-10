@@ -24,7 +24,24 @@ class roles::snakepit_head {
     # treydock/slurm route
     #
 
-    # TODO: install mysql/maria
+    package { 'vim':
+      ensure => installed,
+    }
+
+    # install mysql/maria
+
+    $override_options = {
+      # 'section' => {
+      #   'item' => 'thing',
+      # },
+    }
+
+    class { 'mysql::server':
+      root_password           => lookup('mysql::root_password'), #'strongpassword',
+      remove_default_accounts => true,
+      restart                 => true,
+      override_options        => $override_options,
+    }
 
     include slurm
 

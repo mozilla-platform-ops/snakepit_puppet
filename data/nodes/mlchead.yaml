@@ -2,7 +2,7 @@
 
 slurm::client: true
 slurm::slurmctld: true
-slurm::slurmdbd: true
+slurm::slurmdbd: false  # configure later
 slurm::database: true
 slurm::slurmd: false
 

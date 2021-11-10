@@ -2,6 +2,7 @@
 ## Docs Reference: https://puppet.com/docs/bolt/latest/bolt_configuration_options.html
 name: snakepit_puppet
 modules:
+  - name: puppetlabs/mysql
   - name: puppetlabs/facts
   - name: puppetlabs/stdlib
   - git: https://github.com/puppetlabs/puppetlabs-service

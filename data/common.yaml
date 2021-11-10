@@ -3,8 +3,49 @@
 
 # test values, replaced with values from vault in prod
 
+slurm::cluster_name: slurmpit
+slurm::slurmctld_host:
+  - mlchead
 slurm::manage_firewall: false
 slurm::slurm_user_shell: /usr/sbin/nologin
+
+slurm::slurmdbd_storage_host: mlchead
+# slurm::export_database: true
+# slurm::export_database_tag: "%{lookup('slurm::slurmdbd_storage_host')}"
+
+slurm::greses:
+  nvml:
+    auto_detect: nvml
+slurm::partitions:
+  batch:
+    default: 'YES'
+    def_mem_per_cpu: 1700
+    max_mem_per_cpu: 1750
+    nodes: mlc0,mlc1
+slurm::nodes:
+  mlc0:
+    node_hostname: mlc0
+    cpus: 4
+    threads_per_core: 1
+    cores_per_socket: 1
+    sockets: 4
+    real_memory: 7000
+  mlc1:
+    node_hostname: mlc1
+    cpus: 4
+    threads_per_core: 1
+    cores_per_socket: 1
+    sockets: 4
+    real_memory: 7000
+  mlc2:
+    node_hostname: mlc2
+    cpus: 4
+    threads_per_core: 1
+    cores_per_socket: 1
+    sockets: 4
+    real_memory: 7000
+
+mysql::root_password: abc123_testing_only
 
 munge::munge_key_content: !binary |-
   Pljvv73ljprjvKrvv73vv71eIhZW77+977+9IO+/ve+/vXLvv71x77+977+9JO+/vXHGmduBCu+/
