@@ -19,4 +19,3 @@ class roles::snakepit_worker {
     # TODO: configure nfs packages/mounts
 
 }
-

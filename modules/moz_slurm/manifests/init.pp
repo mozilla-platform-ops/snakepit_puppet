@@ -26,9 +26,3 @@ class moz_slurm (
   # TODO: compile
 
 }
-
-
-
-
-
-
