@@ -47,4 +47,6 @@ class roles::snakepit_head {
 
     # test with slurmdbd -Dvvvv
 
+    # TODO: configure NFS packages/mounts
+
 }
