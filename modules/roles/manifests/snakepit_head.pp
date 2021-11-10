@@ -40,6 +40,8 @@ class roles::snakepit_head {
       # override_options        => $override_options,  # set in hiera
     }
 
+    # munge installed by below, test steps: https://github.com/dun/munge/blob/master/QUICKSTART
+
     include slurm
 
     # interesting slurmdbd options:
