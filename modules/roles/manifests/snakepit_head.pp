@@ -24,11 +24,14 @@ class roles::snakepit_head {
     # treydock/slurm route
     #
 
+    # TODO: manage ssh keys and human users
+
+    # TODO: pull out, add more packages per evgeny's spec
     package { 'vim':
       ensure => installed,
     }
 
-    # install mysql/maria
+    # install mysql
     class { 'mysql::server':
       root_password           => lookup('mysql::root_password'), #'strongpassword',
       remove_default_accounts => true,
@@ -38,16 +41,6 @@ class roles::snakepit_head {
     }
 
     include slurm
-
-    # tweak mysql config to allow mlchead.kitchen to access
-    # TODO: do lookups for this data
-    # mysql_grant { 'slurmdbd@%/slurmdbd':
-    #   ensure     => 'present',
-    #   privileges => ['ALL'],
-    #   table      => 'slurmdbd',
-        # restart => true
-    #   user       => 'slurmdbd@%',
-    # }
 
     # interesting slurmdbd options:
     #   https://gist.github.com/DaisukeMiyamoto/d1dac9483ff0971d5d9f34000311d312
