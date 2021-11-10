@@ -11,4 +11,6 @@ class roles::snakepit_worker {
       munge_key_content => base64('decode', lookup('munge::munge_key_content'))
     }
 
+    include slurm
+
 }
