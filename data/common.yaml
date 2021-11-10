@@ -9,7 +9,9 @@ slurm::slurmctld_host:
 slurm::manage_firewall: false
 slurm::slurm_user_shell: /usr/sbin/nologin
 
-slurm::slurmdbd_storage_host: mlchead
+slurm::slurmdbd_host: mlchead
+slurm::slurmdbd_storage_pass: "another_testing_password"
+slurm::slurmdbd_storage_host: '%'  # used for grant
 # slurm::export_database: true
 # slurm::export_database_tag: "%{lookup('slurm::slurmdbd_storage_host')}"
 
@@ -46,6 +48,9 @@ slurm::nodes:
     real_memory: 7000
 
 mysql::root_password: abc123_testing_only
+mysql::server::override_options:
+  'mysqld':
+    'bind-address': '0.0.0.0'
 
 munge::munge_key_content: !binary |-
   Pljvv73ljprjvKrvv73vv71eIhZW77+977+9IO+/ve+/vXLvv71x77+977+9JO+/vXHGmduBCu+/

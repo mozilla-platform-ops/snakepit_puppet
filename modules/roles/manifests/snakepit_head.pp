@@ -29,20 +29,27 @@ class roles::snakepit_head {
     }
 
     # install mysql/maria
-
-    $override_options = {
-      # 'section' => {
-      #   'item' => 'thing',
-      # },
-    }
-
     class { 'mysql::server':
       root_password           => lookup('mysql::root_password'), #'strongpassword',
       remove_default_accounts => true,
       restart                 => true,
-      override_options        => $override_options,
+      purge_conf_dir          => true,  # default config sets bind-address to localhost
+      # override_options        => $override_options,  # set in hiera
     }
 
     include slurm
+
+    # tweak mysql config to allow mlchead.kitchen to access
+    # TODO: do lookups for this data
+    # mysql_grant { 'slurmdbd@%/slurmdbd':
+    #   ensure     => 'present',
+    #   privileges => ['ALL'],
+    #   table      => 'slurmdbd',
+        # restart => true
+    #   user       => 'slurmdbd@%',
+    # }
+
+    # interesting slurmdbd options:
+    #   https://gist.github.com/DaisukeMiyamoto/d1dac9483ff0971d5d9f34000311d312
 
 }
