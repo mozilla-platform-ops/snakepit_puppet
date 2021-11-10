@@ -52,4 +52,6 @@ class roles::snakepit_head {
     # interesting slurmdbd options:
     #   https://gist.github.com/DaisukeMiyamoto/d1dac9483ff0971d5d9f34000311d312
 
+    # test with slurmdbd -Dvvvv
+
 }
