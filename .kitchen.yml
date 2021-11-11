@@ -41,21 +41,22 @@ verifier:
 
 suites:
   - name: snakepit-head
-    driver:
-      publish_all: true
-      instance_name: mlchead_kitchen
     driver_config:
       hostname: mlchead.kitchen
     provisioner:
       custom_options: '-e "include roles::snakepit_head"'
   - name: snakepit-worker
-    driver:
-      # send queries for mlchead to mlchead_kitchen container
-      links: "mlchead_kitchen:mlchead"
     driver_config:
       hostname: mlc0.kitchen
     provisioner:
       custom_options: '-e "include roles::snakepit_worker"'
+
+  # multi-node testing notes (couldn't get it working):
+  #     (idea is that we could interact with head from worker)
+  # - kitchen-docker's driver_config's link has a race, it needs the other container to be booted to be able to reference.
+  # - kitchen-docker's 'use_internal_docker_network' didn't work, messes with hostnames
+  # - for more, see
+  #    http://www.hurryupandwait.io/blog/multi-node-testing-with-test-kitchen-and-docker
 
   # kitchen-puppet puppet_bolt options
   #     bolt_commands:
