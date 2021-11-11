@@ -64,6 +64,7 @@ jobs:
       - checkout
       - gem_cache
       - apt_cache_restore
+      - run: bolt module install
       - run:
           command: bundle exec kitchen converge << parameters.kitchen_target >>
           no_output_timeout: 30m
