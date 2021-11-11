@@ -1,3 +1,3 @@
 # snakepit-puppet
 
-puppet code for managing Mozilla's Snakepit ML GPU cluster
+puppet code for managing the Slurm deployment on Mozilla's Snakepit ML GPU cluster
