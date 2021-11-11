@@ -7,25 +7,18 @@ driver:
 
 provisioner:
   name: puppet_apply
+  modules_path: modules:.modules
+  manifests_path: manifests
   hiera_data_path: data
   hiera_data_remote_path: /tmp/kitchen/data
   hiera_deep_merge: true
   resolve_with_librarian_puppet: false
-  manifests_path: manifests
   resolve_with_r10k: false
   puppet_debug: true
   puppet_verbose: true
   require_chef_for_busser: true
   require_puppet_omnibus: true
   require_puppet_repo: false
-  #
-  modules_path: modules:.modules
-  #
-  # name: puppet_bolt
-  # bolt_version: 2.40.2  # last that works with ruby <2.5.3 (1804)
-  # bolt_modulepath:  modules;.modules
-  #
-
 
 platforms:
   - name: ubuntu-18.04
@@ -58,10 +51,14 @@ suites:
   # - for more, see
   #    http://www.hurryupandwait.io/blog/multi-node-testing-with-test-kitchen-and-docker
 
+  # puppet-bolt provisioner notes:
+  # - doesn't seem ready for prime time
+  #   - runs on remote host, but manifests aren't copied over by busser like with puppet_apply
+  #   - if it did run locally, how would it connect (how would it get the hostname)?
+
   # kitchen-puppet puppet_bolt options
   #     bolt_commands:
   #     - bolt --help
   #     - bolt --version
   #     - bolt apply manifests/snakepit_head.pp
   #     - bolt task show
-  # how does it get hostname (to run locally)? or how do files get to the host (to run remotely)?
