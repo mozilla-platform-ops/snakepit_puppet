@@ -1,0 +1,80 @@
+version: 2.1
+
+# orbs:
+#   slack: circleci/slack@3.4.2
+#   vault: jmingtan/hashicorp-vault@0.2.1
+
+executors:
+  ubuntu-docker:
+    docker:
+      - image: cimg/base:2021.04
+  ubuntu-vm:
+    machine:
+      image: ubuntu-2004:202010-01
+
+commands:
+  apt_cache_restore:
+    steps:
+      - run: mkdir -p /tmp/docker/var/cache/apt
+      - run: sudo find /tmp/docker/var/cache/apt -type f -name *.deb | sort > apt_cache_debs_checksum
+      - restore_cache:
+          keys:
+          - v1-apt-cache-{{ arch }}-{{ .Branch }}-{{ checksum "apt_cache_debs_checksum" }}
+          - v1-apt-cache-{{ arch }}-{{ .Branch }}-
+          - v1-apt-cache-{{ arch }}-
+  apt_cache_save:
+    steps:
+      - run: sudo find /tmp/docker/var/cache/apt -type f -name *.deb | sort > apt_cache_debs_checksum
+      - save_cache:
+          paths:
+            - /tmp/docker/var/cache/apt
+          key: v1-apt-cache-{{ arch }}-{{ .Branch }}-{{ checksum "apt_cache_debs_checksum" }}
+  gem_cache:
+    steps:
+      - restore_cache:
+          keys:
+          # when lock file changes, use increasingly general patterns to restore cache
+          - v2-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum ".gemfile.lock" }}
+          - v2-gem-cache-{{ arch }}-{{ .Branch }}-
+          - v2-gem-cache-{{ arch }}-
+      - run:
+          name: Bundle Install and forced clean
+          command: |
+            bundle install
+            bundle clean --force
+      - save_cache:
+          paths:
+            - vendor/
+          key: v2-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum ".gemfile.lock" }}
+jobs:
+  pre_commit:
+    executor: ubuntu-docker
+    steps:
+      - checkout
+      - run: pip3 install pre-commit
+      - run: pre-commit run --all-files --verbose
+  linux_integration_tests:
+    executor: ubuntu-vm
+    parameters:
+      kitchen_target:
+        type: string
+    steps:
+      - checkout
+      - gem_cache
+      - apt_cache_restore
+      - run:
+          command: bundle exec kitchen converge << parameters.kitchen_target >>
+          no_output_timeout: 30m
+      - run: bundle exec kitchen verify << parameters.kitchen_target >>
+      - apt_cache_save
+
+workflows:
+  ci_test:
+    jobs:
+      - pre_commit
+      - linux_integration_tests:
+          matrix:
+            parameters:
+              kitchen_target: ["snakepit-head", "snakepit-worker"]
+          requires:
+            - pre_commit
