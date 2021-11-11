@@ -16,3 +16,8 @@ kitchen converge
 # run integration tests
 kitchen verify
 ```
+
+## links
+
+- puppet module used for slurm
+  - https://github.com/treydock/puppet-slurm
