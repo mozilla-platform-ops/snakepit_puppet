@@ -8,8 +8,8 @@ executors:
   ubuntu-docker:
     docker:
     - image: mozillarelops/circleci-ubuntu-2004:v0.1.0
-    # not sure what's in above
-    # cimg/python:3.8  # - image: cimg/base:2021.04
+    # not sure what's in above (ruby and python?)
+    # other images: cimg/python:3.8, cimg/base:2021.04
   ubuntu-vm:
     machine:
       image: ubuntu-2004:202010-01
