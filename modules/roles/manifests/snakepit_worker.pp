@@ -16,7 +16,7 @@ class roles::snakepit_worker {
     # TODO: manage packages (including cude/nvidia-driver)
     #       - figure out how to pull out? shell script or bolt (task)?
 
-    # TODO: singularity
     # TODO: spack/lmod
+    # TODO: singularity via spack
 
 }
