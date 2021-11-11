@@ -4,7 +4,7 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit ML GPU clust
 
 ## testing locally
 
-```
+```bash
 # initial setup
 brew install puppet-bolt  # or equivalent
 bundle install
