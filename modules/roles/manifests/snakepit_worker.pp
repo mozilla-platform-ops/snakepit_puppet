@@ -11,7 +11,12 @@ class roles::snakepit_worker {
 
     include slurm
 
-    # TODO: manage packages (including cude/nvidia-driver)
     # TODO: configure nfs packages/mounts
+
+    # TODO: manage packages (including cude/nvidia-driver)
+    #       - figure out how to pull out? shell script or bolt (task)?
+
+    # TODO: singularity
+    # TODO: spack/lmod
 
 }
