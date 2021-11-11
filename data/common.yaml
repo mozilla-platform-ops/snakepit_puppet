@@ -52,17 +52,6 @@ mysql::server::override_options:
   'mysqld':
     'bind-address': '0.0.0.0'
 
-# how to generate new munge keys
-#
-# in test-kitchen head node, run
-# `/usr/sbin/create-munge-key`, overwrite the existing key,
-# and then base64 it:
-#
-# in `python` interpreter:
-#   import base64
-#   with open("/etc/munge/munge.key", "rb") as image_file:
-#       encoded_string = base64.b64encode(image_file.read()); print(encoded_string)
-#
 munge::munge_key_content: !!binary |-
   Pljvv73ljprjvKrvv73vv71eIhZW77+977+9IO+/ve+/vXLvv71x77+977+9JO+/vXHGmduBCu+/
   vc6d77+9Rxvvv73vv73vv71zcWfvv70B77+9Je+/vR7vv71BRu+/ve+/ve+/ve+/ve+/ve+/vX0s
