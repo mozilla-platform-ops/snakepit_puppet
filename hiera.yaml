@@ -12,5 +12,8 @@ hierarchy:
   - name: "Per-node data"
     path: "nodes/%{facts.hostname}.yaml"
 
+  - name: "Secrets generated from Vault"
+    path: "secrets/vault.yaml"
+
   - name: "Common data to all"
     path: "common.yaml"
