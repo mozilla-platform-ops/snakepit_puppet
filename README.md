@@ -23,11 +23,10 @@ kitchen verify
 
 ## misc
 
-
 ### links
 
 - puppet module used for slurm
-  - https://github.com/treydock/puppet-slurm
+  - <https://github.com/treydock/puppet-slurm>
 
 ### how to generate new munge keys
 
