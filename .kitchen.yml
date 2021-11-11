@@ -20,7 +20,6 @@ provisioner:
   require_puppet_repo: false
   #
   modules_path: modules:.modules
-  require_chef_for_busser: false
   #
   # name: puppet_bolt
   # bolt_version: 2.40.2  # last that works with ruby <2.5.3 (1804)
@@ -42,11 +41,17 @@ verifier:
 
 suites:
   - name: snakepit-head
+    driver:
+      publish_all: true
+      instance_name: mlchead_kitchen
     driver_config:
       hostname: mlchead.kitchen
     provisioner:
       custom_options: '-e "include roles::snakepit_head"'
   - name: snakepit-worker
+    driver:
+      # send queries for mlchead to mlchead_kitchen container
+      links: "mlchead_kitchen:mlchead"
     driver_config:
       hostname: mlc0.kitchen
     provisioner:
