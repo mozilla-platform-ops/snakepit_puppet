@@ -36,7 +36,7 @@ commands:
       - restore_cache:
           keys:
           # when lock file changes, use increasingly general patterns to restore cache
-          - v2-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum ".gemfile.lock" }}
+          - v2-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           - v2-gem-cache-{{ arch }}-{{ .Branch }}-
           - v2-gem-cache-{{ arch }}-
       - run:
@@ -47,7 +47,7 @@ commands:
       - save_cache:
           paths:
             - vendor/
-          key: v2-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum ".gemfile.lock" }}
+          key: v2-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 jobs:
   pre_commit:
     executor: ubuntu-docker
