@@ -13,12 +13,13 @@ mod 'slurm',
 mod 'service',
   git: 'https://github.com/puppetlabs/puppetlabs-service',
   ref: 'a819beee25352924b2c7f15dea2722ff2309bb46'
+mod 'puppetlabs/vcsrepo', '5.0.0'
 mod 'puppetlabs/stdlib', '8.1.0'
 mod 'puppetlabs/facts', '1.4.0'
-mod 'puppet/epel', '3.1.0'
+mod 'puppetlabs/mysql', '12.0.1'
 mod 'puppetlabs/firewall', '3.2.0'
 mod 'puppetlabs/concat', '7.1.1'
-mod 'puppetlabs/mysql', '12.0.1'
+mod 'puppet/epel', '3.1.0'
 mod 'herculesteam/augeasproviders_sysctl', '2.6.2'
 mod 'puppet/logrotate', '6.0.0'
 mod 'puppet/systemd', '3.5.1'

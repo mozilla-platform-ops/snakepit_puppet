@@ -13,10 +13,11 @@ class roles::snakepit_worker {
 
     # TODO: configure nfs packages/mounts
 
-    # TODO: manage packages (including cude/nvidia-driver)
+    # TODO: manage packages (including cuda/nvidia-driver)
     #       - figure out how to pull out? shell script or bolt (task)?
 
     # TODO: spack/lmod
+    include moz_slurm::spack
     # TODO: singularity via spack
 
 }
