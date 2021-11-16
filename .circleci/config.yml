@@ -58,6 +58,7 @@ jobs:
       - run: pre-commit run --all-files --verbose
   linux_integration_tests:
     executor: ubuntu-vm
+    resource_class: large
     parameters:
       kitchen_target:
         type: string
