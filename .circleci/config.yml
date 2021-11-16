@@ -73,7 +73,7 @@ jobs:
       - run: bolt module install
       - run:
           command: bundle exec kitchen converge << parameters.kitchen_target >>
-          no_output_timeout: 30m
+          no_output_timeout: 60m
       - run: bundle exec kitchen verify << parameters.kitchen_target >>
       - apt_cache_save
 
