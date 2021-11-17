@@ -16,8 +16,9 @@ class roles::snakepit_worker {
     # TODO: manage packages (including cuda/nvidia-driver)
     #       - figure out how to pull out? shell script or bolt (task)?
 
-    # TODO: spack/lmod
+    # install spack and lmod/singularity via spack
+    # TODO: takes way too long... only run in prod (use hiera to set a key that only runs)?
+    #       - https://vincent.bernat.ch/en/blog/2014-serverspec-test-infrastructure#advanced-use
     include moz_slurm::spack
-    # TODO: singularity via spack
 
 }
