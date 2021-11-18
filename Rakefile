@@ -2,8 +2,7 @@
 
 desc "Create a package configuration"
 task :create_package_configuration do |t|
-  # actions
-  sh "./modules/moz_slurm/files/creating_new_package_configs/build_and_run.sh"
+  sh "./modules/moz_slurm/files/creating_new_package_configs/build_and_run.sh slurmpit_container"
 end
 
 desc "Create a distribution package"

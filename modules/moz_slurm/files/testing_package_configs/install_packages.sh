@@ -80,6 +80,7 @@ aptget install \
   nvidia-kernel-common-495=495.44-0ubuntu0.18.04.1 \
   nvidia-kernel-source-495=495.44-0ubuntu0.18.04.1 \
   nvidia-modprobe=495.29.05-0ubuntu1 \
+  nvidia-prime=0.8.16~0.18.04.1 \
   nvidia-settings=495.29.05-0ubuntu1 \
   nvidia-utils-495=495.44-0ubuntu0.18.04.1 \
   xserver-xorg-video-nvidia-495=495.44-0ubuntu0.18.04.1

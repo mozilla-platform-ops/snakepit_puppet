@@ -21,6 +21,15 @@ kitchen converge
 kitchen verify
 ```
 
+## creating and testing package configurations
+
+Part of the challenge of using NVIDIA cards and CUDA in a container is that the versions of the software on the bare metal and the container need to be in sync.
+
+```bash
+# view the available tasks
+rake -T
+```
+
 ## misc
 
 ### links
