@@ -21,14 +21,35 @@ kitchen converge
 kitchen verify
 ```
 
-## creating and testing package configurations
+## keeping bare metal and containers in sync
 
-Part of the challenge of using NVIDIA cards and CUDA in a container is that the versions of the software on the bare metal and the container need to be in sync.
+Part of the challenge of using NVIDIA cards and CUDA in a container is that the versions of the software on the bare metal and the container need to be in sync (https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/concepts.html#background).
+
+NVIDIA has a solution that works with newer NVIDIA cards (Kepler and newer, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements).
+
+Because we can't use this solution, we find what packages the metapackage (cuda-11-5 currently) installs. Once the packages have been identified, we craft an install script that installs all of the constituent packages (those includeing cuda and nvidia in the name, the full dependency list is very large).
+
+### creating and testing package configurations
+
+Process:
+
+- run the create step and note the packages mentioned
+- update the install script to use the new package list
+- test the configuration
 
 ```bash
 # view the available tasks
-rake -T
+$ rake -T
+rake create_package_configuration  # Create a package configuration
+rake test_package_configuration    # Create a distribution package
 ```
+
+TODO: Test updating instances... will running the install script just work?
+
+- i.e. start with 11-4 and upgrade to 11-5
+  - will conflict?
+  - maybe make an uninstall script that removes the exact ones installed previously...
+    - then can use newer version's install script.
 
 ## misc
 
