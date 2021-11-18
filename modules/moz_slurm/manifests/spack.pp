@@ -6,12 +6,10 @@ class moz_slurm::spack {
   # see https://www.palmetto.clemson.edu/palmetto/software/spack/
   # for an example setup
 
-  $software_path = '/home/slurm/software'
-  $spack_path = "${software_path}/spack"
-  $spack_bin_path = "${spack_path}/bin/spack"
+  include moz_slurm::spack_variables
 
   # create software dir
-  file { $software_path:
+  file { $::software_path:
     ensure => directory,
     owner  => 'slurm',
     group  => 'slurm',
@@ -19,7 +17,7 @@ class moz_slurm::spack {
   }
 
   # clone repo
-  vcsrepo { $spack_path:
+  vcsrepo { $::spack_path:
     ensure   => present,
     provider => git,
     source   => 'https://github.com/spack/spack.git',
@@ -28,29 +26,7 @@ class moz_slurm::spack {
 
   file_line { 'add spack env source to .bashrc':
     path => '/home/slurm/.bashrc',
-    line => "source ${$spack_path}/share/spack/setup-env.sh",
-  }
-
-  exec {'install lmod':
-    command  => "${spack_bin_path} install lmod",
-    provider => shell,
-    user     => 'slurm',
-    unless   => "${spack_bin_path} find lmod",
-    timeout  => 3600,
-  }
-
-  file_line { 'add lmod env source to .bashrc':
-    path => '/home/slurm/.bashrc',
-    line => 'source $(spack location -i lmod)/lmod/lmod/init/bash',
-  }
-
-  # install singularity
-  exec {'install singularity':
-    command  => "${spack_bin_path} install singularity",
-    provider => shell,
-    user     => 'slurm',
-    unless   => "${spack_bin_path} find singularity",
-    timeout  => 3600,
+    line => "source ${$::spack_path}/share/spack/setup-env.sh",
   }
 
   # TODO: define a set of modules all users get
