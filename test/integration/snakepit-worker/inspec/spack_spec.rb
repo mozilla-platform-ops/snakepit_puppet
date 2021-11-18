@@ -10,10 +10,10 @@ end
 
 in_circleci = ENV["CIRCLECI"]
 
-describe command("#{spack_bin_path} find lmod"), if: in_circleci do
+describe command("#{spack_bin_path} find lmod"), unless: in_circleci do
   its("exit_status") { should eq 0 }
 end
 
-describe command("#{spack_bin_path} find singularity"), if: in_circleci do
+describe command("#{spack_bin_path} find singularity"), unless: in_circleci do
   its("exit_status") { should eq 0 }
 end
