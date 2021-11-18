@@ -7,7 +7,5 @@ end
 
 desc "Create a distribution package"
 task :test_package_configuration do |t|
-  # actions
-  # sh "cc -o #{t.name} #{t.prerequisites.join(' ')}"
-  sh "./modules/moz_slurm/files/testing_package_configs/build_and_run.sh"
+  sh "./modules/moz_slurm/files/testing_package_configs/build_and_run.sh slurmpit_test_container"
 end
