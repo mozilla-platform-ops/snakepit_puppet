@@ -3,8 +3,10 @@
 set -e
 set -x
 
+container_name="slurmpit_test_container"
+
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 cd "${SCRIPTPATH}"
 
-docker build . -t slurmpit_test_container
-docker run -it slurmpit_test_container
+docker build . -t "$container_name"
+docker run -it "$container_name"

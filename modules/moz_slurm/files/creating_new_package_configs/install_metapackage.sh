@@ -4,7 +4,7 @@
 #       so that they can be kept in sync more easily.
 
 set -e
-set -x
+# set -x
 
 # functions
 
