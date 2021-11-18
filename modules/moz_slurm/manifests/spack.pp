@@ -6,10 +6,8 @@ class moz_slurm::spack {
   # see https://www.palmetto.clemson.edu/palmetto/software/spack/
   # for an example setup
 
-  include moz_slurm::spack_variables
-
   # create software dir
-  file { $::software_path:
+  file { lookup('moz_slurm::software_path'):
     ensure => directory,
     owner  => 'slurm',
     group  => 'slurm',
@@ -17,7 +15,7 @@ class moz_slurm::spack {
   }
 
   # clone repo
-  vcsrepo { $::spack_path:
+  vcsrepo { lookup('moz_slurm::spack_path'):
     ensure   => present,
     provider => git,
     source   => 'https://github.com/spack/spack.git',
@@ -26,7 +24,7 @@ class moz_slurm::spack {
 
   file_line { 'add spack env source to .bashrc':
     path => '/home/slurm/.bashrc',
-    line => "source ${$::spack_path}/share/spack/setup-env.sh",
+    line => "source %{lookup('moz_slurm::spack_path')}/share/spack/setup-env.sh",
   }
 
   # TODO: define a set of modules all users get
