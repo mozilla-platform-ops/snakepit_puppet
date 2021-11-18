@@ -8,12 +8,17 @@ describe command("#{spack_bin_path} --version") do
   its("exit_status") { should eq 0 }
 end
 
+# CircleCI sets CI and CIRCLECI=true
 in_circleci = ENV["CIRCLECI"]
 
-describe command("#{spack_bin_path} find lmod"), unless: in_circleci do
-  its("exit_status") { should eq 0 }
-end
+# don't run these in CI because we're not doing it in puppet any longer, too slow
+# - but will still be able to verify a host in prod (not sure how to invoke though)
+unless in_circleci
+  describe command("#{spack_bin_path} find lmod") do
+    its("exit_status") { should eq 0 }
+  end
 
-describe command("#{spack_bin_path} find singularity"), unless: in_circleci do
-  its("exit_status") { should eq 0 }
+  describe command("#{spack_bin_path} find singularity") do
+    its("exit_status") { should eq 0 }
+  end
 end
