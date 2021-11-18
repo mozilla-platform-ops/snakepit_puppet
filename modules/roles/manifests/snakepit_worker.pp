@@ -18,9 +18,11 @@ class roles::snakepit_worker {
 
     # install spack
     include moz_slurm::spack
+
     # install lmod and spack
     # disabled for now, manually run on worker nodes for now. maybe use hiera value to control later?
     # include moz_slurm::spack_lmod
     # include moz_slurm::spack_singularity
+    # TODO: figure out how to call the two above modules from bolt as a post-convergence step
 
 }
