@@ -3,7 +3,9 @@
 set -e
 # set -x
 
-# container_name="$1"
+# NOTES:
+#   "$@" is passed to the build command
+
 container_name="slurmpit_container"
 
 if [ -z "$container_name" ]; then
@@ -30,18 +32,26 @@ if [ "$status" == 0 ] ; then
 
 	docker build --build-arg http_proxy=http://$proxy_host:8123 \
 		--build-arg https_proxy=http://$proxy_host:8123 \
+		"$@" \
 		-t "$container_name" .
 else
 	# polipo is not running
 	echo "* not using proxy"
 	echo ""
 
-	docker build -t "$container_name" .
+	docker build "$@" -t "$container_name" .
 fi
 
 set -x
 docker run "$container_name" python3 /tmp/generate_install_command.py
 { set +x; } 2>/dev/null  # set +x without output
+
+echo ""
+output_dir="boms/$(date +%Y%m%d%H%M%S)"
+mkdir -p "$output_dir"
+docker cp "$container_name":/tmp/base_bom.txt "$output_dir"
+docker cp "$container_name":/tmp/final_bom.txt "$output_dir"
+docker cp "$container_name:/tmp/packages-in*" "$output_dir"
 
 echo ""
 echo "SUCESS. run \`docker run -it '$container_name'\` for futher debugging"
