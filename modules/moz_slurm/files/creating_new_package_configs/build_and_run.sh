@@ -3,7 +3,8 @@
 set -e
 # set -x
 
-container_name="$1"
+# container_name="$1"
+container_name="slurmpit_container"
 
 if [ -z "$container_name" ]; then
   echo "please specify a container name"
