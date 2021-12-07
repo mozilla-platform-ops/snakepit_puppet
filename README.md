@@ -31,6 +31,17 @@ Because we can't use this solution, we find what packages the metapackage (cuda-
 
 ### creating and testing package configurations
 
+The NVIDIA recommended process is to install the cuda or cuda-11-5 metapackage (https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
+
+These metapackages only loosely specify the version to use and float to the latest published packages. This causes issues when trying to keep hosts in sync.
+
+```bash
+$ apt-cache show cuda-11-5
+...
+Depends: cuda-runtime-11-5 (>= 11.5.0), cuda-toolkit-11-5 (>= 11.5.0), cuda-demo-suite-11-5 (>= 11.5.50)
+...
+```
+
 Process:
 
 - run the create step and note the packages mentioned
