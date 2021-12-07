@@ -34,3 +34,9 @@ cd creating_new_package_configs
 cd testing_package_configs
 ./build_and_run.sh
 # things should complete without errors
+# `nvidia-smi` should be present, but won't work yet
+
+## TODOs
+
+- create/store full BOMs also (datetime-stamped)
+  - worst case scenario with install files, we can restore to base by removing all?

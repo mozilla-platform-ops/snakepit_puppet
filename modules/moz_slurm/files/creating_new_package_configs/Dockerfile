@@ -17,3 +17,5 @@ RUN sleep 10 && dpkg --list > /tmp/final_bom.txt
 # RUN diff /tmp/base_bom.txt /tmp/final_bom.txt  | grep -E 'cuda|nvidia'
 COPY generate_install_command.py /tmp/generate_install_command.py
 # RUN python3 /tmp/generate_install_command.py
+
+# TODO: copy base_bom and final_bom to host

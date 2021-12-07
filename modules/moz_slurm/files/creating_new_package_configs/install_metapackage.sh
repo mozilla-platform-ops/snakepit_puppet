@@ -6,6 +6,8 @@
 set -e
 # set -x
 
+# TODO: take metapackage as arg
+
 # functions
 
 aptget() {
