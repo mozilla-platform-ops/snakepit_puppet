@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-# set -x
+set -x
 
 # NOTES:
 #   "$@" is passed to the build command
@@ -42,16 +42,23 @@ else
 	docker build "$@" -t "$container_name" .
 fi
 
-set -x
-docker run "$container_name" python3 /tmp/generate_install_command.py
-{ set +x; } 2>/dev/null  # set +x without output
+# set -x
+# docker run "$container_name" python3 /tmp/generate_install_command.py
+# { set +x; } 2>/dev/null  # set +x without output
 
+# echo ""
+# echo "SUCESS. run \`docker run -it '$container_name'\` for futher debugging"
+
+set -x
 echo ""
 output_dir="boms/$(date +%Y%m%d%H%M%S)"
 mkdir -p "$output_dir"
-docker cp "$container_name":/tmp/base_bom.txt "$output_dir"
-docker cp "$container_name":/tmp/final_bom.txt "$output_dir"
-docker cp "$container_name:/tmp/packages-in*" "$output_dir"
-
-echo ""
-echo "SUCESS. run \`docker run -it '$container_name'\` for futher debugging"
+# instantiates image as container, so we can copy from it
+docker rm -f dummy || true
+docker create -it --name dummy "$container_name" bash
+docker start dummy
+docker exec "dummy" python3 /tmp/generate_install_command.py
+docker cp "dummy":/tmp/output "$output_dir"
+# docker cp "dummy":/tmp/output/final_bom.txt "$output_dir"
+# docker cp "dummy:/tmp/packages-in*" "$output_dir"
+docker rm -f dummy
