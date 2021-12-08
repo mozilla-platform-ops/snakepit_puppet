@@ -4,7 +4,14 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
 
 ## TODOs
 
-- set uid/gids that work in prod
+- puppet
+  - set uid/gids that work in prod
+- package configuration code
+  - Test updating instances... will running the install script just work
+    - i.e. start with 11-4 and upgrade to 11-5
+      - will conflict?
+      - maybe make an uninstall script that removes the exact ones installed previously...
+        - then can use newer version's install script.
 
 ## testing locally
 
@@ -83,14 +90,6 @@ rake test_package_configuration
 # things should complete without errors and
 #   `nvidia-smi` should be present (but won't work yet).
 ```
-
-### TODOs
-
-- Test updating instances... will running the install script just work
-  - i.e. start with 11-4 and upgrade to 11-5
-    - will conflict?
-    - maybe make an uninstall script that removes the exact ones installed previously...
-      - then can use newer version's install script.
 
 ## misc
 
