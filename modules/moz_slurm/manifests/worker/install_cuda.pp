@@ -9,7 +9,7 @@ class moz_slurm::worker::install_cuda {
   file {'installation script':
     ensure => 'present',
     source => 'puppet:///modules/moz_slurm/testing_package_configs/install_packages.sh',
-    path   => "${installation_script_path}}",
+    path   => $installation_script_path,
     mode   => '0755',
     owner  => 'root',
     group  => 'root',
