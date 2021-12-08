@@ -2,6 +2,8 @@ class roles::snakepit_worker {
 
     # TODO: manage users and ssh keys
 
+    # TODO: should moz_slurm's children include this?
+    include moz_slurm
     include moz_slurm::packages
 
     class { 'munge':
@@ -12,9 +14,6 @@ class roles::snakepit_worker {
     include slurm
 
     # TODO: configure nfs packages/mounts
-
-    # TODO: should moz_slurm's children include this?
-    include moz_slurm
 
     # install spack
     include moz_slurm::spack
