@@ -8,6 +8,7 @@ describe command("#{spack_bin_path} --version") do
   its("exit_status") { should eq 0 }
 end
 
+# TODO: need to disable in kitchen also...
 # CircleCI sets CI and CIRCLECI=true
 in_circleci = ENV["CIRCLECI"]
 
