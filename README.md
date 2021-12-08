@@ -32,7 +32,7 @@ kitchen verify
 
 Part of the challenge of using NVIDIA cards and CUDA in a container is that the versions of the software on the bare metal and the container need to be in sync (https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/concepts.html#background).
 
-NVIDIA has a solution (NVIDIA Container Toolkit, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/concepts.html#background) that allows the versions to not match exactly, but it requires newer NVIDIA GPUs (Kepler and newer, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements). Snakepit's GPUs are from a previous genenration and we can't use this solution.
+NVIDIA has a solution (NVIDIA Container Toolkit) that allows the versions to not match exactly, but it requires newer NVIDIA GPUs (Kepler and newer, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements). Snakepit's GPUs are from a previous genenration and we can't use this solution.
 
 The NVIDIA-recommended solution for our older cards is to install the `cuda` or `cuda-11-5` metapackage (https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) and hope things work. These metapackages only loosely specify the version to use and float to the latest published packages. This causes issues when trying to keep hosts in sync (if they're installed or created at different points in time).
 
