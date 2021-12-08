@@ -59,6 +59,4 @@ docker create -it --name dummy "$container_name" bash
 docker start dummy
 docker exec "dummy" python3 /tmp/generate_install_command.py
 docker cp "dummy":/tmp/output "$output_dir"
-# docker cp "dummy":/tmp/output/final_bom.txt "$output_dir"
-# docker cp "dummy:/tmp/packages-in*" "$output_dir"
-docker rm -f dummy
+# cleaned up on the next run
