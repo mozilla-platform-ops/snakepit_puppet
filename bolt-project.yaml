@@ -9,6 +9,6 @@ modules:
   - git: https://github.com/puppetlabs/puppetlabs-service
     ref: main
   - git: https://github.com/treydock/puppet-slurm
-    ref: 21.08
+    ref: v2.0.1
   - git: https://github.com/treydock/puppet-munge
     ref: v3.1.0
