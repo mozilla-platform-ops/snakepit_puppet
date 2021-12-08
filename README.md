@@ -49,7 +49,7 @@ Because we can't use this solution (our cards are from previous generations), we
 
 ### creating and testing package configurations
 
-#### 0 (optional): run a proxy
+#### 0. run a proxy (optional)
 
 These steps install lots of packages. Caching will speed things up dramatically.
 
