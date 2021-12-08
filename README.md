@@ -34,7 +34,7 @@ Part of the challenge of using NVIDIA cards and CUDA in a container is that the 
 
 NVIDIA has a solution that works with newer NVIDIA cards (Kepler and newer, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements).
 
-Because we can't use this solution, we find what packages the metapackage (cuda-11-5 currently) installs. Once the packages have been identified, we craft an install script that installs all of the constituent packages (those includeing cuda and nvidia in the name, the full dependency list is very large).
+Because we can't use this solution (our cards are from previous generations), we find what packages the metapackage (cuda-11-5 currently) installs. Once the packages have been identified, we craft an install script that installs all of the constituent packages (those includeing cuda and nvidia in the name, the full dependency list is very large).
 
 ### creating and testing package configurations
 
