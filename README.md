@@ -5,9 +5,9 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
 ## TODOs
 
 - puppet
-  - set uid/gids that work in prod
+  - set slurm uid/gids that work in prod
 - package configuration code
-  - Test updating instances... will running the install script just work
+  - Test updating instances... will running the install script just work?
     - i.e. start with 11-4 and upgrade to 11-5
       - will conflict?
       - maybe make an uninstall script that removes the exact ones installed previously...
@@ -72,6 +72,7 @@ logLevel=4
 
 ```bash
 rake pkg_config_create
+
 # inspect the output in
 #   modules/moz_slurm/create_package_configuration/boms/ and paste it into
 #   modules/moz_slurm//testing_package_configs/install_packages.sh
@@ -81,6 +82,7 @@ rake pkg_config_create
 
 ```bash
 rake pkg_config_test
+
 # things should complete without errors and
 #   `nvidia-smi` should be present (but won't work yet).
 ```
