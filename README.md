@@ -42,7 +42,9 @@ Depends: cuda-runtime-11-5 (>= 11.5.0), cuda-toolkit-11-5 (>= 11.5.0), cuda-demo
 ...
 ```
 
-#### steps
+We attempt to eliminate this variability by installing the metapackage and recording the packages it installed. With that list we can repeatably install the same packages on bare metal and in a containers.
+
+#### creating and testing an installation script
 
 ##### optional: run a proxy
 
@@ -65,7 +67,7 @@ diskCacheRoot=/tmp/cache/polipo
 logLevel=4
 ```
 
-##### 1. create a new metadata installation recipe
+##### 1. create a new installation script
 
 ```bash
 rake create_package_configuration
@@ -74,7 +76,7 @@ rake create_package_configuration
 #   modules/moz_slurm//testing_package_configs/install_packages.sh
 ```
 
-##### 2. test a new installation recipe
+##### 2. test a new installation script
 
 ```bash
 rake test_package_configuration
@@ -82,12 +84,13 @@ rake test_package_configuration
 #   `nvidia-smi` should be present (but won't work yet).
 ```
 
-### TODO: Test updating instances... will running the install script just work?
+### TODOs
 
-- i.e. start with 11-4 and upgrade to 11-5
-  - will conflict?
-  - maybe make an uninstall script that removes the exact ones installed previously...
-    - then can use newer version's install script.
+- Test updating instances... will running the install script just work
+  - i.e. start with 11-4 and upgrade to 11-5
+    - will conflict?
+    - maybe make an uninstall script that removes the exact ones installed previously...
+      - then can use newer version's install script.
 
 ## misc
 
