@@ -25,16 +25,21 @@ logLevel=4
 
 ### 1. generate a new metadata installation recipe
 
+```bash
 cd creating_new_package_configs
 ./build_and_run.sh
-# copy the output and paste it into ../testing_package_configs/install_packages.sh
+# inspect the output in boms/ and paste it into
+# ../testing_package_configs/install_packages.sh
+```
 
 ### 2. test a new installation recipe
 
+```bash
 cd testing_package_configs
 ./build_and_run.sh
 # things should complete without errors
 # `nvidia-smi` should be present, but won't work yet
+```
 
 ## TODOs
 
