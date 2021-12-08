@@ -71,7 +71,7 @@ logLevel=4
 #### 1. create a new installation script
 
 ```bash
-rake create_package_configuration
+rake pkg_config_create
 # inspect the output in
 #   modules/moz_slurm/create_package_configuration/boms/ and paste it into
 #   modules/moz_slurm//testing_package_configs/install_packages.sh
@@ -80,7 +80,7 @@ rake create_package_configuration
 #### 2. test a new installation script
 
 ```bash
-rake test_package_configuration
+rake pkg_config_test
 # things should complete without errors and
 #   `nvidia-smi` should be present (but won't work yet).
 ```
