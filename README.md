@@ -34,10 +34,6 @@ Part of the challenge of using NVIDIA cards and CUDA in a container is that the 
 
 NVIDIA has a solution that works with newer NVIDIA cards (Kepler and newer, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements).
 
-Because we can't use this solution (our cards are from previous generations), we find what packages the metapackage (cuda-11-5 currently) installs. Once the packages have been identified, we craft an install script that installs all of the constituent packages (those includeing cuda and nvidia in the name, the full dependency list is very large).
-
-### creating and testing package configurations
-
 The NVIDIA recommended process is to install the cuda or cuda-11-5 metapackage (https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html).
 
 These metapackages only loosely specify the version to use and float to the latest published packages. This causes issues when trying to keep hosts in sync.
@@ -49,11 +45,11 @@ Depends: cuda-runtime-11-5 (>= 11.5.0), cuda-toolkit-11-5 (>= 11.5.0), cuda-demo
 ...
 ```
 
-We attempt to eliminate this variability by installing the metapackage and recording the packages it installed. With that list we can repeatably install the same packages on bare metal and in a containers.
+Because we can't use this solution (our cards are from previous generations), we find what packages the metapackage (cuda-11-5 currently) installs. Once the packages have been identified, we craft an install script that installs all of the constituent packages (those including cuda and nvidia in the name, the full dependency list is very large). The install script is then used to install the required packages on the bare metal hosts and any containers.
 
-#### creating and testing an installation script
+### creating and testing package configurations
 
-##### optional: run a proxy
+#### 0 (optional): run a proxy
 
 These steps install lots of packages. Caching will speed things up dramatically.
 
@@ -74,7 +70,7 @@ diskCacheRoot=/tmp/cache/polipo
 logLevel=4
 ```
 
-##### 1. create a new installation script
+#### 1. create a new installation script
 
 ```bash
 rake create_package_configuration
@@ -83,7 +79,7 @@ rake create_package_configuration
 #   modules/moz_slurm//testing_package_configs/install_packages.sh
 ```
 
-##### 2. test a new installation script
+#### 2. test a new installation script
 
 ```bash
 rake test_package_configuration
