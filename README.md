@@ -42,20 +42,47 @@ Depends: cuda-runtime-11-5 (>= 11.5.0), cuda-toolkit-11-5 (>= 11.5.0), cuda-demo
 ...
 ```
 
-Process:
+#### steps
 
-- run the create step and note the packages mentioned
-- update the install script to use the new package list
-- test the configuration
+##### optional: run a proxy
+
+These steps install lots of packages. Caching will speed things up dramatically.
+
+Any caching web proxy on port 8123 will work. I like polipo (in homebrew).
 
 ```bash
-# view the available tasks
-$ rake -T
-rake create_package_configuration  # Create a package configuration
-rake test_package_configuration    # Create a distribution package
+#!/usr/bin/env bash
+
+set -e
+
+mkdir -p /tmp/cache/polipo
+polipo -c polipo.conf
 ```
 
-TODO: Test updating instances... will running the install script just work?
+```bash
+# polipo.conf contents
+diskCacheRoot=/tmp/cache/polipo
+logLevel=4
+```
+
+##### 1. create a new metadata installation recipe
+
+```bash
+rake create_package_configuration
+# inspect the output in
+#   modules/moz_slurm/create_package_configuration/boms/ and paste it into
+#   modules/moz_slurm//testing_package_configs/install_packages.sh
+```
+
+##### 2. test a new installation recipe
+
+```bash
+rake test_package_configuration
+# things should complete without errors and
+#   `nvidia-smi` should be present (but won't work yet).
+```
+
+### TODO: Test updating instances... will running the install script just work?
 
 - i.e. start with 11-4 and upgrade to 11-5
   - will conflict?
