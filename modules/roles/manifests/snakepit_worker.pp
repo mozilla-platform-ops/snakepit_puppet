@@ -18,6 +18,8 @@ class roles::snakepit_worker {
     # install spack
     include moz_slurm::spack
 
+    # steps below moved to roles::snakepit_worker_post to be run by bolt post-convergence
+
     # install lmod and spack
     # disabled for now (takes super long)
     # - manually run on worker nodes for now. maybe use hiera value to control later?
@@ -27,6 +29,6 @@ class roles::snakepit_worker {
 
     # manage packages (including cuda/nvidia-driver)
     # TODO: move this out of initial convergence? see above
-    include moz_slurm::worker::install_cuda
+    # include moz_slurm::worker::install_cuda
 
 }
