@@ -25,10 +25,10 @@ bundle install
 bolt module install  # install 3rd party modules to .modules
 
 # converge
-kitchen converge
+bundle exec kitchen converge
 
 # run integration tests
-kitchen verify
+bundle exec kitchen verify
 ```
 
 ## keeping bare metal and containers in sync
