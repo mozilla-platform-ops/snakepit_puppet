@@ -1,4 +1,4 @@
-# snakepit-puppet
+# snakepit_puppet
 
 puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
 
@@ -6,6 +6,9 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
 
 - puppet
   - set slurm uid/gids that work in prod
+  - configure NFS mount points
+  - future: manage users on the hosts
+- figure out how to make bolt apply the worker_post role, test it
 - package configuration code
   - Test updating instances... will running the install script just work?
     - i.e. start with 11-4 and upgrade to 11-5
