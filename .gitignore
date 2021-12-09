@@ -6,3 +6,4 @@ vendor
 .task_cache.json
 bolt-debug.log
 .vscode
+.vagrant
