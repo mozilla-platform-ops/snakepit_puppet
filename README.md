@@ -5,11 +5,10 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
 ## TODOs
 
 - puppet
+  - create production secrets.yaml file
   - set slurm uid/gids that work in prod
   - configure NFS mount points
   - future: manage users on the hosts
-- bolt
-  - figure out how to apply roles and test (used for initial convergence, and worker post convergence)
 - package configuration code
   - Test updating instances... will running the install script just work?
     - i.e. start with 11-4 and upgrade to 11-5
@@ -17,7 +16,47 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
       - maybe make an uninstall script that removes the exact ones installed previously...
         - then can use newer version's install script.
 
-## testing locally
+## provisioner notes
+
+I had hoped to use bolt to do the masterless convergence, but it doesn't provide debug output like `puppet apply` and `--noop` usage isn't obvious.
+
+TODO: test to see if this is still broken, now that hiera lookup is fixed.
+
+## testing
+
+test-kitchen is the best place to start. vagrant is easier for rapid iteration and for testing the provisioner script.
+
+### vagrant testing
+
+vagrant testing is lower level than test-kitchen and allows more realistic testing of the provisioning and convergence process.
+
+```bash
+vagrant up
+vagrant ssh
+
+# once in the vagrant node
+cd /vagrant
+
+# puppet_apply convergence
+#
+# uses main branch
+sudo /vagrant/provisioner/converge_worker.sh
+sudo /vagrant/provisioner/converge_head.sh
+# override for testing
+sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
+
+# bolt convergence (alternative method)
+#
+# run one of the following
+# to converge a worker node
+sudo bolt plan run roles::worker_converge hosts=localhost --verbose --log-level debug
+# to converge the host as a head node
+sudo bolt plan run roles::head_converge hosts=localhost --verbose --log-level debug
+```
+
+### test-kitchen testing
+
+test-kitchen automates the testing of roles and integrates inspec tests for verification.
 
 ```bash
 # initial setup
@@ -25,7 +64,7 @@ brew install puppet-bolt  # or equivalent
 bundle install
 bolt module install  # install 3rd party modules to .modules
 
-# converge
+# converge head and worker roles
 bundle exec kitchen converge
 
 # run integration tests
