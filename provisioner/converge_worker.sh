@@ -119,7 +119,7 @@ if [ -e "$ROLE_FILE" ]; then
     fi
 else
     # first run
-    # all bitbar_devicepool hosts have the same role
+    # TODO: reconsider this? dangerous...
     echo "First run detected, setting role file '$ROLE_FILE' to role '$ROLE'."
     echo "$ROLE" > $ROLE_FILE
 fi
@@ -139,10 +139,6 @@ wget -P /var/tmp/ "http://apt.puppetlabs.com/puppet7-release-$(lsb_release -c -s
 dpkg -i /var/tmp/*.deb
 apt-get update -y && apt-get install -y puppet-agent puppet-bolt
 ln -sf /opt/puppetlabs/bin/puppet /usr/bin/puppet
-# install r10k
-# to handle https://github.com/puppetlabs/r10k/issues/930
-# /opt/puppetlabs/puppet/bin/gem install cri -v 2.15.6
-# /opt/puppetlabs/puppet/bin/gem install r10k
 
 # disable puppet agent systemd service
 # - we run masterless and only converge manually
