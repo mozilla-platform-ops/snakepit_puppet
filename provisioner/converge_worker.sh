@@ -5,14 +5,14 @@ set -x
 
 # user configurables
 if [ -z "${PUPPET_REPO}" ]; then
-    PUPPET_REPO="https://github.com/mozilla-platform-ops/ronin_puppet.git"
+    PUPPET_REPO="https://github.com/mozilla-platform-ops/snakepit_puppet.git"
 fi
 if [ -z "${PUPPET_BRANCH}" ]; then
-    PUPPET_BRANCH="master"
+    PUPPET_BRANCH="main"
 fi
 
 # hard coded
-ROLE="snakepit_worker"  # TODO: remove, hardocded below
+ROLE="snakepit_worker"  # TODO: remove? hardocded below. still used for check...
 PUPPET_BIN='/opt/puppetlabs/bin/puppet'
 PUPPET_ENV_DIR='/etc/puppetlabs/environments'
 FACTER_BIN='/opt/puppetlabs/bin/facter'
