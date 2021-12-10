@@ -89,6 +89,8 @@ Depends: cuda-runtime-11-5 (>= 11.5.0), cuda-toolkit-11-5 (>= 11.5.0), cuda-demo
 
 To remedy this problem, we find what packages the metapackage installs. Once the packages have been identified, we craft an install script that installs all of the constituent packages (those including cuda and nvidia in the name, the full dependency list is very large). The install script is then used to install the required packages on the bare metal hosts and any containers.
 
+Full BOMs (`dpkg --list` output) of the before and after state are captured also.
+
 ### creating and testing package configurations
 
 #### 0. run a proxy (optional)
