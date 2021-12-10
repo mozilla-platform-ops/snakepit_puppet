@@ -28,7 +28,7 @@ repos:
     - id: shellcheck
 
 - repo: https://github.com/aerickson/pre-commit-hooks
-  rev: 84328184aca54f7a41b9b620485956f721b7d318
+  rev:  2.1.4-aerickson
   hooks:
     - id: standardrb
       exclude: '^Gemfile*'
