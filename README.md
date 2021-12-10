@@ -56,6 +56,8 @@ sudo bolt plan run roles::head_converge hosts=localhost --verbose --log-level de
 
 test-kitchen automates the testing of roles and integrates inspec tests for verification.
 
+test-kitchen is used for testing in CI, so the test-kitchen worker configuration does a partial converge for speed (see modules/roles/manifests/slurm_worker_post.pp).
+
 ```bash
 # initial setup
 brew install puppet-bolt  # or equivalent
