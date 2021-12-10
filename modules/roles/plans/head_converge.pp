@@ -4,6 +4,6 @@ plan roles::head_converge(
   apply_prep([$hosts])
 
   apply($hosts) {
-    include roles::snakepit_head
+    include roles::slurm_head
   }
 }

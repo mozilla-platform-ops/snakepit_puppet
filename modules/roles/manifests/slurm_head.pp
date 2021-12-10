@@ -1,4 +1,4 @@
-class roles::snakepit_head {
+class roles::slurm_head {
 
     # TODO: manage ssh keys and human users
 

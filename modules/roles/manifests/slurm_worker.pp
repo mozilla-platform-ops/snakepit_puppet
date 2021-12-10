@@ -1,4 +1,4 @@
-class roles::snakepit_worker {
+class roles::slurm_worker {
 
     # TODO: manage users and ssh keys
 
@@ -19,7 +19,7 @@ class roles::snakepit_worker {
     # install spack
     include moz_slurm::spack
 
-    # steps below moved to roles::snakepit_worker_post to be run by bolt post-convergence
+    # steps below moved to roles::slurm_worker_post to be run by bolt post-convergence
     #
     # install lmod and spack
     # include moz_slurm::spack_lmod

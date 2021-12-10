@@ -12,7 +12,7 @@ if [ -z "${PUPPET_BRANCH}" ]; then
 fi
 
 # hard coded
-ROLE="snakepit_worker"  # TODO: remove? hardocded below. still used for check...
+ROLE="slurm_worker"  # TODO: remove? hardocded below. still used for check...
 PUPPET_BIN='/opt/puppetlabs/bin/puppet'
 PUPPET_ENV_DIR='/etc/puppetlabs/environments'
 FACTER_BIN='/opt/puppetlabs/bin/facter'
@@ -62,7 +62,7 @@ function update_puppet {
     cat <<EOF > "${PUPPET_REPO_PATH}/manifests/nodes/nodes.pp"
     node '${FQDN}' {
         include ::roles::${ROLE}
-        include ::roles::snakepit_worker_post
+        include ::roles::slurm_worker_post
     }
 EOF
 

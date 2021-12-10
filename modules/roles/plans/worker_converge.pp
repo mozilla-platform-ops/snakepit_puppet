@@ -4,7 +4,7 @@ plan roles::worker_converge(
   apply_prep([$hosts])
 
   apply($hosts) {
-    include roles::snakepit_worker
-    include roles::snakepit_worker_post
+    include roles::slurm_worker
+    include roles::slurm_worker_post
   }
 }
