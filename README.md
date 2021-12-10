@@ -23,6 +23,8 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
 
 I had hoped to use bolt to do the masterless convergence, but it doesn't interpolate hiera variables outside of apply blocks. I didn't have the ttime to work around this issue, so I'm using our traditional `puppet apply` provisioner.
 
+TODO: test to see if this is still broken, now that hiera lookup is fixed.
+
 ## test-kitchen testing
 
 test-kitchen automates testing roles and integrates serverspec tests for verification.
@@ -59,9 +61,9 @@ $ cd /vagrant
 # bolt: NOT WORKING (due to hiera interpolation not being done)
 # run one of the following
 # to converge a worker node
-$ sudo bolt plan run roles::worker_converge servers=localhost
+$ sudo bolt plan run roles::worker_converge hosts=localhost
 # to converge the host as a head node
-$ sudo bolt plan run roles::head_converge servers=localhost
+$ sudo bolt plan run roles::head_converge hosts=localhost
 ```
 
 ## keeping bare metal and containers in sync
