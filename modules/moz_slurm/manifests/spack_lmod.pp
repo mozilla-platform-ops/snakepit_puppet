@@ -2,11 +2,13 @@ class moz_slurm::spack_lmod {
 
   # include moz_slurm::spack
 
+  $spack_bin_path = lookup('moz_slurm::spack_bin_path')
+
   exec {'install lmod':
-    command  => "%{lookup('moz_slurm::spack_bin_path')} install lmod",
+    command  => "${spack_bin_path} install lmod",
     provider => shell,
     user     => 'slurm',
-    unless   => "%{lookup('moz_slurm::spack_bin_path')} find lmod",
+    unless   => "${spack_bin_path} find lmod",
     timeout  => 3600,
   }
 
