@@ -10,6 +10,8 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
   - future: manage users on the hosts
 - bolt
   - figure out how to apply roles and test (used for initial convergence, and worker post convergence)
+    - won't do interpolated hiera data... why bother then...?
+      - just use puppet provisioner from ronin-puppet.
 - package configuration code
   - Test updating instances... will running the install script just work?
     - i.e. start with 11-4 and upgrade to 11-5
@@ -17,7 +19,13 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
       - maybe make an uninstall script that removes the exact ones installed previously...
         - then can use newer version's install script.
 
-## testing locally
+## provisioner notes
+
+I had hoped to use bolt to do the masterless convergence, but it doesn't interpolate hiera variables outside of apply blocks. I didn't have the ttime to work around this issue, so I'm using our traditional `puppet apply` provisioner.
+
+## test-kitchen testing
+
+test-kitchen automates testing roles and integrates serverspec tests for verification.
 
 ```bash
 # initial setup
@@ -25,11 +33,35 @@ brew install puppet-bolt  # or equivalent
 bundle install
 bolt module install  # install 3rd party modules to .modules
 
-# converge
+# converge head and worker roles
 bundle exec kitchen converge
 
 # run integration tests
 bundle exec kitchen verify
+```
+
+## vagrant testing
+
+vagrant testing is lower level than test-kitchen and allows more realistic testing of the bolt provisioning and convergence process.
+
+```bash
+vagrant up
+vagrant ssh
+
+# once in the vagrant node
+$ cd /vagrant
+
+# puppet_apply:
+#
+# TBD
+# sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
+
+# bolt: NOT WORKING (due to hiera interpolation not being done)
+# run one of the following
+# to converge a worker node
+$ sudo bolt plan run roles::worker_converge servers=localhost
+# to converge the host as a head node
+$ sudo bolt plan run roles::head_converge servers=localhost
 ```
 
 ## keeping bare metal and containers in sync

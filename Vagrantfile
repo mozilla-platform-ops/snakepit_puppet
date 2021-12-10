@@ -14,7 +14,7 @@ SCRIPT
 Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/bionic64"
 
-  config.vm.provision "shell", inline: $script
+  # config.vm.provision "shell", inline: $script
 
   #  config.vm.provider "virtualbox" do |vb|
   #    vb.memory = "4096"
