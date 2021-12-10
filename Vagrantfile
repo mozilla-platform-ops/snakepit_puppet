@@ -24,4 +24,15 @@ Vagrant.configure("2") do |config|
      vb.memory = 2048
      vb.cpus = 4
    end
+
+   # config.vm.hostname
+
+  config.vm.define "head" do |machine|
+    machine.vm.hostname = "mlchead.vagrant"
+  end
+
+  config.vm.define "worker" do |machine|
+    machine.vm.hostname = "mlc0.vagrant"
+  end
+
 end
