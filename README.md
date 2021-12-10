@@ -41,6 +41,7 @@ cd /vagrant
 #
 # uses main branch
 sudo /vagrant/provisioner/converge_worker.sh
+sudo /vagrant/provisioner/converge_head.sh
 # override for testing
 sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
 
