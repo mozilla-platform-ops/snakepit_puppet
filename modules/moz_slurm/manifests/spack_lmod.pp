@@ -6,7 +6,8 @@ class moz_slurm::spack_lmod {
   $spack_bin_path = lookup('moz_slurm::spack_bin_path')
 
   exec {'install lmod':
-    command  => "${spack_bin_path} install lmod",
+    # need bash -c to load spack and lmod in .bashrc
+    command  => "bash -c '${spack_bin_path} install lmod'",
     provider => shell,
     user     => 'slurm',
     unless   => "${spack_bin_path} find lmod",
