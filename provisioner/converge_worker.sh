@@ -59,7 +59,6 @@ function update_puppet {
     #$BOLT_BIN puppetfile install "${R10K_INSTALL_OPTIONS[@]}"
 
     # Install bolt modules
-    # TODO: check existence elsewhere
     ${BOLT_BIN} module install
 
     FQDN=$(${FACTER_BIN} networking.fqdn)
@@ -167,9 +166,9 @@ if [ ! -x "${FACTER_BIN}" ]; then
     fail "${FACTER_BIN} is missing or not executable"
 fi
 
-# if [ ! -x "${BOLT_BIN}" ]; then
-#     fail "${BOLT_BIN} is missing or not executable"
-# fi
+if [ ! -x "${BOLT_BIN}" ]; then
+    fail "${BOLT_BIN} is missing or not executable"
+fi
 
 # run puppet
 run_puppet
