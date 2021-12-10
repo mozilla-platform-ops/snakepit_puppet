@@ -3,17 +3,21 @@
 set -e
 set -x
 
-ROLE="snakepit_worker"
-PUPPET_REPO="https://github.com/mozilla-platform-ops/ronin_puppet.git"
-PUPPET_BRANCH="master"
-# PUPPET_REPO="https://github.com/aerickson/ronin_puppet.git"
-# PUPPET_BRANCH="devicepool_fixes_99"
+# user configurables
+if [ -z "${PUPPET_REPO}" ]; then
+    PUPPET_REPO="https://github.com/mozilla-platform-ops/ronin_puppet.git"
+fi
+if [ -z "${PUPPET_BRANCH}" ]; then
+    PUPPET_BRANCH="master"
+fi
 
+# hard coded
+ROLE="snakepit_worker"  # TODO: remove, hardocded below
 PUPPET_BIN='/opt/puppetlabs/bin/puppet'
 PUPPET_ENV_DIR='/etc/puppetlabs/environments'
 FACTER_BIN='/opt/puppetlabs/bin/facter'
-R10K_BIN='/opt/puppetlabs/puppet/bin/r10k'
-#R10K_DIR="/etc/puppetlabs/environments/production/r10k_modules"
+BOLT_BIN='/opt/puppetlabs/puppet/bin/bolt'
+BOLT_DIR="/etc/puppetlabs/environments/production/.modules"
 ROLE_FILE='/etc/puppet_role'
 PUPPET_REPO_PATH="$PUPPET_ENV_DIR/production"
 
@@ -48,11 +52,15 @@ function update_puppet {
 
     # Purge modules no longer managed by Puppetfile
     #R10K_PURGE_OPTIONS=("--moduledir=${R10K_DIR}" '-v')
-    #$R10K_BIN puppetfile purge "${R10K_PURGE_OPTIONS[@]}"
+    #$BOLT_BIN puppetfile purge "${R10K_PURGE_OPTIONS[@]}"
 
     # Install r10k modules
     #R10K_INSTALL_OPTIONS=("--moduledir=${R10K_DIR}" '--force' '-v')
-    #$R10K_BIN puppetfile install "${R10K_INSTALL_OPTIONS[@]}"
+    #$BOLT_BIN puppetfile install "${R10K_INSTALL_OPTIONS[@]}"
+
+    # Install bolt modules
+    # TODO: check existence elsewhere
+    ${BOLT_BIN} module install
 
     FQDN=$(${FACTER_BIN} networking.fqdn)
 
@@ -74,7 +82,7 @@ function run_puppet {
     # this includes:
     # FACTER_PUPPETIZING so that the manifests know this is a first run of puppet
     # TODO: send logs to syslog? send a puppet report to puppetdb?
-    PUPPET_OPTIONS=('--modulepath=./modules:./r10k_modules' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
+    PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
     # PUPPET_OPTIONS=('--modulepath=./modules:./r10k_modules' '--debug' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
 
     # check for 'Error:' in the output; this catches errors even
@@ -135,7 +143,7 @@ fi
 # install puppet
 wget -P /var/tmp/ "http://apt.puppetlabs.com/puppet7-release-$(lsb_release -c -s).deb"
 dpkg -i /var/tmp/*.deb
-apt-get update -y && apt-get install -y puppet-agent
+apt-get update -y && apt-get install -y puppet-agent puppet-bolt
 ln -sf /opt/puppetlabs/bin/puppet /usr/bin/puppet
 # install r10k
 # to handle https://github.com/puppetlabs/r10k/issues/930
@@ -159,9 +167,9 @@ if [ ! -x "${FACTER_BIN}" ]; then
     fail "${FACTER_BIN} is missing or not executable"
 fi
 
-if [ ! -x "${R10K_BIN}" ]; then
-    fail "${R10K_BIN} is missing or not executable"
-fi
+# if [ ! -x "${BOLT_BIN}" ]; then
+#     fail "${BOLT_BIN} is missing or not executable"
+# fi
 
 # run puppet
 run_puppet
