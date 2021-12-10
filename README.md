@@ -51,7 +51,7 @@ vagrant up
 vagrant ssh
 
 # once in the vagrant node
-$ cd /vagrant
+cd /vagrant
 
 # puppet_apply:
 #
@@ -61,9 +61,9 @@ $ cd /vagrant
 # bolt: NOT WORKING (due to hiera interpolation not being done)
 # run one of the following
 # to converge a worker node
-$ sudo bolt plan run roles::worker_converge hosts=localhost
+sudo bolt plan run roles::worker_converge hosts=localhost --verbose --log-level debug
 # to converge the host as a head node
-$ sudo bolt plan run roles::head_converge hosts=localhost
+sudo bolt plan run roles::head_converge hosts=localhost --verbose --log-level debug
 ```
 
 ## keeping bare metal and containers in sync

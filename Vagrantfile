@@ -14,11 +14,11 @@ SCRIPT
 Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/bionic64"
 
+  # needed if we're converging via bolt
   # config.vm.provision "shell", inline: $script
 
-  #  config.vm.provider "virtualbox" do |vb|
-  #    vb.memory = "4096"
-  #    v.memory = 1024
-  #    v.cpus = 2
-  #  end
+   config.vm.provider "virtualbox" do |vb|
+     vb.memory = 2048
+     vb.cpus = 2
+   end
 end
