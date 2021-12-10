@@ -1,8 +1,8 @@
 class roles::slurm_worker_post {
 
     # idea behind this class:
-    #   bolt will run post-convergence to do the heavy lifting
-    #     e.g. bolt apply modules/roles/manifests/slurm_worker_post.pp --targets workers
+    #   the things in this file take too long to run for CI,
+    #   so split up convergence.
 
     # TODO: rename this to full and include slurm_worker
     # - rename to phase 1 and complete (includes phase 2)?
