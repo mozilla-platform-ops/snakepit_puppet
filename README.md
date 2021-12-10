@@ -9,10 +9,6 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
   - set slurm uid/gids that work in prod
   - configure NFS mount points
   - future: manage users on the hosts
-- bolt
-  - figure out how to apply roles and test (used for initial convergence, and worker post convergence)
-    - won't do interpolated hiera data... why bother then...?
-      - just use puppet provisioner from ronin-puppet.
 - package configuration code
   - Test updating instances... will running the install script just work?
     - i.e. start with 11-4 and upgrade to 11-5
@@ -26,9 +22,40 @@ I had hoped to use bolt to do the masterless convergence, but it doesn't provide
 
 TODO: test to see if this is still broken, now that hiera lookup is fixed.
 
-## test-kitchen testing
+## testing
 
-test-kitchen automates testing roles and integrates serverspec tests for verification.
+test-kitchen is the best place to start. vagrant is easier for rapid iteration and for testing the provisioner script.
+
+### vagrant testing
+
+vagrant testing is lower level than test-kitchen and allows more realistic testing of the provisioning and convergence process.
+
+```bash
+vagrant up
+vagrant ssh
+
+# once in the vagrant node
+cd /vagrant
+
+# puppet_apply convergence
+#
+# uses main branch
+sudo /vagrant/provisioner/converge_worker.sh
+# override for testing
+sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
+
+# bolt convergence (alternative method)
+#
+# run one of the following
+# to converge a worker node
+sudo bolt plan run roles::worker_converge hosts=localhost --verbose --log-level debug
+# to converge the host as a head node
+sudo bolt plan run roles::head_converge hosts=localhost --verbose --log-level debug
+```
+
+### test-kitchen testing
+
+test-kitchen automates the testing of roles and integrates inspec tests for verification.
 
 ```bash
 # initial setup
@@ -41,31 +68,6 @@ bundle exec kitchen converge
 
 # run integration tests
 bundle exec kitchen verify
-```
-
-## vagrant testing
-
-vagrant testing is lower level than test-kitchen and allows more realistic testing of the bolt provisioning and convergence process.
-
-```bash
-vagrant up
-vagrant ssh
-
-# once in the vagrant node
-cd /vagrant
-
-# puppet_apply:
-# uses main branch
-sudo /vagrant/provisioner/converge_worker.sh
-# override for testing
-sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
-
-# bolt: NOT WORKING (due to hiera interpolation not being done)
-# run one of the following
-# to converge a worker node
-sudo bolt plan run roles::worker_converge hosts=localhost --verbose --log-level debug
-# to converge the host as a head node
-sudo bolt plan run roles::head_converge hosts=localhost --verbose --log-level debug
 ```
 
 ## keeping bare metal and containers in sync
