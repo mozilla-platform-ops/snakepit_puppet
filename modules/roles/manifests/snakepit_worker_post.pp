@@ -4,6 +4,9 @@ class roles::snakepit_worker_post {
     #   bolt will run post-convergence to do the heavy lifting
     #     e.g. bolt apply modules/roles/manifests/snakepit_worker_post.pp --targets workers
 
+    # TODO: rename this to full and include snakepit_worker
+    # - rename to phase 1 and complete (includes phase 2)?
+
     # TODO: should moz_slurm's children include this?
     include moz_slurm
 

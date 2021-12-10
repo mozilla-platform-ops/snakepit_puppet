@@ -14,6 +14,7 @@ class roles::snakepit_worker {
     include slurm
 
     # TODO: configure nfs packages/mounts
+    #       - evgeny says: like /data from snakepit scheduler
 
     # install spack
     include moz_slurm::spack

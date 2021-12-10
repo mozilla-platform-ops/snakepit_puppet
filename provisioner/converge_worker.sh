@@ -50,19 +50,15 @@ function update_puppet {
     git fetch --all --prune || return 1
     git checkout --force origin/${PUPPET_BRANCH} || return 1
 
-    # Purge modules no longer managed by Puppetfile
-    #R10K_PURGE_OPTIONS=("--moduledir=${R10K_DIR}" '-v')
-    #$BOLT_BIN puppetfile purge "${R10K_PURGE_OPTIONS[@]}"
-
-    # Install r10k modules
-    #R10K_INSTALL_OPTIONS=("--moduledir=${R10K_DIR}" '--force' '-v')
-    #$BOLT_BIN puppetfile install "${R10K_INSTALL_OPTIONS[@]}"
+    # TODO: bolt module purge or equivalent?
 
     # Install bolt modules
     ${BOLT_BIN} module install
 
-    FQDN=$(${FACTER_BIN} networking.fqdn)
+    # ensure nodes directory is present
+    mkdir -p "${PUPPET_REPO_PATH}/manifests/nodes/"
 
+    FQDN=$(${FACTER_BIN} networking.fqdn)
     cat <<EOF > "${PUPPET_REPO_PATH}/manifests/nodes/nodes.pp"
     node '${FQDN}' {
         include ::roles::${ROLE}
@@ -78,12 +74,10 @@ function run_puppet {
     echo "Running puppet apply"
 
     cd $PUPPET_REPO_PATH
-    # this includes:
-    # FACTER_PUPPETIZING so that the manifests know this is a first run of puppet
-    # TODO: send logs to syslog? send a puppet report to puppetdb?
+    # normal operation
     # PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
+    # debugging
     PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--debug' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=true' '--detailed-exitcodes' './manifests/')
-    # PUPPET_OPTIONS=('--modulepath=./modules:./r10k_modules' '--debug' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
 
     # check for 'Error:' in the output; this catches errors even
     # when the puppet exit status is incorrect.

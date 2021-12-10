@@ -5,6 +5,7 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
 ## TODOs
 
 - puppet
+  - create production secrets.yaml file
   - set slurm uid/gids that work in prod
   - configure NFS mount points
   - future: manage users on the hosts
@@ -54,9 +55,10 @@ vagrant ssh
 cd /vagrant
 
 # puppet_apply:
-#
-# TBD
-# sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
+# uses main branch
+sudo /vagrant/provisioner/converge_worker.sh
+# override for testing
+sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
 
 # bolt: NOT WORKING (due to hiera interpolation not being done)
 # run one of the following
