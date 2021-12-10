@@ -21,7 +21,7 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
 
 ## provisioner notes
 
-I had hoped to use bolt to do the masterless convergence, but it doesn't interpolate hiera variables outside of apply blocks. I didn't have the ttime to work around this issue, so I'm using our traditional `puppet apply` provisioner.
+I had hoped to use bolt to do the masterless convergence, but it doesn't provide debug output like `puppet apply` and `--noop` usage isn't obvious.
 
 TODO: test to see if this is still broken, now that hiera lookup is fixed.
 
