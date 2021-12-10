@@ -1,7 +1,7 @@
 class moz_slurm::spack_singularity {
 
-  require moz_slurm::spack
-  require moz_slurm::spack_lmod
+  include moz_slurm::spack
+  include moz_slurm::spack_lmod
 
   # install singularity
   exec {'install singularity':

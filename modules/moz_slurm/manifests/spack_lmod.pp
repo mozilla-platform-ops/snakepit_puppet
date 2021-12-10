@@ -1,6 +1,6 @@
 class moz_slurm::spack_lmod {
 
-  require moz_slurm::spack
+  include moz_slurm::spack
 
   exec {'install lmod':
     command  => "%{lookup('moz_slurm::spack_bin_path')} install lmod",
