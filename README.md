@@ -30,7 +30,8 @@ vagrant testing is lower level than test-kitchen and allows more realistic testi
 
 ```bash
 vagrant up
-vagrant ssh
+# ssh into the 'head' or 'worker' instance
+vagrant ssh worker
 
 # once in the vagrant node
 cd /vagrant
