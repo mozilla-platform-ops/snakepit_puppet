@@ -20,8 +20,6 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
 
 I had hoped to use bolt to do the masterless convergence, but it doesn't provide debug output like `puppet apply` and `--noop` usage isn't obvious.
 
-TODO: test to see if this is still broken, now that hiera lookup is fixed.
-
 ## testing
 
 test-kitchen is the best place to start. vagrant is easier for rapid iteration and for testing the provisioner script.
