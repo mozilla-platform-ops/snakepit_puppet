@@ -6,6 +6,8 @@ class moz_slurm::spack {
   # see https://www.palmetto.clemson.edu/palmetto/software/spack/
   # for an example setup
 
+  $spack_path = lookup('moz_slurm::spack_path')
+
   # create software dir
   file { lookup('moz_slurm::software_path'):
     ensure => directory,
@@ -24,7 +26,7 @@ class moz_slurm::spack {
 
   file_line { 'add spack env source to .bashrc':
     path => '/home/slurm/.bashrc',
-    line => "source %{lookup('moz_slurm::spack_path')}/share/spack/setup-env.sh",
+    line => "source ${spack_path}/share/spack/setup-env.sh",
   }
 
   # TODO: define a set of modules all users get
