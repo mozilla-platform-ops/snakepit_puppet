@@ -1,14 +1,17 @@
 class moz_slurm::spack_singularity {
 
-  # include moz_slurm::spack
-  # include moz_slurm::spack_lmod
+  require moz_slurm::spack
+  require moz_slurm::spack_lmod
+
+  # variables just in double quoted strings won't get resolved
+  $spack_bin_path = lookup('moz_slurm::spack_bin_path')
 
   # install singularity
   exec {'install singularity':
-    command  => "%{lookup('moz_slurm::spack_bin_path')} install singularity",
+    command  => "${spack_bin_path} install singularity",
     provider => shell,
     user     => 'slurm',
-    unless   => "%{lookup('moz_slurm::spack_bin_path')} find singularity",
+    unless   => "${spack_bin_path} find singularity",
     timeout  => 3600,
   }
 

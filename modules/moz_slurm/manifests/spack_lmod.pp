@@ -1,7 +1,8 @@
 class moz_slurm::spack_lmod {
 
-  # include moz_slurm::spack
+  require moz_slurm::spack
 
+  # variables just in double quoted strings won't get resolved
   $spack_bin_path = lookup('moz_slurm::spack_bin_path')
 
   exec {'install lmod':
