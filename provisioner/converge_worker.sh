@@ -16,7 +16,7 @@ ROLE="snakepit_worker"  # TODO: remove? hardocded below. still used for check...
 PUPPET_BIN='/opt/puppetlabs/bin/puppet'
 PUPPET_ENV_DIR='/etc/puppetlabs/environments'
 FACTER_BIN='/opt/puppetlabs/bin/facter'
-BOLT_BIN='/opt/puppetlabs/puppet/bin/bolt'
+BOLT_BIN='/usr/local/bin/bolt'
 BOLT_DIR="/etc/puppetlabs/environments/production/.modules"
 ROLE_FILE='/etc/puppet_role'
 PUPPET_REPO_PATH="$PUPPET_ENV_DIR/production"
@@ -81,7 +81,8 @@ function run_puppet {
     # this includes:
     # FACTER_PUPPETIZING so that the manifests know this is a first run of puppet
     # TODO: send logs to syslog? send a puppet report to puppetdb?
-    PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
+    # PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
+    PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--debug' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=true' '--detailed-exitcodes' './manifests/')
     # PUPPET_OPTIONS=('--modulepath=./modules:./r10k_modules' '--debug' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
 
     # check for 'Error:' in the output; this catches errors even
