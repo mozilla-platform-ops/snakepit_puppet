@@ -116,7 +116,7 @@ rake pkg_config_create
 
 # inspect the output in
 #   modules/moz_slurm/create_package_configuration/boms/ and paste it into
-#   modules/moz_slurm//testing_package_configs/install_packages.sh
+#   modules/moz_slurm/testing_package_configs/install_packages.sh
 ```
 
 #### 2. test a new installation script
