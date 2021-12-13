@@ -8,7 +8,10 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
   - create production secrets.yaml file
   - set slurm uid/gids that work in prod
   - configure NFS mount points
+  - worker: set environment for proxy
+    - https://github.com/mozilla/snakepit/pull/186/files
   - future: manage users on the hosts
+  - future: proxy installation & configuration
 - package configuration code
   - Test updating instances... will running the install script just work?
     - i.e. start with 11-4 and upgrade to 11-5
@@ -16,7 +19,21 @@ puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
       - maybe make an uninstall script that removes the exact ones installed previously...
         - then can use newer version's install script.
 
-## provisioner notes
+## notes
+
+### nfs mounts
+
+Snakpit (the scheduler) only gives jobs access to their jobs directory, user directory, and group directory.
+
+Slurm doesn't do any access control. If the slurm unix user can write to a directory, every job will be able to write to it.
+
+```bash
+#  server paths to client paths
+/snakepit/shared/data: /data/ro
+/moz_slurm/user_data: /data/rw
+```
+
+### provisioners
 
 I had hoped to use bolt to do the masterless convergence, but it doesn't provide debug output like `puppet apply` and `--noop` usage isn't obvious.
 
