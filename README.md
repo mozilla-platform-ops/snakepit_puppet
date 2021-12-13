@@ -20,7 +20,7 @@ puppet code for managing Mozilla's Snakepit cluster
 
 ### nfs mounts
 
-Snakpit (the scheduler) only gives jobs access to their jobs directory, user directory, and group directory.
+Snakepit (the scheduler, https://github.com/mozilla/snakepit) only gives jobs access to their jobs directory, user directory, and group directory.
 
 Slurm doesn't do any access control. If the slurm unix user can write to a directory, every job will be able to write to it.
 

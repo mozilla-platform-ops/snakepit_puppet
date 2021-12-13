@@ -12,7 +12,7 @@ class moz_slurm::worker::nfs {
   file { '/data':
     ensure => 'directory',
     path   => '/data',
-    mode   => '0750',  # TODO: what should these be? also update README.md. is it important when it's just mounted over?
+    mode   => '0750',
     owner  => 'root',
     group  => 'root'
   }
@@ -23,14 +23,14 @@ class moz_slurm::worker::nfs {
   file { '/data/ro':
     ensure => 'directory',
     path   => '/data/ro',
-    mode   => '0750',  # TODO: what should these be? also update README.md. is it important when it's just mounted over?
+    mode   => '0750',
     owner  => 'slurm',
     group  => 'slurm'
   }
 
   # # configure fstab
   mount { '/data/ro':
-    ensure  => 'mounted',
+    ensure  => 'mounted',  # just present so we can converge in puppet?
     atboot  => true,
     device  => '192.168.1.1:/data_ro',
     fstype  => 'nfs',
@@ -44,7 +44,7 @@ class moz_slurm::worker::nfs {
   file { '/data/rw':
     ensure => 'directory',
     path   => '/data/rw',
-    mode   => '0750',  # TODO: what should these be? also update README.md. is it important when it's just mounted over?
+    mode   => '0750',
     owner  => 'slurm',
     group  => 'slurm'
   }
