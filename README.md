@@ -11,13 +11,10 @@ puppet code for managing Mozilla's Snakepit cluster
   - worker: set environment for proxy
     - https://github.com/mozilla/snakepit/pull/186/files
   - future: manage users on the hosts
-  - future: proxy installation & configuration
-- package configuration code
-  - Test updating instances... will running the install script just work?
-    - i.e. start with 11-4 and upgrade to 11-5
-      - will conflict?
-      - maybe make an uninstall script that removes the exact ones installed previously...
-        - then can use newer version's install script.
+  - future: head: proxy installation & configuration
+- package configuration
+  - test updating instances
+    - e.g. start with 11-4 and upgrade to 11-5
 
 ## notes
 
