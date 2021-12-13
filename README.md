@@ -1,6 +1,6 @@
 # snakepit_puppet
 
-puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
+puppet code for managing Mozilla's Snakepit cluster
 
 ## TODOs
 
