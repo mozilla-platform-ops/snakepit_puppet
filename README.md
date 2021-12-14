@@ -37,9 +37,9 @@ Snakepit (the scheduler, https://github.com/mozilla/snakepit) only gives jobs wr
 Slurm doesn't do any access control. If the slurm unix user can write to a directory, every job will be able to write to it.
 
 ```bash
-#  server paths to client paths
-/snakepit/shared/data: /data/ro
-/moz_slurm/user_data: /data/rw
+#  mlchead nfs export paths to client mount paths
+/snakepit/shared      /data/ro
+/moz_slurm/user_data  /data/rw
 ```
 
 ### provisioners
