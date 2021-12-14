@@ -44,7 +44,7 @@ commands:
           name: Bundle Install and forced clean
           command: |
             gem install bundler
-            bundle install
+            bundle install --path vendor/bundle
             bundle clean --force
       - save_cache:
           paths:
