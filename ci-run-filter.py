@@ -26,6 +26,10 @@ import subprocess
 #     - circleci: https://ideas.circleci.com/cloud-feature-requests/p/set-job-state-based-on-exit-code
 #     - gitlab: https://gitlab.com/gitlab-org/gitlab/-/issues/16733
 #     - github: no public issue mentioning this
+#
+# potential issues:
+# - if developers push a bunch of commits at once, the we could 'miss' commits that should be triggered on
+#   - mitigation: encourage developers to push frequently
 
 
 def inspect_commit_message():
