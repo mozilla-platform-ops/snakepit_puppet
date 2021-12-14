@@ -14,7 +14,7 @@ class moz_slurm::worker::nfs {
     path   => '/data',
     mode   => '0750',
     owner  => 'root',
-    group  => 'root'
+    group  => 'slurm'
   }
 
   # /data/ro
@@ -32,7 +32,7 @@ class moz_slurm::worker::nfs {
   mount { '/data/ro':
     ensure  => 'mounted',  # just present so we can converge in puppet?
     atboot  => true,
-    device  => '192.168.1.1:/data_ro',
+    device  => '192.168.1.1:/snakepit/shared',
     fstype  => 'nfs',
     options => 'nosuid,hard,udp,bg,noatime',
     pass    => 0
@@ -53,7 +53,7 @@ class moz_slurm::worker::nfs {
   mount { '/data/rw':
     ensure  => 'mounted',  # just present so we can converge in puppet?
     atboot  => true,
-    device  => '192.168.1.1:/data_rw',
+    device  => '192.168.1.1:/moz_slurm/user_data',
     fstype  => 'nfs',
     options => 'nosuid,hard,udp,bg,noatime',
     pass    => 0
