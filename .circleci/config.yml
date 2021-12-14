@@ -66,16 +66,16 @@ jobs:
       - checkout
       - gem_cache
       - apt_cache_restore
-      - run: |
-          wget https://apt.puppet.com/puppet-tools-release-focal.deb
-          sudo dpkg -i puppet-tools-release-focal.deb
-          sudo apt-get update
-          sudo apt-get install puppet-bolt
-      - run: bolt module install
       - run:
+          name: install bolt and puppet modules
+          command: ./ci-run-filter.py -c 'ci_bolt_install.sh' -s 'modules/' -s 'Puppetfile' -s 'bolt-project.yaml' -v
+      - run:
+          name: converge
           command: ./ci-run-filter.py -c 'bundle exec kitchen converge << parameters.kitchen_target >>' -s 'modules/' -v
           no_output_timeout: 60m
-      - run: ./ci-run-filter.py -c 'bundle exec kitchen verify << parameters.kitchen_target >>' -s 'modules/' -v
+      - run:
+          name: verify
+          command: ./ci-run-filter.py -c 'bundle exec kitchen verify << parameters.kitchen_target >>' -s 'modules/' -v
       - apt_cache_save
 
 workflows:
