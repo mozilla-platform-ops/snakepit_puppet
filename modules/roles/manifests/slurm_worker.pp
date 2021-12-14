@@ -2,10 +2,6 @@ class roles::slurm_worker {
 
     # TODO: manage users and ssh keys
 
-    # TODO: should moz_slurm's children include this?
-    include moz_slurm
-    include moz_slurm::packages
-
     class { 'munge':
       # the 'key' defines the security realm for a node, https://github.com/dun/munge/wiki/Man-7-munge
       munge_key_content => base64('decode', lookup('munge::munge_key_content'))
@@ -13,9 +9,10 @@ class roles::slurm_worker {
 
     include slurm
 
-    # TODO: configure nfs packages/mounts
-    #       - evgeny says: like /data from snakepit scheduler
-
+    # TODO: should moz_slurm's children include this?
+    include moz_slurm
+    include moz_slurm::packages
+    include moz_slurm::worker::nfs
     # install spack
     include moz_slurm::spack
 
