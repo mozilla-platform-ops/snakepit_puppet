@@ -8,8 +8,8 @@ slurm::slurmctld_host:
   - mlchead
 slurm::manage_firewall: false
 # TODO: set the UID/GID
-# slurm::slurm_group_gid: 93
-# slurm::slurm_user_uid: 93
+slurm::slurm_group_gid: 1877
+slurm::slurm_user_uid: 1877
 slurm::slurm_user_home: /home/slurm
 slurm::slurm_user_shell: /bin/bash
 
