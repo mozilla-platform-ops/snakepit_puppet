@@ -22,7 +22,17 @@ puppet code for managing Mozilla's Snakepit cluster
 
 ### nfs mounts
 
-Snakepit (the scheduler, https://github.com/mozilla/snakepit) only gives jobs access to their jobs directory, user directory, and group directory.
+Snakepit (the scheduler, https://github.com/mozilla/snakepit) only gives jobs write access to their jobs directory, the user's directory, and any group directories the user is a member of. A shared read-only space is also available.
+
+```text
+/data
+  /ro
+    /shared (contents of mlchead/snakepit/shared/)
+  /rw
+    /group-GROUP (any groups you're in, contents of mlchead/snakepit/groups/GROUP)
+    /home (user dir, mlchead/snakepit/home/USER)
+    /pit (job dir, mlchead/snakepit/pits/ID)
+```
 
 Slurm doesn't do any access control. If the slurm unix user can write to a directory, every job will be able to write to it.
 
