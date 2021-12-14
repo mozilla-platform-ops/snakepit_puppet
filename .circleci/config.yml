@@ -70,7 +70,7 @@ jobs:
       - apt_cache_restore
       - run:
           name: install bolt and puppet modules
-          command: ./ci-run-filter.py -c 'ci_bolt_install.sh' -s 'modules/' -s 'Puppetfile' -s 'bolt-project.yaml' -v
+          command: ./ci-run-filter.py -c './ci_bolt_install.sh' -s 'modules/' -s 'Puppetfile' -s 'bolt-project.yaml' -v
       - run:
           name: converge
           command: ./ci-run-filter.py -c 'bundle exec kitchen converge << parameters.kitchen_target >>' -s 'modules/' -v
