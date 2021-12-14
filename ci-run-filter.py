@@ -112,7 +112,7 @@ if __name__ == "__main__":
     # run test
 
     if args.verbose:
-        print("%s: running test ('%s')..." % (file_name, args.command))
+        print("%s: running command ('%s')..." % (file_name, args.command))
     process = subprocess.Popen(args.command, stdout=subprocess.PIPE, shell=True)
     for c in iter(lambda: process.stdout.read(1), b''):
         sys.stdout.buffer.write(c)
