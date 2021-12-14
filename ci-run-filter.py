@@ -33,6 +33,10 @@ import configparser
 # potential issues:
 # - if developers push a bunch of commits at once, the we could 'miss' commits that should be triggered on
 #   - mitigation: encourage developers to push frequently
+#
+# potential improvements:
+# - figure out how to inspect diff between last CI run and HEAD (vs just HEAD and HEAD~1)
+#   - avoid 'potential issue' above
 
 
 # returns 'skip', 'run', or None (for no action advised)
