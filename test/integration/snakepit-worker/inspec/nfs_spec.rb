@@ -11,41 +11,6 @@ describe file("/data") do
   its("group") { should eq "slurm" }
 end
 
-# TODO: replace with https://docs.chef.io/inspec/resources/etc_fstab/
-# describe fstab do
-#   it do
-#     should have_entry(
-#       device: "192.168.1.1:/snakepit",
-#       mount_point: "/mnt/snakepit",
-#       type: "nfs",
-#       options: {
-#         nosuid: true,
-#         hard: true,
-#         udp: true,
-#         bg: true,
-#         noatime: true
-#       },
-#       dump: 0,
-#       pass: 0
-#     )
-#   end
-# end
-
-# /data
-#   /ro
-#     /shared (contents of mlchead/snakepit/shared/)
-#   /rw
-#     /group-GROUP (any groups you're in, contents of mlchead/snakepit/groups/GROUP)
-#     /home (user dir, mlchead/snakepit/home/USER)
-#     /pit (job dir, mlchead/snakepit/pits/ID)
-#
-# exports:
-#   /snakepit/shared      192.168.0.0/16(ro,no_root_squash,no_subtree_check)
-#   /moz_slurm/user_data  192.168.0.0/16(rw,no_root_squash,no_subtree_check)
-#
-# fstab:
-#        options => 'nosuid,hard,udp,bg,noatime',
-
 describe etc_fstab.where { mount_point == "/data/ro" } do
   its("device_name") { should cmp "192.168.1.1:/snakepit/shared" }
   its("file_system_type") { should cmp "nfs" }
