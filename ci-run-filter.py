@@ -32,6 +32,9 @@ import subprocess
 # potential issues:
 # - if developers push a bunch of commits at once, the we could 'miss' commits that should be triggered on
 #   - mitigation: encourage developers to push frequently
+#
+# TODOs:
+# - use a config file to load shared settings
 
 
 def inspect_commit_message():
