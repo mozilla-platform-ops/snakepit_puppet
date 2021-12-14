@@ -75,6 +75,7 @@ def files_in_diff_match(match_strings, verbose=False, git_ref="HEAD"):
 def run_test_if_matches(
     match_strings, command, git_ref, force_run, force_skip, verbose=False
 ):
+    # TODO: define at root?
     file_name = os.path.basename(__file__)
 
     # debugging
@@ -176,7 +177,6 @@ def main(argv=None):
             config.read([args.conf_file])
             defaults.update(dict(config.items("main")))
         except configparser.NoSectionError:
-            # TODO: warn?
             pass
         # TODO: handle loading filters (manually)
 
