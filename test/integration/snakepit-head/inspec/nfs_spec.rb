@@ -11,13 +11,12 @@ end
 # verify exports
 describe file("/etc/exports") do
   it { should exist }
-  # it { should be_mode 644 }
   its("mode") { should cmp "0644" }
   it { should be_owned_by "root" }
   it { should be_grouped_into "root" }
-  its("content") { should match "^/snakepit/shared/data" }
+  # TODO: match more
+  its("content") { should match "^/snakepit/shared" }
   its("content") { should match "^/moz_slurm/user_data" }
-  # it { should contain  }
 end
 
 # nfs testing on docker doesn't work (modules aren't loaded in host)
@@ -36,7 +35,7 @@ end
 if is_docker
   describe command("exportfs") do
     its(:exit_status) { should eq 0 }
-    its("stdout") { should match "/snakepit/shared/data" }
+    its("stdout") { should match "/snakepit/shared" }
     its("stdout") { should match "/moz_slurm/user_data" }
   end
 end
