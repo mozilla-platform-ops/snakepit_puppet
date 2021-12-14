@@ -179,6 +179,7 @@ def main(argv=None):
         except configparser.NoSectionError:
             pass
         # TODO: handle loading filters (manually)
+        # print({section: dict(config[section]) for section in config.sections()})
 
     # Parse rest of arguments
     # Don't suppress add_help here so it will handle -h
