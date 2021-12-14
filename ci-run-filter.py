@@ -200,6 +200,9 @@ def main(argv=None):
         action="append",
         required=True,
     )
+    # TODO: add filter_set argument
+    # - filter sets loaded from config
+    # - would merge with existing match_strings
     secondary_group.add_argument(
         "--git-ref",
         dest="git_ref",
