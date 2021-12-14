@@ -68,6 +68,7 @@ jobs:
       - checkout
       - gem_cache
       - apt_cache_restore
+      # TODO: add bolt modules caching (stored in .modules)
       - run:
           name: install bolt and puppet modules
           command: ./ci-run-filter.py -c './ci_bolt_install.sh' -s 'modules/' -s 'Puppetfile' -s 'bolt-project.yaml' -v
