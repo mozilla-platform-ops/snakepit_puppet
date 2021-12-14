@@ -33,15 +33,21 @@ import configparser
 # potential issues:
 # - if developers push a bunch of commits at once, the we could 'miss' commits that should be triggered on
 #   - mitigation: encourage developers to push frequently
-#
-# TODOs:
-# - use a config file to load shared settings
 
 
-def inspect_commit_message():
+# returns 'skip', 'run', or None (for no action advised)
+def inspect_commit_message(git_ref, run_string, skip_string):
     # `git show HEAD -s` and look for SKIP_CI or FORCE_CI
-    # - see what CI services are using for defaults
-    pass
+    cmd_to_run = "git show %s -s 2>&1" % git_ref
+    output = subprocess.getoutput(cmd_to_run)
+    # TODO: which should be handled first? run or skip?
+    # TODO: handle if both are present?
+    if run_string in output:
+        return "run"
+    elif skip_string in output:
+        return "skip"
+    else:
+        return None
 
 
 def files_in_diff_match(match_strings, verbose=False, git_ref="HEAD"):
@@ -63,7 +69,6 @@ def files_in_diff_match(match_strings, verbose=False, git_ref="HEAD"):
                 return True
         if verbose:
             print("  ✗ %s" % line)
-
     return False
 
 
@@ -79,23 +84,41 @@ def run_test_if_matches(
     try:
         branch = os.environ["CIRCLE_BRANCH"]
     except KeyError:
-        print("%s: warning: CIRCLE_BRANCH not defined" % file_name)
+        print("%s: WARN: CIRCLE_BRANCH not defined" % file_name)
         branch = "UNKNOWN"
     # print(branch)
 
-    # TODO: support force-run trigger in description
-    # TODO: support force-skip ...
-    # TODO: what order/priority for force options?
+    commit_msg_inspection_result = inspect_commit_message(
+        git_ref, force_run, force_skip
+    )
+
+    # TODO: where should force options fall in priority?
     if branch == "master" or branch == "main":
         pass
-    if files_in_diff_match(match_strings, git_ref=git_ref, verbose=verbose):
+    elif commit_msg_inspection_result and commit_msg_inspection_result == "run":
+        print(
+            "%s: Forcing a command run due to keyword (%s) in commit message."
+            % (file_name, force_run)
+        )
+        pass
+    elif commit_msg_inspection_result and commit_msg_inspection_result == "skip":
+        print(
+            "%s: Skipping command run due to keyword (%s) in commit message."
+            % (file_name, force_skip)
+        )
+        sys.exit(0)
+    elif files_in_diff_match(match_strings, git_ref=git_ref, verbose=verbose):
         pass
     else:
-        # TODO: make sure this matches actual order above? or just omit it?
-        print("- No changed files matched the selection criteria.")
-        print("- Not on master or main braches.")
-        # print("- Commit doesn't have force_run or force_skip keywords in message.")
         print("%s: Skipping test." % file_name)
+        if verbose:
+            # TODO: make sure this matches actual order above? or just omit it?
+            # TODO: mention the actual args
+            print("  - Not on master or main branches.")
+            print(
+                "  - Commit doesn't have force_run or force_skip keywords in message."
+            )
+            print("  - No changed files matched the selection criteria.")
         sys.exit(0)
 
     # run test
