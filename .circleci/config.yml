@@ -73,9 +73,9 @@ jobs:
           sudo apt-get install puppet-bolt
       - run: bolt module install
       - run:
-          command: bundle exec kitchen converge << parameters.kitchen_target >>
+          command: ./ci-run-filter.py -c 'bundle exec kitchen converge << parameters.kitchen_target >>' -s 'modules/' -v
           no_output_timeout: 60m
-      - run: bundle exec kitchen verify << parameters.kitchen_target >>
+      - run: ./ci-run-filter.py -c 'bundle exec kitchen verify << parameters.kitchen_target >>' -s 'modules/' -v
       - apt_cache_save
 
 workflows:

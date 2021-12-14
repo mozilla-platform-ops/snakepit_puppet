@@ -14,6 +14,8 @@ import subprocess
 #     - always runs on master/main
 #     - TODO: run or don't run based on certain tags in the commit message
 #
+#   example usage:
+#     ./ci-run-filter.py -c 'bundle exec kitchen verify' -s 'modules/' -v
 
 # advantages:
 # - saves a bunch of time if commits are just .txt files changes
