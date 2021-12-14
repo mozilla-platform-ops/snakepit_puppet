@@ -34,18 +34,36 @@ def inspect_commit_message():
     pass
 
 
-def files_in_diff_match(match_string, verbose=False):
-    output = subprocess.getoutput("git diff-tree --name-only HEAD 2>&1")
+def files_in_diff_match(match_strings, verbose=False, git_ref='HEAD'):
+    # doesn't get full path
+    # cmd_to_run = "git diff-tree --name-only %s 2>&1" % git_ref
+
+    # full paths, only need to strip off last line
+    cmd_to_run = "git show --stat --name-only --pretty='format:' %s 2>&1" % git_ref
+
+    print(cmd_to_run)
+    output = subprocess.getoutput(cmd_to_run)
     # first line has gitref, skip
-    if verbose:
-        print("changes files:")
-    for line in output.split("\n")[1:]:
-        if verbose:
-            print("  %s" % line)
+
+    for line in output.split("\n")[:-1]:
+    # for mstring_counter, mstring in enumerate(match_strings):
+
+        for mstring_counter, mstring in enumerate(match_strings):
+        # for line in output.split("\n")[1:]:
         # TODO: iterate over array of potential matches
-        if match_string in line:
-            print("'%s' matched pattern, running test..." % line)
-            return True
+            # if verbose:
+            #     print("%s/%s: '%s'..." % (mstring_counter + 1, len(match_strings), mstring))
+            if mstring in line:
+                # print("'%s' matched pattern '%s', running test..." % (line, mstring))
+                if verbose:
+                    print("  ✓ %s (matches '%s')" % (line, mstring))
+                return True
+            # else:
+            #     if verbose:
+            #         print("  ✗ %s" % line)
+        if verbose:
+            print("  ✗ %s" % line)
+
     return False
 
 
@@ -53,11 +71,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process some integers.")
     parser.add_argument('--command', '-c')
     # TODO: take multiple
-    parser.add_argument('--substring_to_match', '-s')
+    parser.add_argument('--substring_to_match', '-s', dest='match_strings', action='append')
     parser.add_argument('--verbose', '-v', default=False, action='store_true')
+    parser.add_argument('--git-ref', '-g', dest="git_ref", default='HEAD')
     # TODO: add skip_commit_message, run_commit_message
     args = parser.parse_args()
+
+    # debugging
     print(args)
+    # sys.exit(0)
 
     try:
         branch = os.environ["CIRCLE_BRANCH"]
@@ -68,7 +90,7 @@ if __name__ == "__main__":
 
     if branch == "master" or branch == "main":
         pass
-    if files_in_diff_match(args.substring_to_match, verbose=args.verbose):
+    if files_in_diff_match(args.match_strings, git_ref=args.git_ref, verbose=args.verbose):
         pass
     # TODO: support force-run trigger in description
     # TODO: support force-skip ...
