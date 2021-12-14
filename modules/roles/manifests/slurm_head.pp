@@ -2,8 +2,6 @@ class roles::slurm_head {
 
     # TODO: manage ssh keys and human users
 
-    include moz_slurm::packages
-
     # install mysql
     class { 'mysql::server':
       root_password           => lookup('mysql::root_password'), #'strongpassword',
@@ -16,6 +14,10 @@ class roles::slurm_head {
     # munge installed by below, test steps: https://github.com/dun/munge/blob/master/QUICKSTART
 
     include slurm
+
+    include moz_slurm
+    include moz_slurm::packages
+    include moz_slurm::head::nfs
 
     # interesting slurmdbd options:
     #   https://gist.github.com/DaisukeMiyamoto/d1dac9483ff0971d5d9f34000311d312

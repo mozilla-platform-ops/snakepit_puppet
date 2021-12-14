@@ -4,9 +4,9 @@ class moz_slurm {
 
   file {'moz_slurm dir':
     ensure => 'directory',
-    path   => '/opt/moz_slurm',
-    owner  => 'root',
-    group  => 'root'
+    path   => '/moz_slurm',
+    owner  => 'slurm',
+    group  => 'slurm'
   }
 
 }

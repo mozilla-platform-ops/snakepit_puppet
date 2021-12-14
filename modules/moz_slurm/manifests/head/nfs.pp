@@ -13,11 +13,28 @@ class moz_slurm::head::nfs {
   }
 
   # create nfs mount points
-  # TODO: snakepit shared dir for testing?
+
+  # /snakepit/shared/data
+  file { '/snakepit':
+    ensure => 'directory',
+    path   => '/snakepit',
+    # leave options loose as it's an existing dir in prod
+  }
+  file { '/snakepit/shared':
+    ensure => 'directory',
+    path   => '/snakepit/shared',
+    # leave options loose as it's an existing dir in prod
+  }
+  file { '/snakepit/shared/data':
+    ensure => 'directory',
+    path   => '/snakepit/shared/data',
+    # leave options loose as it's an existing dir in prod
+  }
+
   #   /moz_slurm/user_data
   file { '/moz_slurm/user_data':
     ensure => 'directory',
-    path   => '/data/ro',
+    path   => '/moz_slurm/user_data',
     mode   => '0750',
     owner  => 'slurm',
     group  => 'slurm'

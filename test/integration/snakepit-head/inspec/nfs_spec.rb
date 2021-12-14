@@ -11,20 +11,21 @@ end
 # verify exports
 describe file("/etc/exports") do
   it { should exist }
-  it { should be_mode 644 }
+  # it { should be_mode 644 }
+  its("mode") { should cmp "0644" }
   it { should be_owned_by "root" }
   it { should be_grouped_into "root" }
-  it { should contain "/snakepit       192.168.0.0/16(rw,no_root_squash,no_subtree_check)" }
+  its("content") { should match "^/snakepit/shared/data" }
+  its("content") { should match "^/moz_slurm/user_data" }
+  # it { should contain  }
 end
 
 # nfs testing on docker doesn't work (modules aren't loaded in host)
-#  detect if we're on docker by inspecting PID 1's cgroup
-def proc_1_cgroup
-  file("/proc/1/cgroup").content
-end
-
+#  - related? `exportfs: /moz_slurm/user_data does not support NFS export`
+#
+# detect if we're on docker by inspecting PID 1's cgroup
 def is_docker
-  if proc_1_cgroup.include?("docker")
+  if File.exist?("/.dockerenv")
     true
   else
     false
@@ -32,7 +33,10 @@ def is_docker
 end
 
 # verify serivce is exporting them
-describe command("exportfs"), if: !is_docker do
-  its(:exit_status) { should eq 0 }
-  its(:stdout) { should contain "/snakepit     	192.168.0.0/16" }
+if is_docker
+  describe command("exportfs") do
+    its(:exit_status) { should eq 0 }
+    its("stdout") { should match "/snakepit/shared/data" }
+    its("stdout") { should match "/moz_slurm/user_data" }
+  end
 end
