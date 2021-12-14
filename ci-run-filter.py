@@ -52,24 +52,14 @@ def files_in_diff_match(match_strings, verbose=False, git_ref='HEAD'):
 
     # print(cmd_to_run)
     output = subprocess.getoutput(cmd_to_run)
-    # first line has gitref, skip
 
+    # first to last line has summary, skip with slice
     for line in output.split("\n")[:-1]:
-    # for mstring_counter, mstring in enumerate(match_strings):
-
-        for mstring_counter, mstring in enumerate(match_strings):
-        # for line in output.split("\n")[1:]:
-        # TODO: iterate over array of potential matches
-            # if verbose:
-            #     print("%s/%s: '%s'..." % (mstring_counter + 1, len(match_strings), mstring))
+        for _mstring_counter, mstring in enumerate(match_strings):
             if mstring in line:
-                # print("'%s' matched pattern '%s', running test..." % (line, mstring))
                 if verbose:
                     print("  ✓ %s (matches '%s')" % (line, mstring))
                 return True
-            # else:
-            #     if verbose:
-            #         print("  ✗ %s" % line)
         if verbose:
             print("  ✗ %s" % line)
 
@@ -79,7 +69,6 @@ def files_in_diff_match(match_strings, verbose=False, git_ref='HEAD'):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Process some integers.")
     parser.add_argument('--command', '-c')
-    # TODO: take multiple
     parser.add_argument('--substring_to_match', '-s', dest='match_strings', action='append')
     parser.add_argument('--verbose', '-v', default=False, action='store_true')
     parser.add_argument('--git-ref', '-g', dest="git_ref", default='HEAD')
@@ -99,21 +88,22 @@ if __name__ == "__main__":
         branch = "UNKNOWN"
     # print(branch)
 
+    # TODO: support force-run trigger in description
+    # TODO: support force-skip ...
+    # TODO: what order/priority for force options?
     if branch == "master" or branch == "main":
         pass
     if files_in_diff_match(args.match_strings, git_ref=args.git_ref, verbose=args.verbose):
         pass
-    # TODO: support force-run trigger in description
-    # TODO: support force-skip ...
     else:
+        # TODO: make sure this matches actual order above? or just omit it?
         print("- No changed files matched the selection criteria.")
         print("- Not on master or main braches.")
-        # print("- Commit doesn't have force ci in message.")
+        # print("- Commit doesn't have force_run or force_skip keywords in message.")
         print("Skipping test.")
         sys.exit(0)
 
     # run test
-
     if args.verbose:
         print("%s: running command ('%s')..." % (file_name, args.command))
     process = subprocess.Popen(args.command, stdout=subprocess.PIPE, shell=True)
