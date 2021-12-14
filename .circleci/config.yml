@@ -43,7 +43,7 @@ commands:
       - run:
           name: Bundle Install and forced clean
           command: |
-            pip install -U bundler
+            gem install bundler
             bundle install
             bundle clean --force
       - save_cache:
