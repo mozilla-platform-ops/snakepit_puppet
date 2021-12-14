@@ -7,7 +7,6 @@ puppet code for managing Mozilla's Snakepit cluster
 - puppet
   - create production secrets.yaml file
   - set slurm uid/gids that work in prod
-  - configure NFS mount points and exports
   - worker: set environment for proxy
     - https://github.com/mozilla/snakepit/pull/186/files
   - future: manage users on the hosts
@@ -17,6 +16,7 @@ puppet code for managing Mozilla's Snakepit cluster
     - e.g. start with 11-4 and upgrade to 11-5
 - test infrastructure
   - circleci: get apt caching working again
+  - circleci: cache bolt modules
 
 ## notes
 
