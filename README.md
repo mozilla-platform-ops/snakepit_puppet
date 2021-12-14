@@ -15,6 +15,8 @@ puppet code for managing Mozilla's Snakepit cluster
 - package configuration
   - test updating instances
     - e.g. start with 11-4 and upgrade to 11-5
+- test infrastructure
+  - circleci: get apt caching working again
 
 ## notes
 
