@@ -41,7 +41,7 @@ def files_in_diff_match(match_strings, verbose=False, git_ref='HEAD'):
     # full paths, only need to strip off last line
     cmd_to_run = "git show --stat --name-only --pretty='format:' %s 2>&1" % git_ref
 
-    print(cmd_to_run)
+    # print(cmd_to_run)
     output = subprocess.getoutput(cmd_to_run)
     # first line has gitref, skip
 
@@ -77,14 +77,16 @@ if __name__ == "__main__":
     # TODO: add skip_commit_message, run_commit_message
     args = parser.parse_args()
 
+    file_name = os.path.basename(__file__)
+
     # debugging
-    print(args)
+    # print(args)
     # sys.exit(0)
 
     try:
         branch = os.environ["CIRCLE_BRANCH"]
     except KeyError:
-        print("warning: CIRCLE_BRANCH not defined")
+        print("%s: warning: CIRCLE_BRANCH not defined" % file_name)
         branch = "UNKNOWN"
     # print(branch)
 
@@ -101,10 +103,17 @@ if __name__ == "__main__":
         print("Skipping test.")
         sys.exit(0)
 
-    # TODO: run test
-    # print("would have run test (%s)" % args.command)
+    # run test
+
+    if args.verbose:
+        print("%s: running test ('%s')..." % (file_name, args.command))
     process = subprocess.Popen(args.command, stdout=subprocess.PIPE, shell=True)
     for c in iter(lambda: process.stdout.read(1), b''):
         sys.stdout.buffer.write(c)
         # flush buffer to avoid hiding output
         sys.stdout.buffer.flush()
+
+    # collect the exit code
+    process.wait()
+    print('%s: process exited with result code %s' % (file_name, process.returncode))
+    sys.exit(process.returncode)
