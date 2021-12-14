@@ -119,8 +119,8 @@ if [ -e "$ROLE_FILE" ]; then
     fi
 else
     # first run
-    # TODO: reconsider this? dangerous...
-    echo "First run detected, setting role file '$ROLE_FILE' to role '$ROLE'."
+    echo "Please set a role in '$ROLE_FILE'!"
+    exit 1
     echo "$ROLE" > $ROLE_FILE
 fi
 
