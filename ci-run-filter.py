@@ -82,6 +82,8 @@ def run_test_if_matches(
     # print(args)
     # sys.exit(0)
 
+    # TODO: figure out how to support other CI systems
+    #       - github `GITHUB_REF=refs/heads/feature-branch-1`
     try:
         branch = os.environ["CIRCLE_BRANCH"]
     except KeyError:
@@ -204,6 +206,9 @@ def main(argv=None):
     # TODO: add filter_set argument
     # - filter sets loaded from config
     # - would merge with existing match_strings
+    # TODO: add option to diff against base of PR and look for matches (vs just head)?
+    # - describe  the need better... what case would we use this? seems annoying.
+    # - gh: diff between GITHUB_HEAD_REF and GITHUB_BASE_REF
     secondary_group.add_argument(
         "--git-ref",
         dest="git_ref",
