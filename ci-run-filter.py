@@ -30,6 +30,13 @@ import configparser
 #     - gitlab: https://gitlab.com/gitlab-org/gitlab/-/issues/16733
 #     - github: no public issue mentioning this
 #
+# future features:
+# - support forcing and skipping via env var
+#   - configurable via config file/argument
+#   - https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration
+#   - advantage: doesn't require something in commit message
+#   - disadvantage: more CI configuration required
+#
 # potential issues:
 # - if developers push a bunch of commits at once, the we could 'miss' commits that should be triggered on
 #   - mitigation: encourage developers to push frequently
