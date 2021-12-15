@@ -63,11 +63,17 @@ cd /vagrant
 
 # puppet_apply convergence
 #
+# set role
+echo slurm_worker > /etc/puppet_role
+
 # uses main branch
 sudo /vagrant/provisioner/converge_worker.sh
-sudo /vagrant/provisioner/converge_head.sh
 # override for testing
 sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
+
+# for head, the process is similar
+echo slurm_head > /etc/puppet_role
+sudo /vagrant/provisioner/converge_head.sh
 
 # bolt convergence (alternative method)
 #
@@ -92,6 +98,8 @@ bolt module install  # install 3rd party modules to .modules
 
 # converge head and worker roles
 bundle exec kitchen converge
+# you can also specify a specific kitchen target to converge/verify/etc
+# bundle exec kitchen converge worker
 
 # run integration tests
 bundle exec kitchen verify
