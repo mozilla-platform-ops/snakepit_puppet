@@ -15,14 +15,9 @@ class roles::slurm_worker {
     include moz_slurm::worker::nfs
     # install spack
     include moz_slurm::spack
+    # TODO: configure worker's env vars to use proxy
+    # include moz_slurm::worker::proxy_env
 
-    # steps below moved to roles::slurm_worker_post to be run by bolt post-convergence
-    #
-    # install lmod and spack
-    # include moz_slurm::spack_lmod
-    # include moz_slurm::spack_singularity
-    #
-    # manage packages (including cuda/nvidia-driver)
-    # include moz_slurm::worker::install_cuda
+    # next steps moved to roles::slurm_worker_post to save time when testing
 
 }

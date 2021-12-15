@@ -6,8 +6,7 @@ puppet code for managing Mozilla's Snakepit cluster
 
 - puppet
   - create production secrets.yaml file
-  - worker: set environment for proxy
-    - https://github.com/mozilla/snakepit/pull/186/files
+  - future: worker: set environment for proxy
   - future: manage users on the hosts
   - future: head: proxy installation & configuration
 - package configuration
