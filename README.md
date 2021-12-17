@@ -1,26 +1,48 @@
 # snakepit_puppet
 
-puppet code for managing the Slurm deployment on Mozilla's Snakepit cluster
+puppet code for managing Mozilla's Snakepit cluster
 
 ## TODOs
 
 - puppet
   - create production secrets.yaml file
-  - set slurm uid/gids that work in prod
-  - configure NFS mount points
+  - future: worker: set environment for proxy
   - future: manage users on the hosts
-- package configuration code
-  - Test updating instances... will running the install script just work?
-    - i.e. start with 11-4 and upgrade to 11-5
-      - will conflict?
-      - maybe make an uninstall script that removes the exact ones installed previously...
-        - then can use newer version's install script.
+  - future: head: proxy installation & configuration
+- package configuration
+  - test updating instances
+    - e.g. start with 11-4 and upgrade to 11-5
+- test infrastructure
+  - circleci: get apt caching working again
+  - circleci: cache bolt modules
 
-## provisioner notes
+## notes
+
+### nfs mounts
+
+Snakepit (the scheduler, https://github.com/mozilla/snakepit) only gives jobs write access to their jobs directory, the user's directory, and any group directories the user is a member of. A shared read-only space is also available.
+
+```text
+/data
+  /ro
+    /shared (contents of mlchead:snakepit/shared/)
+  /rw
+    /group-GROUP (any groups you're in, contents of mlchead:snakepit/groups/GROUP)
+    /home (user dir, mlchead:snakepit/home/USER)
+    /pit (job dir, mlchead:snakepit/pits/ID)
+```
+
+Slurm doesn't do any access control. If the slurm unix user can write to a directory, every job will be able to write to it.
+
+```text
+/data
+  /ro (contents of mlchead:/snakepit/shared)
+  /rw (contents of mlchead:/moz_slurm/user_data)
+```
+
+### provisioners
 
 I had hoped to use bolt to do the masterless convergence, but it doesn't provide debug output like `puppet apply` and `--noop` usage isn't obvious.
-
-TODO: test to see if this is still broken, now that hiera lookup is fixed.
 
 ## testing
 
@@ -32,18 +54,25 @@ vagrant testing is lower level than test-kitchen and allows more realistic testi
 
 ```bash
 vagrant up
-vagrant ssh
+# ssh into the 'head' or 'worker' instance
+vagrant ssh worker
 
 # once in the vagrant node
 cd /vagrant
 
 # puppet_apply convergence
 #
+# set role
+echo slurm_worker > /etc/puppet_role
+
 # uses main branch
 sudo /vagrant/provisioner/converge_worker.sh
-sudo /vagrant/provisioner/converge_head.sh
 # override for testing
 sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
+
+# for head, the process is similar
+echo slurm_head > /etc/puppet_role
+sudo /vagrant/provisioner/converge_head.sh
 
 # bolt convergence (alternative method)
 #
@@ -58,6 +87,8 @@ sudo bolt plan run roles::head_converge hosts=localhost --verbose --log-level de
 
 test-kitchen automates the testing of roles and integrates inspec tests for verification.
 
+test-kitchen is used for testing in CI, so the test-kitchen worker configuration does a partial converge for speed (see modules/roles/manifests/slurm_worker_post.pp).
+
 ```bash
 # initial setup
 brew install puppet-bolt  # or equivalent
@@ -66,6 +97,8 @@ bolt module install  # install 3rd party modules to .modules
 
 # converge head and worker roles
 bundle exec kitchen converge
+# you can also specify a specific kitchen target to converge/verify/etc
+# bundle exec kitchen converge worker
 
 # run integration tests
 bundle exec kitchen verify
@@ -87,6 +120,8 @@ Depends: cuda-runtime-11-5 (>= 11.5.0), cuda-toolkit-11-5 (>= 11.5.0), cuda-demo
 ```
 
 To remedy this problem, we find what packages the metapackage installs. Once the packages have been identified, we craft an install script that installs all of the constituent packages (those including cuda and nvidia in the name, the full dependency list is very large). The install script is then used to install the required packages on the bare metal hosts and any containers.
+
+Full BOMs (`dpkg --list` output) of the before and after state are captured also.
 
 ### creating and testing package configurations
 
@@ -118,7 +153,7 @@ rake pkg_config_create
 
 # inspect the output in
 #   modules/moz_slurm/create_package_configuration/boms/ and paste it into
-#   modules/moz_slurm//testing_package_configs/install_packages.sh
+#   modules/moz_slurm/testing_package_configs/install_packages.sh
 ```
 
 #### 2. test a new installation script

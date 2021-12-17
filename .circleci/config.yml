@@ -37,18 +37,20 @@ commands:
       - restore_cache:
           keys:
           # when lock file changes, use increasingly general patterns to restore cache
-          - v2-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          - v2-gem-cache-{{ arch }}-{{ .Branch }}-
-          - v2-gem-cache-{{ arch }}-
+          - v3-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          - v3-gem-cache-{{ arch }}-{{ .Branch }}-
+          - v3-gem-cache-{{ arch }}-
       - run:
           name: Bundle Install and forced clean
           command: |
+            gem install bundler
+            bundle config set --local path 'vendor/bundle'
             bundle install
             bundle clean --force
       - save_cache:
           paths:
             - vendor/
-          key: v2-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: v3-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
 jobs:
   pre_commit:
     executor: ubuntu-docker
@@ -66,16 +68,17 @@ jobs:
       - checkout
       - gem_cache
       - apt_cache_restore
-      - run: |
-          wget https://apt.puppet.com/puppet-tools-release-focal.deb
-          sudo dpkg -i puppet-tools-release-focal.deb
-          sudo apt-get update
-          sudo apt-get install puppet-bolt
-      - run: bolt module install
+      # TODO: add bolt modules caching (stored in .modules)
       - run:
-          command: bundle exec kitchen converge << parameters.kitchen_target >>
+          name: install bolt and puppet modules
+          command: ./ci-run-filter.py -c './ci_bolt_install.sh' -s 'modules/' -s 'Puppetfile' -s 'bolt-project.yaml' -v
+      - run:
+          name: converge
+          command: ./ci-run-filter.py -c 'bundle exec kitchen converge << parameters.kitchen_target >>' -s 'modules/' -v
           no_output_timeout: 60m
-      - run: bundle exec kitchen verify << parameters.kitchen_target >>
+      - run:
+          name: verify
+          command: ./ci-run-filter.py -c 'bundle exec kitchen verify << parameters.kitchen_target >>' -s 'modules/' -v
       - apt_cache_save
 
 workflows:
