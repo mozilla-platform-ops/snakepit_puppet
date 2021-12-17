@@ -108,13 +108,17 @@ def run_test_if_matches(
 
     # TODO: where should force options fall in priority?
     if branch == "master" or branch == "main":
-        pass
+        print(
+            "%s: Forcing a command run due to being on the primary branch (%s)."
+            % (file_name, branch)
+        )
+        # continue to run test
     elif commit_msg_inspection_result and commit_msg_inspection_result == "run":
         print(
             "%s: Forcing a command run due to keyword (%s) in commit message."
             % (file_name, force_run)
         )
-        pass
+        # continue to run test
     elif commit_msg_inspection_result and commit_msg_inspection_result == "skip":
         print(
             "%s: Skipping command run due to keyword (%s) in commit message."
@@ -122,6 +126,8 @@ def run_test_if_matches(
         )
         sys.exit(0)
     elif files_in_diff_match(match_strings, git_ref=git_ref, verbose=verbose):
+        # files_in_diff_match does verbose output
+        # continue to run test
         pass
     else:
         print("%s: Skipping test." % file_name)
