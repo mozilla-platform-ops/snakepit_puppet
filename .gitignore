@@ -7,3 +7,4 @@ vendor
 bolt-debug.log
 .vscode
 .vagrant
+vault.yaml
