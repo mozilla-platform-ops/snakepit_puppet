@@ -148,7 +148,7 @@ systemctl disable puppet
 update_puppet
 
 # ensure vault.yaml exists
-if [ ! -x "${HIERA_SECRET_FILE}" ]; then
+if [ ! -e "${HIERA_SECRET_FILE}" ]; then
     fail "${HIERA_SECRET_FILE} doesn't exist, please place and rerun"
 fi
 
