@@ -4,7 +4,7 @@ class roles::slurm_head {
 
     # install mysql
     class { 'mysql::server':
-      root_password           => lookup('mysql::root_password'), #'strongpassword',
+      root_password           => lookup('mysql::root_password'),
       remove_default_accounts => true,
       restart                 => true,
       purge_conf_dir          => true,  # default config sets bind-address to localhost
