@@ -11,7 +11,9 @@ class roles::slurm_head {
       # override_options        => $override_options,  # set in hiera
     }
 
-    # munge installed by below, test steps: https://github.com/dun/munge/blob/master/QUICKSTART
+    # munge installed by slurm module
+    # test steps:
+    #   https://github.com/dun/munge/blob/master/QUICKSTART in section 7.A.
 
     include slurm
 
