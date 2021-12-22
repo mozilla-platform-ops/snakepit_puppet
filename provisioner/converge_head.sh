@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
-set -x
+# set -x
 
 # user configurables
 if [ -z "${PUPPET_REPO}" ]; then
@@ -20,7 +20,7 @@ BOLT_BIN='/usr/local/bin/bolt'
 BOLT_DIR="/etc/puppetlabs/environments/production/.modules"
 ROLE_FILE='/etc/puppet_role'
 PUPPET_REPO_PATH="$PUPPET_ENV_DIR/production"
-
+HIERA_SECRET_FILE="$PUPPET_REPO_PATH/data/secrets/vault.yaml"
 
 
 ## FUNCTIONS
@@ -145,6 +145,11 @@ systemctl disable puppet
 
 # get the repo
 update_puppet
+
+# ensure vault.yaml exists
+if [ ! -x "${HIERA_SECRET_FILE}" ]; then
+    fail "${HIERA_SECRET_FILE} doesn't exist, please place and rerun"
+fi
 
 # Check that we have the minimum requirements to run puppet
 # Since this is a bootstrap script we may actaully install minimum requirements here in the future
