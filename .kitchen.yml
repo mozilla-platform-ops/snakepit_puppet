@@ -25,6 +25,9 @@ platforms:
     driver_config:
       image: ubuntu:bionic
       platform: ubuntu
+      # enable if running proxy
+      # http_proxy: <%= ENV['http_proxy'] %>
+      # https_proxy: <%= ENV['https_proxy'] %>
 
 busser:
   sudo: true

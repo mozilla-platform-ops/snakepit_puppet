@@ -25,6 +25,4 @@ class roles::slurm_head {
 
     # test with slurmdbd -Dvvvv
 
-    # TODO: configure NFS packages/mounts
-
 }
