@@ -39,7 +39,9 @@ repos:
     - id: black
 
 - repo: https://github.com/Yelp/detect-secrets
-  rev: v1.1.0
+  rev: v1.0.3
+  # 1.1.0 has problems with py3.9+
+  # https://github.com/Yelp/detect-secrets/issues/452
   hooks:
   -   id: detect-secrets
       args: ['--baseline', '.secrets.baseline']
