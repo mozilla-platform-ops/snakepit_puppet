@@ -5,7 +5,6 @@ puppet code for managing Mozilla's Snakepit cluster
 ## TODOs
 
 - puppet
-  - create production secrets.yaml file
   - future: worker: set environment for proxy
   - future: manage users on the hosts
   - future: head: proxy installation & configuration
