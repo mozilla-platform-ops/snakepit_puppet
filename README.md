@@ -70,6 +70,11 @@ sudo /vagrant/provisioner/converge_worker.sh
 # override for testing
 sudo PUPPET_REPO=https://github.com/aerickson/snakepit_puppet.git PUPPET_BRANCH=work_1 /vagrant/provisioner/converge_worker.sh
 
+# create fake vault.yaml file
+touch /etc/puppetlabs/environments/production/data/secrets/vault.yaml
+
+# rerun converge script for a second time now that vault.yaml is in place
+
 # for head, the process is similar
 echo slurm_head > /etc/puppet_role
 sudo /vagrant/provisioner/converge_head.sh

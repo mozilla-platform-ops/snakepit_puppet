@@ -4,14 +4,16 @@ class roles::slurm_head {
 
     # install mysql
     class { 'mysql::server':
-      root_password           => lookup('mysql::root_password'), #'strongpassword',
+      root_password           => lookup('mysql::root_password'),
       remove_default_accounts => true,
       restart                 => true,
       purge_conf_dir          => true,  # default config sets bind-address to localhost
       # override_options        => $override_options,  # set in hiera
     }
 
-    # munge installed by below, test steps: https://github.com/dun/munge/blob/master/QUICKSTART
+    # munge installed by slurm module
+    # test steps:
+    #   https://github.com/dun/munge/blob/master/QUICKSTART in section 7.A.
 
     include slurm
 
