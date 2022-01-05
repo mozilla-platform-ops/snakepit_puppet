@@ -143,6 +143,7 @@ ln -sf /opt/puppetlabs/bin/puppet /usr/bin/puppet
 # disable puppet agent systemd service
 # - we run masterless and only converge manually
 systemctl disable puppet
+systemctl disable pxp-agent
 
 # get the repo
 update_puppet
