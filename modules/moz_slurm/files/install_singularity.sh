@@ -9,8 +9,8 @@ env
 
 spack load go
 
-go --version
-
 env
+
+go --version || true
 
 spack install singularity
