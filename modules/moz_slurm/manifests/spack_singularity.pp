@@ -10,7 +10,7 @@ class moz_slurm::spack_singularity {
   exec {'install singularity':
     # command  => ". /home/slurm/software/spack/share/spack/setup-env.sh && ${spack_bin_path} install singularity",
     # command  => "${spack_bin_path} install singularity",
-    command  => "bash -i -c '${spack_bin_path} install singularity'",
+    command  => "BASH_ENV=~/.bashrc bash -c '${spack_bin_path} install singularity'",
     provider => shell,  # uses posix by default
     user     => 'slurm',
     cwd      => '/home/slurm',
