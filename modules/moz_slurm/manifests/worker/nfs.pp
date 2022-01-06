@@ -23,9 +23,10 @@ class moz_slurm::worker::nfs {
   file { '/data/ro':
     ensure => 'directory',
     path   => '/data/ro',
-    mode   => '0750',
-    owner  => 'slurm',
-    group  => 'slurm'
+    mode   => '0555',
+    # snakepit doesn't exist on test infra, but is real owner in prod
+    # owner  => 'snakepit',
+    # group  => 'snakepit'
   }
 
   # # configure fstab
