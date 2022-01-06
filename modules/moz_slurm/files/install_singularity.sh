@@ -5,12 +5,14 @@ set -e
 . /home/slurm/software/spack/share/spack/setup-env.sh
 . "$(spack location -i lmod)/lmod/lmod/init/bash"
 
-env
+# debugging
+# env
+# spack load go
+# env
+# go version
 
-spack load go
+# installs suid... non-root can't use
+#spack install singularity
 
-env
-
-go --version || true
-
-spack install singularity
+# disable suid
+spack install singularity -suid

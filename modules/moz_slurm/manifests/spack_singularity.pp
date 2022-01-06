@@ -27,4 +27,7 @@ class moz_slurm::spack_singularity {
     timeout  => 3600,
   }
 
+  # why does this fail? why???
+  # - works fine on cli with sh
+
 }
