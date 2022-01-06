@@ -52,7 +52,7 @@ test-kitchen is the best place to start. vagrant is easier for rapid iteration a
 vagrant testing is lower level than test-kitchen and allows more realistic testing of the provisioning and convergence process.
 
 ```bash
-vagrant up
+vagrant up worker
 # ssh into the 'head' or 'worker' instance
 vagrant ssh worker
 
