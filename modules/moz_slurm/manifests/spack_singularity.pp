@@ -8,7 +8,7 @@ class moz_slurm::spack_singularity {
 
   # install singularity
   exec {'install singularity':
-    command  => "bash -c '${spack_bin_path} install singularity'",
+    command  => "bash -i -c '${spack_bin_path} install singularity'",
     provider => shell,
     user     => 'slurm',
     unless   => "${spack_bin_path} find singularity",
