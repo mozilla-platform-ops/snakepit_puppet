@@ -3,7 +3,7 @@ class moz_slurm::spack_singularity {
   require moz_slurm::spack
   require moz_slurm::spack_lmod
 
-  $installation_script_path = '/tmp/install_singularity.sh'
+  $installation_script_path = '/opt/moz_slurm/install_singularity.sh'
   # variables just in double quoted strings won't get resolved
   $spack_bin_path = lookup('moz_slurm::spack_bin_path')
 
@@ -19,7 +19,7 @@ class moz_slurm::spack_singularity {
 
   # install singularity
   exec {'install singularity':
-    command  => "bash -c '/tmp/install_singularity.sh'",
+    command  => "bash -c '${installation_script_path}'",
     provider => shell,  # uses posix by default
     user     => 'slurm',
     cwd      => '/home/slurm',
