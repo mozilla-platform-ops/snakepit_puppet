@@ -25,31 +25,61 @@ slurm::greses:
 slurm::partitions:
   batch:
     default: 'YES'
-    def_mem_per_cpu: 1700
-    max_mem_per_cpu: 1750
+    def_mem_per_cpu: 2000
+    max_mem_per_cpu: 2300
     nodes: mlc0,mlc1
 slurm::nodes:
+  # slurmd -C output on mlc0:
+  # NodeName=mlc0 CPUs=48 Boards=1 SocketsPerBoard=2 CoresPerSocket=12 ThreadsPerCore=2 RealMemory=112689
   mlc0:
     node_hostname: mlc0
-    cpus: 4
-    threads_per_core: 1
-    cores_per_socket: 1
-    sockets: 4
-    real_memory: 7000
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
   mlc1:
     node_hostname: mlc1
-    cpus: 4
-    threads_per_core: 1
-    cores_per_socket: 1
-    sockets: 4
-    real_memory: 7000
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
   mlc2:
     node_hostname: mlc2
-    cpus: 4
-    threads_per_core: 1
-    cores_per_socket: 1
-    sockets: 4
-    real_memory: 7000
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
+  mlc3:
+    node_hostname: mlc3
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
+  mlc4:
+    node_hostname: mlc4
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
+  mlc5:
+    node_hostname: mlc5
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
+  mlc6:
+    node_hostname: mlc6
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
 
 mysql::root_password: abc123_testing_only
 mysql::server::override_options:
