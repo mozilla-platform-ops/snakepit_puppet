@@ -24,6 +24,7 @@ class moz_slurm::worker::install_cuda {
     timeout  => 3600,
   }
 
+  # TODO: only create if above is successful
   file {'cuda packages installation indicator':
     ensure => 'present',
     path   => $indicator_file_path,

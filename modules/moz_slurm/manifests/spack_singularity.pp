@@ -30,4 +30,6 @@ class moz_slurm::spack_singularity {
   # why does this fail? why???
   # - works fine on cli with sh
 
+  # TODO: add  spack load singularity to .bashrc
+
 }
