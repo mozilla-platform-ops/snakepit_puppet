@@ -18,7 +18,9 @@ slurm::slurmdbd_storage_pass: "another_testing_password"
 slurm::slurmdbd_storage_host: 'localhost'  # used for StorageHost and mysql grant
 # slurm::export_database: true
 # slurm::export_database_tag: "%{lookup('slurm::slurmdbd_storage_host')}"
-
+slurm::slurm_conf_override:
+  GresTypes:
+    - gpu
 slurm::greses:
   nvml:
     auto_detect: nvml
