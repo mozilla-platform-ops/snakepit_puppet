@@ -21,6 +21,7 @@ slurm::slurmdbd_storage_host: 'localhost'  # used for StorageHost and mysql gran
 slurm::slurm_conf_override:
   GresTypes:
     - gpu
+  SelectType: select/cons_tres
 slurm::greses:
   nvml:
     auto_detect: nvml
