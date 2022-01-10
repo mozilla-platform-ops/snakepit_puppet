@@ -27,7 +27,7 @@ slurm::partitions:
     default: 'YES'
     def_mem_per_cpu: 2000
     max_mem_per_cpu: 2300
-    nodes: mlc0,mlc1
+    nodes: mlc0
 slurm::nodes:
   # slurmd -C output on mlc0:
   # NodeName=mlc0 CPUs=48 Boards=1 SocketsPerBoard=2 CoresPerSocket=12 ThreadsPerCore=2 RealMemory=112689
