@@ -41,6 +41,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
+    gres:
   mlc1:
     node_hostname: mlc1
     cpus: 48
