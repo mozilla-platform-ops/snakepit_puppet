@@ -102,3 +102,6 @@ aptget install \
   "nvidia-settings=495.29.05-0ubuntu1" \
   "nvidia-utils-495=495.29.05-0ubuntu1" \
   "xserver-xorg-video-nvidia-495=495.29.05-0ubuntu1"
+
+# record that the installation finished successfully
+touch /etc/moz_slurm_cuda_packages_installed
