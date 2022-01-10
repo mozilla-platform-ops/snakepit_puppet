@@ -2,10 +2,12 @@ class roles::slurm_worker {
 
     # TODO: manage users and ssh keys
 
-    class { 'munge':
-      # the 'key' defines the security realm for a node, https://github.com/dun/munge/wiki/Man-7-munge
-      munge_key_content => base64('decode', lookup('munge::munge_key_content'))
-    }
+    # munge is installed by slurm module
+    #
+    # class { 'munge':
+    #   # the 'key' defines the security realm for a node, https://github.com/dun/munge/wiki/Man-7-munge
+    #   munge_key_content => base64('decode', lookup('munge::munge_key_content'))
+    # }
 
     include slurm
 
