@@ -43,7 +43,7 @@ slurm::nodes:
     real_memory: 112000
     # Gres=gpu:geforce_gtx_1080:4
     # Gres=gpu:tesla:1,gpu:kepler:1,bandwidth:lustre:no_consume:4G"
-    Gres: gpu:nvidia_titan_xp:8
+    gres: gpu:nvidia_titan_xp:8
   mlc1:
     node_hostname: mlc1
     cpus: 48
