@@ -5,7 +5,6 @@ puppet code for managing Mozilla's Snakepit cluster
 ## TODOs
 
 - puppet
-  - set proxy env vars
   - future: worker: set environment for proxy
   - future: manage users on the hosts
   - future: head: proxy installation & configuration
