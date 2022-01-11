@@ -35,7 +35,8 @@ class moz_slurm::worker::nfs {
     atboot  => true,
     device  => '192.168.1.1:/snakepit/shared',
     fstype  => 'nfs',
-    options => 'nosuid,hard,udp,bg,noatime',
+    # udp forces v3, which locking seems broken on (at least in spack)
+    options => 'nosuid,hard,bg,noatime',
     pass    => 0
   }
 
@@ -56,7 +57,7 @@ class moz_slurm::worker::nfs {
     atboot  => true,
     device  => '192.168.1.1:/moz_slurm/user_data',
     fstype  => 'nfs',
-    options => 'nosuid,hard,udp,bg,noatime',
+    options => 'nosuid,hard,bg,noatime',
     pass    => 0
   }
 
@@ -66,7 +67,7 @@ class moz_slurm::worker::nfs {
     atboot  => true,
     device  => '192.168.1.1:/home/slurm',
     fstype  => 'nfs',
-    options => 'nosuid,hard,udp,bg,noatime',
+    options => 'nosuid,hard,bg,noatime',
     pass    => 0
   }
 
