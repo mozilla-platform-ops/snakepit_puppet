@@ -11,9 +11,4 @@ class roles::slurm_head_post {
     include moz_slurm::spack_lmod
     include moz_slurm::spack_singularity
 
-    # cuda/nvidia not installed on head
-    #
-    # manage packages (including cuda/nvidia-driver)
-    # include moz_slurm::worker::install_cuda
-
 }
