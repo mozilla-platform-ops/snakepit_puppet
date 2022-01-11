@@ -34,7 +34,8 @@ class moz_slurm::spack_singularity {
   file_line { 'add spack load singularity':
     path => '/home/slurm/.bashrc',
     # -L to ignore locks
-    line => "${spack_bin_path} -L load singularity",
+    # do not use full path, want to use shell function
+    line => 'spack -L load singularity',
   }
 
 }
