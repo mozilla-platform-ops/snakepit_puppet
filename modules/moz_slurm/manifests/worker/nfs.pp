@@ -71,6 +71,15 @@ class moz_slurm::worker::nfs {
     pass    => 0
   }
 
+  # create mountpoint for /data/home
+  file { '/data/home':
+    ensure => 'directory',
+    path   => '/data/home',
+    mode   => '0750',
+    owner  => 'slurm',
+    group  => 'slurm'
+  }
+
   # mount /snakepit/home -> /data/home
   mount { '/data/home':
     ensure  => 'mounted',
