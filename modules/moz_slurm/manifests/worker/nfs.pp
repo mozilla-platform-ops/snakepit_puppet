@@ -71,4 +71,14 @@ class moz_slurm::worker::nfs {
     pass    => 0
   }
 
+  # mount /snakepit/home -> /data/home
+  mount { '/data/home':
+    ensure  => 'mounted',
+    atboot  => true,
+    device  => '192.168.1.1:/snakepit/home',
+    fstype  => 'nfs',
+    options => 'nosuid,hard,bg,noatime',
+    pass    => 0
+  }
+
 }
