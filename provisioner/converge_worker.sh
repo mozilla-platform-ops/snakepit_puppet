@@ -62,7 +62,7 @@ function update_puppet {
     cat <<EOF > "${PUPPET_REPO_PATH}/manifests/nodes/nodes.pp"
     node '${FQDN}' {
         include ::roles::${ROLE}
-        include ::roles::slurm_worker_post
+        include ::roles::${ROLE}_post
     }
 EOF
 
