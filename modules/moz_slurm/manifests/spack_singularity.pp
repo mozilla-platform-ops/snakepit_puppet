@@ -30,6 +30,11 @@ class moz_slurm::spack_singularity {
   # why does this fail? why???
   # - works fine on cli with sh
 
-  # TODO: add  spack load singularity to .bashrc
+  # add spack load singularity to .bashrc
+  file_line { 'add spack load singularity':
+    path => '/home/slurm/.bashrc',
+    # -L to ignore locks
+    line => "${spack_bin_path} -L load singularity",
+  }
 
 }
