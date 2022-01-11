@@ -11,3 +11,4 @@
 #/snakepit       192.168.0.0/16(rw,no_root_squash,no_subtree_check)
 /snakepit/shared      192.168.0.0/16(ro,no_root_squash,no_subtree_check)
 /moz_slurm/user_data  192.168.0.0/16(rw,no_root_squash,no_subtree_check)
+/home/slurm           192.168.0.0/16(rw,no_root_squash,no_subtree_check)
