@@ -20,7 +20,7 @@ describe etc_fstab.where { mount_point == "/data/ro" } do
 end
 
 describe etc_fstab.where { mount_point == "/data/rw" } do
-  its("device_name") { should cmp "192.168.1.1:/moz_slurm/user_data" }
+  its("device_name") { should cmp "192.168.1.1:/data/rw" }
   its("file_system_type") { should cmp "nfs" }
   its("mount_options") { should eq [["nosuid", "hard", "udp", "bg", "noatime"]] }
   its("dump_options") { should cmp "0" }

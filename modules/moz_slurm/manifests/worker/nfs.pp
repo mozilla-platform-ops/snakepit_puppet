@@ -55,7 +55,7 @@ class moz_slurm::worker::nfs {
   mount { '/data/rw':
     ensure  => 'mounted',
     atboot  => true,
-    device  => '192.168.1.1:/moz_slurm/user_data',
+    device  => '192.168.1.1:/data/rw',
     fstype  => 'nfs',
     options => 'nosuid,hard,bg,noatime',
     pass    => 0

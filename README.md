@@ -36,7 +36,7 @@ Slurm doesn't do any access control. If the slurm unix user can write to a direc
 ```text
 /data
   /ro (contents of mlchead:/snakepit/shared)
-  /rw (contents of mlchead:/moz_slurm/user_data)
+  /rw (contents of mlchead:/data/rw)
 ```
 
 ### provisioners

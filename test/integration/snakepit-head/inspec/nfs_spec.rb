@@ -16,7 +16,7 @@ describe file("/etc/exports") do
   it { should be_grouped_into "root" }
   # TODO: match more
   its("content") { should match "^/snakepit/shared" }
-  its("content") { should match "^/moz_slurm/user_data" }
+  its("content") { should match "^/data/rw" }
 end
 
 # nfs testing on docker doesn't work (modules aren't loaded in host)
@@ -36,6 +36,6 @@ if is_docker
   describe command("exportfs") do
     its(:exit_status) { should eq 0 }
     its("stdout") { should match "/snakepit/shared" }
-    its("stdout") { should match "/moz_slurm/user_data" }
+    its("stdout") { should match "/data/rw" }
   end
 end
