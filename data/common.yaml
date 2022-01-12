@@ -19,6 +19,7 @@ slurm::slurmdbd_storage_host: 'localhost'  # used for StorageHost and mysql gran
 # slurm::export_database: true
 # slurm::export_database_tag: "%{lookup('slurm::slurmdbd_storage_host')}"
 slurm::slurm_conf_override:
+  ReturnToService: 2
   GresTypes:
     - gpu
   SelectType: select/cons_tres
