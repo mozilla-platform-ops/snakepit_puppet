@@ -179,6 +179,8 @@ rake pkg_config_test
 
 - puppet module used for slurm
   - <https://github.com/treydock/puppet-slurm>
+- NVIDIA's best practices for SLURM deployment
+  - <https://github.com/NVIDIA/deepops/tree/master/docs/slurm-cluster>
 
 ### how to generate new munge keys
 
