@@ -24,10 +24,17 @@ aptget install software-properties-common wget
 # from https://developer.nvidia.com/cuda-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=18.04&target_type=deb_network
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
 mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
-apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+
+# use curl to install key - it respect proxy settings
+# apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+curl -sSL \
+  'https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub' \
+  | sudo apt-key add -
+
 add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
 aptget update
 
+# --allow-downgrades may be required
 aptget install \
   "cuda-cccl-11-5=11.5.62-1" \
   "cuda-command-line-tools-11-5=11.5.1-1" \
