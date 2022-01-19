@@ -2,6 +2,8 @@
 
 set -e
 
+# TODO: check that user is slurm/non-root
+
 # TODO: don't hardcode this
 . /data/sw/spack/share/spack/setup-env.sh
 # shellcheck source=/dev/null
