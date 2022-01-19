@@ -16,7 +16,9 @@ set -e
 # go version
 
 # installs suid... non-root can't use
-#spack install singularity
-
+# spack install singularity
 # disable suid
 spack install singularity -suid
+
+# testing
+# singularity run library://sylabsed/examples/lolcow
