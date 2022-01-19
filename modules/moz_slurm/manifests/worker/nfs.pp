@@ -75,9 +75,9 @@ class moz_slurm::worker::nfs {
   file { '/data/home':
     ensure => 'directory',
     path   => '/data/home',
-    mode   => '0750',
-    owner  => 'slurm',
-    group  => 'slurm'
+    mode   => '0775',
+    owner  => 'snakepit',
+    group  => 'snakepit'
   }
 
   # mount /snakepit/home -> /data/home
