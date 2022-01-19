@@ -3,7 +3,7 @@
 set -e
 
 # TODO: don't hardcode this
-. /data/sw/software/spack/share/spack/setup-env.sh
+. /data/sw/spack/share/spack/setup-env.sh
 # shellcheck source=/dev/null
 . "$(spack location -i lmod)/lmod/lmod/init/bash"
 
