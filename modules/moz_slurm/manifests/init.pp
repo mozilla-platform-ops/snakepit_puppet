@@ -16,4 +16,7 @@ class moz_slurm {
     group  => 'slurm'
   }
 
+  # add slurm user to snakepit group
+  User<|title == 'slurm'|> { groups => ['slurm', 'snakepit'] }
+
 }
