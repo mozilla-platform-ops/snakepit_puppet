@@ -23,8 +23,9 @@ metapackage_version = result.stdout.rstrip()
 # result = subprocess.run(cmd2, stdout=subprocess.PIPE, encoding="UTF8", shell=True)
 
 
-# new method: only show pacakges from nvidia repo
+# new method: only show packages from nvidia repo
 # - uses list_external_packages.sh
+# TODO: call the script vs using output in a file
 f = open("/Users/aerickson/git/snakepit_puppet/in.txt", "r")
 results = f.read()
 
