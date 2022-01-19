@@ -136,7 +136,7 @@ fi
 
 # install puppet
 # TODO: only do if `puppet` is missing
-rm /var/tmp/puppet*.deb || true
+rm /var/tmp/puppet*.deb* || true
 wget -P /var/tmp/ "http://apt.puppetlabs.com/puppet7-release-$(lsb_release -c -s).deb"
 dpkg -i /var/tmp/*.deb
 apt-get update -y && apt-get install -y puppet-agent puppet-bolt
