@@ -8,14 +8,6 @@ class moz_slurm::spack {
 
   $spack_path = lookup('moz_slurm::spack_path')
 
-  # create software dir
-  file { lookup('moz_slurm::software_path'):
-    ensure => directory,
-    owner  => 'slurm',
-    group  => 'slurm',
-    mode   => '0750',
-  }
-
   # clone repo
   vcsrepo { lookup('moz_slurm::spack_path'):
     ensure   => present,

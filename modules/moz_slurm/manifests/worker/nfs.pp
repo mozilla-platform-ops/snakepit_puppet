@@ -90,13 +90,12 @@ class moz_slurm::worker::nfs {
     pass    => 0
   }
 
-  # /data/sw
-  file { '/data/sw':
-    ensure => 'directory',
-    path   => '/data/sw',
-    mode   => '0750',
+  # create software dir (/data/sw)
+  file { lookup('moz_slurm::software_path'):
+    ensure => directory,
     owner  => 'slurm',
-    group  => 'slurm'
+    group  => 'slurm',
+    mode   => '0750',
   }
 
   # mount /data/sw
