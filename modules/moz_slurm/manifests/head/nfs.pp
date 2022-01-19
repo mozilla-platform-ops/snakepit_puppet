@@ -40,6 +40,15 @@ class moz_slurm::head::nfs {
     group  => 'slurm'
   }
 
+  # /data/sw export
+  file { '/data/sw':
+    ensure => 'directory',
+    path   => '/data/sw',
+    mode   => '0750',
+    owner  => 'slurm',
+    group  => 'slurm'
+  }
+
   # configure /etc/exports
   file { '/etc/exports':
     mode   => '0644',
