@@ -26,3 +26,6 @@ describe etc_fstab.where { mount_point == "/data/rw" } do
   its("dump_options") { should cmp "0" }
   its("file_system_options") { should cmp "0" }
 end
+
+# TODO: check for /data/sw
+# TODO: check for /home(/slurm)

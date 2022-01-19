@@ -90,4 +90,23 @@ class moz_slurm::worker::nfs {
     pass    => 0
   }
 
+  # /data/sw
+  file { '/data/sw':
+    ensure => 'directory',
+    path   => '/data/sw',
+    mode   => '0750',
+    owner  => 'slurm',
+    group  => 'slurm'
+  }
+
+  # mount /data/sw
+  mount { '/data/sw':
+    ensure  => 'mounted',
+    atboot  => true,
+    device  => '192.168.1.1:/data/sw',
+    fstype  => 'nfs',
+    options => 'nosuid,hard,bg,noatime',
+    pass    => 0
+  }
+
 }
