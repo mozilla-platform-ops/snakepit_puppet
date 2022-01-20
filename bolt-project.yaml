@@ -1,14 +1,14 @@
-## This is an example bolt configuration file.
-## Docs Reference: https://puppet.com/docs/bolt/latest/bolt_configuration_options.html
+---
 name: snakepit_puppet
 modules:
-  - name: puppetlabs/mysql
-  - name: puppetlabs/facts
-  - name: puppetlabs/stdlib
-  - name: puppetlabs/vcsrepo
-  - git: https://github.com/puppetlabs/puppetlabs-service
-    ref: main
-  - git: https://github.com/treydock/puppet-slurm
-    ref: v2.0.1
-  - git: https://github.com/treydock/puppet-munge
-    ref: v3.1.0
+- name: puppetlabs/mysql
+- name: puppetlabs/facts
+- name: puppetlabs/stdlib
+- name: puppetlabs/vcsrepo
+- git: https://github.com/puppetlabs/puppetlabs-service
+  ref: main
+- git: https://github.com/treydock/puppet-slurm
+  ref: v2.0.1
+- git: https://github.com/treydock/puppet-munge
+  ref: v3.1.0
+- puppet/prometheus
