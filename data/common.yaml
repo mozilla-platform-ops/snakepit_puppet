@@ -27,11 +27,21 @@ slurm::greses:
   nvml:
     auto_detect: nvml
 slurm::partitions:
-  batch:
+  txp:
     default: 'YES'
     def_mem_per_cpu: 2000
     max_mem_per_cpu: 2300
-    nodes: mlc0
+    nodes: mlc0, mlc1, mlc2, mlc3
+  g2080:
+    default: 'YES'
+    def_mem_per_cpu: 2000
+    max_mem_per_cpu: 2300
+    nodes: mlc4, mlc5
+  q6000:
+    default: 'YES'
+    def_mem_per_cpu: 2000
+    max_mem_per_cpu: 2300
+    nodes: mlc6
 slurm::nodes:
   # slurmd -C output on mlc0:
   # NodeName=mlc0 CPUs=48 Boards=1 SocketsPerBoard=2 CoresPerSocket=12 ThreadsPerCore=2 RealMemory=112689
@@ -52,6 +62,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
+    gres: gpu:nvidia_titan_xp:8
   mlc2:
     node_hostname: mlc2
     cpus: 48
@@ -59,6 +70,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
+    gres: gpu:nvidia_titan_xp:8
   mlc3:
     node_hostname: mlc3
     cpus: 48
@@ -66,6 +78,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
+    gres: gpu:nvidia_titan_xp:8
   mlc4:
     node_hostname: mlc4
     cpus: 48
@@ -73,6 +86,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
+    # TODO: gres
   mlc5:
     node_hostname: mlc5
     cpus: 48
@@ -80,6 +94,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
+    # TODO: gres
   mlc6:
     node_hostname: mlc6
     cpus: 48
@@ -87,6 +102,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
+    # TODO: gres
 
 mysql::root_password: abc123_testing_only
 mysql::server::override_options:
