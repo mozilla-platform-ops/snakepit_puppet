@@ -10,12 +10,12 @@ class roles::slurm_worker {
     # }
 
     # manage packages (including cuda/nvidia-driver)
+    include moz_slurm
     include moz_slurm::worker::install_cuda
 
     include slurm
 
     # TODO: should moz_slurm's children include this?
-    include moz_slurm
     include moz_slurm::packages
     include moz_slurm::worker::nfs
     include moz_slurm::worker::disable_automated_upgrades
