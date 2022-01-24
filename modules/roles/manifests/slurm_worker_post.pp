@@ -16,7 +16,4 @@ class roles::slurm_worker_post {
     # include moz_slurm::spack_lmod
     # include moz_slurm::spack_singularity
 
-    # manage packages (including cuda/nvidia-driver)
-    include moz_slurm::worker::install_cuda
-
 }

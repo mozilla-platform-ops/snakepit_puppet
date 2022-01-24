@@ -9,6 +9,9 @@ class roles::slurm_worker {
     #   munge_key_content => base64('decode', lookup('munge::munge_key_content'))
     # }
 
+    # manage packages (including cuda/nvidia-driver)
+    include moz_slurm::worker::install_cuda
+
     include slurm
 
     # TODO: should moz_slurm's children include this?
