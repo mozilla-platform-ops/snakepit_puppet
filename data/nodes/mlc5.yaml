@@ -1,0 +1,7 @@
+---
+
+slurm::client: true
+slurm::slurmctld: false
+slurm::slurmdbd: false
+slurm::database: false
+slurm::slurmd: true
