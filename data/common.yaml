@@ -31,12 +31,18 @@ slurm::partitions:
     default: 'YES'
     def_mem_per_cpu: 2000
     max_mem_per_cpu: 2300
-    nodes: mlc0, mlc1, mlc2, mlc3
+    nodes:
+      - mlc0
+      - mlc1
+      - mlc2
+      - mlc3
   g2080:
     default: 'YES'
     def_mem_per_cpu: 2000
     max_mem_per_cpu: 2300
-    nodes: mlc4, mlc5
+    nodes:
+      - mlc4
+      - mlc5
   q6000:
     default: 'YES'
     def_mem_per_cpu: 2000
