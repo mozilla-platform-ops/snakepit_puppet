@@ -14,10 +14,6 @@ class roles::slurm_worker {
 
     include slurm
 
-    slurm::gres { 'nvml':
-        auto_detect => 'nvml',
-    }
-
     # TODO: should moz_slurm's children include this?
     include moz_slurm
     include moz_slurm::packages
