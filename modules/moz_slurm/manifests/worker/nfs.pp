@@ -72,7 +72,8 @@ class moz_slurm::worker::nfs {
     device  => '192.168.1.1:/home/slurm',
     fstype  => 'nfs',
     options => 'nosuid,hard,bg,noatime',
-    pass    => 0
+    pass    => 0,
+    require => File['/home/slurm']
   }
 
   # create mountpoint for /data/home
