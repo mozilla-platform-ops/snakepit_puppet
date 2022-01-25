@@ -21,12 +21,13 @@ class moz_slurm::worker::nfs {
 
   # create mountpoint
   file { '/data/ro':
-    ensure => 'directory',
-    path   => '/data/ro',
-    mode   => '0555',
+    ensure  => 'directory',
+    path    => '/data/ro',
+    mode    => '0555',
     # snakepit doesn't exist on test infra, but is real owner in prod
     # owner  => 'snakepit',
     # group  => 'snakepit'
+    require => File['/data'],
   }
 
   # # configure fstab
@@ -37,18 +38,20 @@ class moz_slurm::worker::nfs {
     fstype  => 'nfs',
     # udp forces v3, which locking seems broken on (at least in spack)
     options => 'nosuid,hard,bg,noatime',
-    pass    => 0
+    pass    => 0,
+    require => File['/data/ro'],
   }
 
   # /data/rw
 
   # create mountpoint
   file { '/data/rw':
-    ensure => 'directory',
-    path   => '/data/rw',
-    mode   => '0750',
-    owner  => 'slurm',
-    group  => 'slurm'
+    ensure  => 'directory',
+    path    => '/data/rw',
+    mode    => '0750',
+    owner   => 'slurm',
+    group   => 'slurm',
+    require => File['/data'],
   }
 
   # configure fstab
@@ -58,7 +61,8 @@ class moz_slurm::worker::nfs {
     device  => '192.168.1.1:/data/rw',
     fstype  => 'nfs',
     options => 'nosuid,hard,bg,noatime',
-    pass    => 0
+    pass    => 0,
+    require => File['/data/rw'],
   }
 
   # mount /home/slurm
@@ -73,11 +77,12 @@ class moz_slurm::worker::nfs {
 
   # create mountpoint for /data/home
   file { '/data/home':
-    ensure => 'directory',
-    path   => '/data/home',
-    mode   => '0775',
-    owner  => 'snakepit',
-    group  => 'snakepit'
+    ensure  => 'directory',
+    path    => '/data/home',
+    mode    => '0775',
+    owner   => 'snakepit',
+    group   => 'snakepit',
+    require => File['/data'],
   }
 
   # mount /snakepit/home -> /data/home
@@ -87,7 +92,8 @@ class moz_slurm::worker::nfs {
     device  => '192.168.1.1:/snakepit/home',
     fstype  => 'nfs',
     options => 'nosuid,hard,bg,noatime',
-    pass    => 0
+    pass    => 0,
+    require => File['/data/home'],
   }
 
   # create software dir (/data/sw)
@@ -105,7 +111,8 @@ class moz_slurm::worker::nfs {
     device  => '192.168.1.1:/data/sw',
     fstype  => 'nfs',
     options => 'nosuid,hard,bg,noatime',
-    pass    => 0
+    pass    => 0,
+    require => File['/data'],
   }
 
 }
