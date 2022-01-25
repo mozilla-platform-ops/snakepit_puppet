@@ -7,3 +7,4 @@ slurm::database: false
 slurm::slurmd: true
 
 slurm::configless: true
+slurm::conf_server: mlchead
