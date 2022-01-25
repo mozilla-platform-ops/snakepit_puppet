@@ -5,15 +5,15 @@ class moz_slurm {
   file {'/moz_slurm dir':
     ensure => 'directory',
     path   => '/moz_slurm',
-    owner  => 'slurm',
-    group  => 'slurm'
+    owner  => 'root',
+    group  => 'root'
   }
 
   file {'/opt/moz_slurm dir':
     ensure => 'directory',
     path   => '/opt/moz_slurm',
-    owner  => 'slurm',
-    group  => 'slurm'
+    owner  => 'root',
+    group  => 'root'
   }
 
   # add slurm user to snakepit group
