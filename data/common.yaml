@@ -108,7 +108,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
-    # TODO: gres
+    gres: quadro_rtx_6000:8
 
 mysql::root_password: abc123_testing_only
 mysql::server::override_options:
