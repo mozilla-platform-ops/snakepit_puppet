@@ -14,7 +14,6 @@ slurm::slurm_user_home: /home/slurm
 slurm::slurm_user_shell: /bin/bash
 
 slurm::conf_server: mlchead
-slurm::enable_configless: true
 
 slurm::slurmdbd_host: mlchead
 slurm::slurmdbd_storage_pass: "another_testing_password"
