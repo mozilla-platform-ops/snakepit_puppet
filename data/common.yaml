@@ -92,7 +92,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
-    gres: nvidia_geforce_rtx_2080_ti:8
+    gres: gpu:nvidia_geforce_rtx_2080_ti:8
   mlc5:
     node_hostname: mlc5
     cpus: 48
@@ -100,7 +100,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
-    gres: nvidia_geforce_rtx_2080_ti:8
+    gres: gpu:nvidia_geforce_rtx_2080_ti:8
   mlc6:
     node_hostname: mlc6
     cpus: 48
@@ -108,7 +108,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
-    gres: quadro_rtx_6000:8
+    gres: gpu:quadro_rtx_6000:8
 
 mysql::root_password: abc123_testing_only
 mysql::server::override_options:
