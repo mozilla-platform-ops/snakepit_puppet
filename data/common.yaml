@@ -12,6 +12,7 @@ slurm::slurm_group_gid: 1877
 slurm::slurm_user_uid: 1877
 slurm::slurm_user_home: /home/slurm
 slurm::slurm_user_shell: /bin/bash
+slurm::env_dir: /etc/sysconfig
 
 slurm::slurmdbd_host: mlchead
 slurm::slurmdbd_storage_pass: "another_testing_password"
