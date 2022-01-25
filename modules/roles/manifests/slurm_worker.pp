@@ -13,7 +13,7 @@ class roles::slurm_worker {
     include moz_slurm::worker::install_cuda
 
     # ensure that cuda packages are present before doing slurm installation
-    Class['moz_slurm::worker::install_cuda'] ~> Class['slurm']
+    Class['moz_slurm'] ~> Class['slurm']
 
     # TODO: configure worker's env vars to use proxy
     # include moz_slurm::worker::proxy_env
