@@ -15,7 +15,8 @@ class roles::slurm_worker {
 
     # ensure that cuda packages are present before doing slurm installation
     Class['moz_slurm::worker::install_cuda'] ~> Class['slurm'] ~> Class['moz_slurm::worker::nfs']
-    Service['slurmd'] -> Class['moz_slurm::worker::fix_slurmd_service']
+    # ensure slurmd service exists before running fix
+    # Service['slurmd'] -> Class['moz_slurm::worker::fix_slurmd_service']
 
     # TODO: configure worker's env vars to use proxy
     # include moz_slurm::worker::proxy_env
