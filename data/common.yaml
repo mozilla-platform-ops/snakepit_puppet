@@ -92,7 +92,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
-    # TODO: gres
+    gres: nvidia_geforce_rtx_2080_ti:8
   mlc5:
     node_hostname: mlc5
     cpus: 48
@@ -100,7 +100,7 @@ slurm::nodes:
     cores_per_socket: 12
     sockets: 2
     real_memory: 112000
-    # TODO: gres
+    gres: nvidia_geforce_rtx_2080_ti:8
   mlc6:
     node_hostname: mlc6
     cpus: 48
