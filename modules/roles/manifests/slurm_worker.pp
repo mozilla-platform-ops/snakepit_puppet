@@ -11,9 +11,11 @@ class roles::slurm_worker {
     include moz_slurm::worker::disable_automated_upgrades
     # manage packages (including cuda/nvidia-driver)
     include moz_slurm::worker::install_cuda
+    include moz_slurm::worker::fix_slurmd_service
 
     # ensure that cuda packages are present before doing slurm installation
-    Class['moz_slurm::worker::install_cuda'] ~> Class['slurm'] -> Class['moz_slurm::worker::nfs']
+    Class['moz_slurm::worker::install_cuda'] ~> Class['slurm']
+        -> Class['moz_slurm::worker::nfs'] -> Class['moz_slurm::worker::fix_slurmd_service']
 
     # TODO: configure worker's env vars to use proxy
     # include moz_slurm::worker::proxy_env
