@@ -84,16 +84,16 @@ slurm::nodes:
     real_memory: 112000
     gres: gpu:nvidia_titan_xp:8
   mlc4:
+    # mlc4-mlc6 are a bit newer and beefier
+    # NodeName=mlc6 CPUs=56 Boards=1 SocketsPerBoard=2 CoresPerSocket=14 ThreadsPerCore=2 RealMemory=257826
     node_hostname: mlc4
-    cpus: 48
+    cpus: 56
     threads_per_core: 2
-    cores_per_socket: 12
+    cores_per_socket: 14
     sockets: 2
-    real_memory: 112000
+    real_memory: 246000
     gres: gpu:nvidia_geforce_rtx_2080_ti:8
   mlc5:
-    # mlc5 and mlc6 are a bit newer and beefier
-    # NodeName=mlc6 CPUs=56 Boards=1 SocketsPerBoard=2 CoresPerSocket=14 ThreadsPerCore=2 RealMemory=257826
     node_hostname: mlc5
     cpus: 56
     threads_per_core: 2
