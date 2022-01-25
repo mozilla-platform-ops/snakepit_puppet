@@ -73,7 +73,6 @@ class moz_slurm::worker::nfs {
     fstype  => 'nfs',
     options => 'nosuid,hard,bg,noatime',
     pass    => 0,
-    require => File['/home/slurm']  # doesn't work, defined in ::slurm
   }
 
   # create mountpoint for /data/home
