@@ -18,12 +18,20 @@ class moz_slurm {
 
   # create snakepit group, because we add the slurm to it
   group { 'snakepit group':
-  ensure => 'present',
-  name   => 'snakepit',
-  gid    => 1777
-}
+    ensure => 'present',
+    name   => 'snakepit',
+    gid    => 1777
+  }
 
   # add slurm user to snakepit group
   User<|title == 'slurm'|> { groups => ['slurm', 'snakepit'] }
+
+  # place slurm monitoring script
+  file { '/opt/moz_slurm/bin/monitor_slurm.sh':
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root',
+    source => 'puppet:///modules/moz_slurm/monitor_slurm.sh',
+  }
 
 }
