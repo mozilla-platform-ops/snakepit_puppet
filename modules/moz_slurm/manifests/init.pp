@@ -29,7 +29,7 @@ class moz_slurm {
   # make bin dir
   file {'/opt/moz_slurm dir/bin':
     ensure => 'directory',
-    path   => '/opt/moz_slurm',
+    path   => '/opt/moz_slurm/bin',
     owner  => 'root',
     group  => 'root'
   }
