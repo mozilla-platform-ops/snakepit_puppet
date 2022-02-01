@@ -12,7 +12,7 @@ class moz_slurm::worker::install_libcudnn {
 
   # install from nfs mount
   package { 'cudnn-local-repo-ubuntu1804-8.3.2.44':
-    ensure   => present,
+    ensure   => installed,
     provider => dpkg,
     source   => '/data/ro/data/relops_data/cudnn-local-repo-ubuntu1804-8.3.2.44_1.0-1_amd64.deb'
   }
