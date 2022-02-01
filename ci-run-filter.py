@@ -47,12 +47,14 @@ import configparser
 
 
 # returns 'skip', 'run', or None (for no action advised)
-def inspect_commit_message(git_ref, run_string, skip_string):
+def inspect_commit_message(git_ref, run_string, skip_string, verbose=False):
     # `git show HEAD -s` and look for SKIP_CI or FORCE_CI
     cmd_to_run = "git show %s -s 2>&1" % git_ref
     output = subprocess.getoutput(cmd_to_run)
     # TODO: which should be handled first? run or skip?
     # TODO: handle if both are present?
+    # if verbose:
+    #     print("inspecting %s" % git_ref)
     if run_string in output:
         return "run"
     elif skip_string in output:
@@ -68,11 +70,13 @@ def files_in_diff_match(match_strings, verbose=False, git_ref="HEAD"):
     # full paths, only need to strip off last line
     cmd_to_run = "git show --stat --name-only --pretty='format:' %s 2>&1" % git_ref
 
+    # if verbose:
+    #     print(cmd_to_run)
+
     # print(cmd_to_run)
     output = subprocess.getoutput(cmd_to_run)
 
-    # first to last line has summary, skip with slice
-    for line in output.split("\n")[:-1]:
+    for line in output.split("\n"):
         for _mstring_counter, mstring in enumerate(match_strings):
             if mstring in line:
                 if verbose:
@@ -103,7 +107,7 @@ def run_test_if_matches(
     # print(branch)
 
     commit_msg_inspection_result = inspect_commit_message(
-        git_ref, force_run, force_skip
+        git_ref, force_run, force_skip, verbose
     )
 
     # TODO: where should force options fall in priority?
