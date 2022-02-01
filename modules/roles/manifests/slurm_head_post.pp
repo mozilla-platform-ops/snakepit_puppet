@@ -11,4 +11,7 @@ class roles::slurm_head_post {
     include moz_slurm::spack_lmod
     include moz_slurm::spack_singularity
 
+    # place cuda libs in nfs share
+    include moz_slurm::head::place_cuda
+
 }

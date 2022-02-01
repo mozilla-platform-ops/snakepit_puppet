@@ -16,4 +16,6 @@ class roles::slurm_worker_post {
     # include moz_slurm::spack_lmod
     # include moz_slurm::spack_singularity
 
+    include moz_slurm::worker::install_libcudnn
+
 }
