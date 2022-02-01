@@ -1,0 +1,12 @@
+---
+
+# identical to mlc0
+slurm::client: true
+slurm::slurmctld: false
+slurm::slurmdbd: false
+slurm::database: false
+slurm::slurmd: true
+
+# disable configless so test-kitchen works
+slurm::configless: false
+# slurm::conf_server: mlchead
