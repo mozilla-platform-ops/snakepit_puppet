@@ -26,6 +26,14 @@ class moz_slurm {
   # add slurm user to snakepit group
   User<|title == 'slurm'|> { groups => ['slurm', 'snakepit'] }
 
+  # make bin dir
+  file {'/opt/moz_slurm dir/bin':
+    ensure => 'directory',
+    path   => '/opt/moz_slurm',
+    owner  => 'root',
+    group  => 'root'
+  }
+
   # place slurm monitoring script
   file { '/opt/moz_slurm/bin/monitor_slurm.sh':
     mode   => '0755',
