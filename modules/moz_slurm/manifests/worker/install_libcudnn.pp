@@ -44,10 +44,10 @@ class moz_slurm::worker::install_libcudnn {
   # Install the code samples and the cuDNN library documentation.
   #   sudo apt-get install libcudnn8-samples=8.x.x.x-1+cudaX.Y
   package{ 'libcudnn8':
-    ensure => "=${cudnn_version}-1+cuda${cuda_version}"
+    ensure => "${cudnn_version}-1+cuda${cuda_version}"
   }
   package { 'libcudnn8-dev':
-    ensure => "=${cudnn_version}-1+${cuda_version}"
+    ensure => "${cudnn_version}-1+${cuda_version}"
                       }
   package { 'libcudnn8-samples':
     ensure => "${cudnn_version}-1+${cuda_version}"
