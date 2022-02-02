@@ -12,3 +12,4 @@ modules:
 - git: https://github.com/treydock/puppet-munge
   ref: v3.1.0
 - puppet/prometheus
+- puppetlabs/apt
