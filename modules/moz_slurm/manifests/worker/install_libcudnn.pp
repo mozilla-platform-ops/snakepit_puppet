@@ -47,10 +47,10 @@ class moz_slurm::worker::install_libcudnn {
     ensure => "${cudnn_version}-1+cuda${cuda_version}"
   }
   package { 'libcudnn8-dev':
-    ensure => "${cudnn_version}-1+${cuda_version}"
+    ensure => "${cudnn_version}-1+cuda${cuda_version}"
                       }
   package { 'libcudnn8-samples':
-    ensure => "${cudnn_version}-1+${cuda_version}"
+    ensure => "${cudnn_version}-1+cuda${cuda_version}"
   }
 
 }
