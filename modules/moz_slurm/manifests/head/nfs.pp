@@ -31,6 +31,14 @@ class moz_slurm::head::nfs {
     # leave options loose as it's an existing dir in prod
   }
 
+  file { '/data':
+    ensure => 'directory',
+    path   => '/data',
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root'
+  }
+
   # rw area for slurm
   file { '/data/rw':
     ensure => 'directory',
