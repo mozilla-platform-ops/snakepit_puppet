@@ -30,7 +30,10 @@ mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
 curl -sSL \
   'https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub' \
   | sudo apt-key add -
-
+# apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub
+curl -sSL \
+  'https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/3bf863cc.pub' \
+  | sudo apt-key add -
 add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/ /"
 aptget update
 
