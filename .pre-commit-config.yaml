@@ -1,6 +1,6 @@
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.1.0
+  rev: v4.4.0
   hooks:
   - id: check-executables-have-shebangs
   - id: check-json
@@ -10,7 +10,7 @@ repos:
   - id: trailing-whitespace
 
 - repo: https://github.com/chriskuehl/puppet-pre-commit-hooks.git
-  rev: v2.1.0
+  rev: v2.2.0
   hooks:
   - id: puppet-validate
     exclude: '^modules/\w+/plans'
@@ -23,7 +23,7 @@ repos:
     - --no-documentation-check
 
 - repo: https://github.com/jumanjihouse/pre-commit-hooks
-  rev: 2.1.5
+  rev: 3.0.0
   hooks:
     - id: shellcheck
 
@@ -34,12 +34,12 @@ repos:
       exclude: '^Gemfile*'
 
 - repo: https://github.com/psf/black
-  rev: 22.1.0
+  rev: 23.3.0
   hooks:
     - id: black
 
 - repo: https://github.com/Yelp/detect-secrets
-  rev: v1.0.3
+  rev: v1.4.0
   # 1.1.0 has problems with py3.9+
   # https://github.com/Yelp/detect-secrets/issues/452
   hooks:
