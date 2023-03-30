@@ -116,6 +116,7 @@ mysql::server::override_options:
   'mysqld':
     'bind-address': '0.0.0.0'
 
+# pragma: allowlist nextline secret
 munge::munge_key_content: !!binary |-
   Pljvv73ljprjvKrvv73vv71eIhZW77+977+9IO+/ve+/vXLvv71x77+977+9JO+/vXHGmduBCu+/
   vc6d77+9Rxvvv73vv73vv71zcWfvv70B77+9Je+/vR7vv71BRu+/ve+/ve+/ve+/ve+/ve+/vX0s
