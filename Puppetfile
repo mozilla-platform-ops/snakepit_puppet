@@ -10,7 +10,7 @@ mod 'munge',
   ref: 'c9c0d914eebbbb78c77dd0b0d17c85414bd4a977'
 mod 'slurm',
   git: 'https://github.com/treydock/puppet-slurm',
-  ref: 'e1a4506018b8ddb490f68d0ec823da762a3b43c5'
+  ref: '3e74fe163cbe4cf263199e854c5c16416e785f7b'
 mod 'service',
   git: 'https://github.com/puppetlabs/puppetlabs-service',
   ref: 'a819beee25352924b2c7f15dea2722ff2309bb46'
