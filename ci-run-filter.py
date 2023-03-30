@@ -140,7 +140,7 @@ def run_test_if_matches(
             # TODO: mention the actual args
             print("  - Not on master or main branches.")
             print(
-                "  - Commit doesn't have force_run or force_skip keywords in message."
+                f"  - Commit doesn't have {force_run} or {force_skip} keywords in message."
             )
             print("  - No changed files matched the selection criteria.")
         sys.exit(0)
