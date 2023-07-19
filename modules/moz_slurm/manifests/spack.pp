@@ -8,14 +8,6 @@ class moz_slurm::spack {
 
   $spack_path = lookup('moz_slurm::spack_path')
 
-  # create software dir
-  file { lookup('moz_slurm::software_path'):
-    ensure => directory,
-    owner  => 'slurm',
-    group  => 'slurm',
-    mode   => '0750',
-  }
-
   # clone repo
   vcsrepo { lookup('moz_slurm::spack_path'):
     ensure   => present,
@@ -24,6 +16,8 @@ class moz_slurm::spack {
     user     => 'slurm'
   }
 
+  # takes a long time to load...
+  # use tips in https://github.com/spack/spack/issues/3318?
   file_line { 'add spack env source to .bashrc':
     path => '/home/slurm/.bashrc',
     line => "source ${spack_path}/share/spack/setup-env.sh",

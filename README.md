@@ -5,9 +5,8 @@ puppet code for managing Mozilla's Snakepit cluster
 ## TODOs
 
 - puppet
-  - create production secrets.yaml file
   - future: worker: set environment for proxy
-  - future: manage users on the hosts
+  - future: manage users on hosts
   - future: head: proxy installation & configuration
 - package configuration
   - test updating instances
@@ -27,9 +26,9 @@ Snakepit (the scheduler, https://github.com/mozilla/snakepit) only gives jobs wr
   /ro
     /shared (contents of mlchead:snakepit/shared/)
   /rw
-    /group-GROUP (any groups you're in, contents of mlchead:snakepit/groups/GROUP)
-    /home (user dir, mlchead:snakepit/home/USER)
-    /pit (job dir, mlchead:snakepit/pits/ID)
+    /group-GROUP (any groups you're in, contents of mlchead:/snakepit/groups/GROUP)
+    /home (user dir, mlchead:/snakepit/home/USER)
+    /pit (job dir, mlchead:/snakepit/pits/ID)
 ```
 
 Slurm doesn't do any access control. If the slurm unix user can write to a directory, every job will be able to write to it.
@@ -37,7 +36,7 @@ Slurm doesn't do any access control. If the slurm unix user can write to a direc
 ```text
 /data
   /ro (contents of mlchead:/snakepit/shared)
-  /rw (contents of mlchead:/moz_slurm/user_data)
+  /rw (contents of mlchead:/data/rw)
 ```
 
 ### provisioners
@@ -53,7 +52,7 @@ test-kitchen is the best place to start. vagrant is easier for rapid iteration a
 vagrant testing is lower level than test-kitchen and allows more realistic testing of the provisioning and convergence process.
 
 ```bash
-vagrant up
+vagrant up worker
 # ssh into the 'head' or 'worker' instance
 vagrant ssh worker
 
@@ -109,13 +108,17 @@ bundle exec kitchen converge
 bundle exec kitchen verify
 ```
 
-## keeping bare metal and containers in sync
+## nvidia/cuda: keeping bare metal and containers in sync
 
 Part of the challenge of using NVIDIA cards and CUDA in a container is that the versions of the software on the bare metal and the container need to be in sync (https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/concepts.html#background).
 
 NVIDIA has a solution (NVIDIA Container Toolkit) that allows the versions to not match exactly, but it requires newer NVIDIA GPUs (Kepler and newer, https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#platform-requirements). Snakepit's GPUs are from a previous genenration and we can't use this solution.
 
-The NVIDIA-recommended solution for our older cards is to install the `cuda` or `cuda-11-5` metapackage (https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html) and hope things work. These metapackages only loosely specify the version to use and float to the latest published packages. This causes issues when trying to keep hosts in sync (if they're installed or created at different points in time).
+We solve this in our slurm environmentt by using singularity's GPU mode (https://sylabs.io/guides/3.5/user-guide/gpu.html).
+
+## nvidia/cuda: keeping bare metal hosts in sync
+
+NVIDIA's recommended intallatio process is to install the `cuda` or `cuda-11-5` metapackages (https://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html). These metapackages only loosely specify the version to use and float to the latest published packages. This causes issues when trying to keep hosts in sync (if they're installed or created at different points in time).
 
 ```bash
 $ apt-cache show cuda-11-5
@@ -176,6 +179,8 @@ rake pkg_config_test
 
 - puppet module used for slurm
   - <https://github.com/treydock/puppet-slurm>
+- NVIDIA's best practices for SLURM deployment
+  - <https://github.com/NVIDIA/deepops/tree/master/docs/slurm-cluster>
 
 ### how to generate new munge keys
 

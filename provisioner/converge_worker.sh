@@ -62,7 +62,7 @@ function update_puppet {
     cat <<EOF > "${PUPPET_REPO_PATH}/manifests/nodes/nodes.pp"
     node '${FQDN}' {
         include ::roles::${ROLE}
-        include ::roles::slurm_worker_post
+        include ::roles::${ROLE}_post
     }
 EOF
 
@@ -135,6 +135,8 @@ else
 fi
 
 # install puppet
+# TODO: only do if `puppet` is missing
+rm /var/tmp/puppet*.deb* || true
 wget -P /var/tmp/ "http://apt.puppetlabs.com/puppet7-release-$(lsb_release -c -s).deb"
 dpkg -i /var/tmp/*.deb
 apt-get update -y && apt-get install -y puppet-agent puppet-bolt
@@ -143,6 +145,7 @@ ln -sf /opt/puppetlabs/bin/puppet /usr/bin/puppet
 # disable puppet agent systemd service
 # - we run masterless and only converge manually
 systemctl disable puppet
+systemctl disable pxp-agent
 
 # get the repo
 update_puppet

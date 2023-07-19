@@ -10,11 +10,12 @@ class roles::slurm_worker_post {
     # TODO: should moz_slurm's children include this?
     include moz_slurm
 
+    # these are now installed on the head as /home/slurm is nfs mounted
+    #
     # install lmod and spack
-    include moz_slurm::spack_lmod
-    include moz_slurm::spack_singularity
+    # include moz_slurm::spack_lmod
+    # include moz_slurm::spack_singularity
 
-    # manage packages (including cuda/nvidia-driver)
-    include moz_slurm::worker::install_cuda
+    include moz_slurm::worker::install_libcudnn
 
 }

@@ -1,4 +1,4 @@
 ---
-moz_slurm::software_path: /home/slurm/software
+moz_slurm::software_path: /data/sw
 moz_slurm::spack_path: "%{lookup('moz_slurm::software_path')}/spack"
 moz_slurm::spack_bin_path: "%{lookup('moz_slurm::spack_path')}/bin/spack"

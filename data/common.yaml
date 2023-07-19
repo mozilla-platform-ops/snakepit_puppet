@@ -18,44 +18,105 @@ slurm::slurmdbd_storage_pass: "another_testing_password"
 slurm::slurmdbd_storage_host: 'localhost'  # used for StorageHost and mysql grant
 # slurm::export_database: true
 # slurm::export_database_tag: "%{lookup('slurm::slurmdbd_storage_host')}"
-
+slurm::slurm_conf_override:
+  ReturnToService: 2
+  GresTypes:
+    - gpu
+  SelectType: select/cons_tres
 slurm::greses:
   nvml:
     auto_detect: nvml
 slurm::partitions:
-  batch:
+  txp:
     default: 'YES'
-    def_mem_per_cpu: 1700
-    max_mem_per_cpu: 1750
-    nodes: mlc0,mlc1
+    def_mem_per_cpu: 2000
+    max_mem_per_cpu: 2300
+    nodes:
+      - mlc0
+      - mlc1
+      - mlc2
+      - mlc3
+  g2080:
+    default: 'YES'
+    def_mem_per_cpu: 2000
+    max_mem_per_cpu: 2300
+    nodes:
+      - mlc4
+      - mlc5
+  q6000:
+    default: 'YES'
+    def_mem_per_cpu: 2000
+    max_mem_per_cpu: 2300
+    nodes: mlc6
 slurm::nodes:
+  # slurmd -C output on mlc0:
+  # NodeName=mlc0 CPUs=48 Boards=1 SocketsPerBoard=2 CoresPerSocket=12 ThreadsPerCore=2 RealMemory=112689
   mlc0:
     node_hostname: mlc0
-    cpus: 4
-    threads_per_core: 1
-    cores_per_socket: 1
-    sockets: 4
-    real_memory: 7000
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
+    gres: gpu:nvidia_titan_xp:8
   mlc1:
     node_hostname: mlc1
-    cpus: 4
-    threads_per_core: 1
-    cores_per_socket: 1
-    sockets: 4
-    real_memory: 7000
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
+    gres: gpu:nvidia_titan_xp:8
   mlc2:
     node_hostname: mlc2
-    cpus: 4
-    threads_per_core: 1
-    cores_per_socket: 1
-    sockets: 4
-    real_memory: 7000
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
+    gres: gpu:nvidia_titan_xp:8
+  mlc3:
+    node_hostname: mlc3
+    cpus: 48
+    threads_per_core: 2
+    cores_per_socket: 12
+    sockets: 2
+    real_memory: 112000
+    gres: gpu:nvidia_titan_xp:8
+  mlc4:
+    # NodeName=mlc4 CPUs=56 Boards=1 SocketsPerBoard=2 CoresPerSocket=14 ThreadsPerCore=2 RealMemory=128803
+    node_hostname: mlc4
+    cpus: 56
+    threads_per_core: 2
+    cores_per_socket: 14
+    sockets: 2
+    real_memory: 112000
+    gres: gpu:nvidia_geforce_rtx_2080_ti:8
+  mlc5:
+    # NodeName=mlc5 CPUs=56 Boards=1 SocketsPerBoard=2 CoresPerSocket=14 ThreadsPerCore=2 RealMemory=128803
+    node_hostname: mlc5
+    cpus: 56
+    threads_per_core: 2
+    cores_per_socket: 14
+    sockets: 2
+    real_memory: 112000
+    gres: gpu:nvidia_geforce_rtx_2080_ti:8
+  mlc6:
+    # NodeName=mlc6 CPUs=56 Boards=1 SocketsPerBoard=2 CoresPerSocket=14 ThreadsPerCore=2 RealMemory=257826
+    node_hostname: mlc6
+    cpus: 56
+    threads_per_core: 2
+    cores_per_socket: 14
+    sockets: 2
+    real_memory: 246000
+    gres: gpu:quadro_rtx_6000:8
 
 mysql::root_password: abc123_testing_only
 mysql::server::override_options:
   'mysqld':
     'bind-address': '0.0.0.0'
 
+# pragma: allowlist nextline secret
 munge::munge_key_content: !!binary |-
   Pljvv73ljprjvKrvv73vv71eIhZW77+977+9IO+/ve+/vXLvv71x77+977+9JO+/vXHGmduBCu+/
   vc6d77+9Rxvvv73vv73vv71zcWfvv70B77+9Je+/vR7vv71BRu+/ve+/ve+/ve+/ve+/ve+/vX0s

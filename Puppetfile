@@ -4,12 +4,13 @@
 # The following directive installs modules to the managed moduledir.
 moduledir '.modules'
 
+mod 'puppetlabs/apt', '8.3.0'
 mod 'munge',
   git: 'https://github.com/treydock/puppet-munge',
   ref: 'c9c0d914eebbbb78c77dd0b0d17c85414bd4a977'
 mod 'slurm',
   git: 'https://github.com/treydock/puppet-slurm',
-  ref: 'v2.0.1'
+  ref: '3e74fe163cbe4cf263199e854c5c16416e785f7b'
 mod 'service',
   git: 'https://github.com/puppetlabs/puppetlabs-service',
   ref: 'a819beee25352924b2c7f15dea2722ff2309bb46'
@@ -28,3 +29,4 @@ mod 'puppet/alternatives', '3.0.0'
 mod 'treydock/slurm_providers', '0.12.3'
 mod 'puppetlabs/inifile', '5.2.0'
 mod 'herculesteam/augeasproviders_core', '3.1.0'
+mod 'puppet/prometheus', '12.3.0'

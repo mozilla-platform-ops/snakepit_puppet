@@ -31,10 +31,27 @@ class moz_slurm::head::nfs {
     # leave options loose as it's an existing dir in prod
   }
 
-  #   /moz_slurm/user_data
-  file { '/moz_slurm/user_data':
+  file { '/data':
     ensure => 'directory',
-    path   => '/moz_slurm/user_data',
+    path   => '/data',
+    mode   => '0755',
+    owner  => 'root',
+    group  => 'root'
+  }
+
+  # rw area for slurm
+  file { '/data/rw':
+    ensure => 'directory',
+    path   => '/data/rw',
+    mode   => '0750',
+    owner  => 'slurm',
+    group  => 'slurm'
+  }
+
+  # /data/sw export
+  file { '/data/sw':
+    ensure => 'directory',
+    path   => '/data/sw',
     mode   => '0750',
     owner  => 'slurm',
     group  => 'slurm'

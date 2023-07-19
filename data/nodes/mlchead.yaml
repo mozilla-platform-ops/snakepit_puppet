@@ -7,3 +7,5 @@ slurm::database: true
 slurm::slurmd: false
 
 slurm::slurmrestd: true
+
+slurm::enable_configless: true

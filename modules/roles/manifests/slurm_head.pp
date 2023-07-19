@@ -4,7 +4,7 @@ class roles::slurm_head {
 
     # install mysql
     class { 'mysql::server':
-      root_password           => lookup('mysql::root_password'),
+      root_password           => lookup('mysql::root_password'),  # pragma: allowlist secret
       remove_default_accounts => true,
       restart                 => true,
       purge_conf_dir          => true,  # default config sets bind-address to localhost
@@ -20,6 +20,9 @@ class roles::slurm_head {
     include moz_slurm
     include moz_slurm::packages
     include moz_slurm::head::nfs
+
+    # install spack
+    include moz_slurm::spack
 
     # interesting slurmdbd options:
     #   https://gist.github.com/DaisukeMiyamoto/d1dac9483ff0971d5d9f34000311d312

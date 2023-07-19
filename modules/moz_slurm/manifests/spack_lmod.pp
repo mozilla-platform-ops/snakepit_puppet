@@ -16,7 +16,8 @@ class moz_slurm::spack_lmod {
 
   file_line { 'add lmod env source to .bashrc':
     path => '/home/slurm/.bashrc',
-    line => 'source $(spack location -i lmod)/lmod/lmod/init/bash',
+    # -L to ignore locks
+    line => 'source $(spack -L location -i lmod)/lmod/lmod/init/bash',
   }
 
 }
