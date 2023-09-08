@@ -48,7 +48,7 @@ function update_puppet {
 
     # Fetch and checkout production branch
     git fetch --all --prune || return 1
-    git checkout --force origin/${PUPPET_BRANCH} || return 1
+    git checkout --force "origin/${PUPPET_BRANCH}" || return 1
 
     # TODO: bolt module purge or equivalent?
 
@@ -62,7 +62,8 @@ function update_puppet {
     cat <<EOF > "${PUPPET_REPO_PATH}/manifests/nodes/nodes.pp"
     node '${FQDN}' {
         include ::roles::${ROLE}
-        include ::roles::${ROLE}_post
+        # only converge base
+        # include ::roles::${ROLE}_post
     }
 EOF
 
@@ -121,7 +122,7 @@ else
     # first run
     echo "Please set a role in '$ROLE_FILE'!"
     exit 1
-    echo "$ROLE" > $ROLE_FILE
+    # echo "$ROLE" > "$ROLE_FILE"
 fi
 
 # This file should be set by the provisioner and is an error to not have a role

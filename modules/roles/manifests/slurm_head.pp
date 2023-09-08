@@ -7,9 +7,12 @@ class roles::slurm_head {
   # test steps:
   #   https://github.com/dun/munge/blob/master/QUICKSTART in section 7.A.
 
-  include slurm
+  # slurm install (`include slurm`) moved to (disabled) post. it's too risky to
+  # converge slurm due to version drift and infrequency of convergence/updates
+  # to this repo.
 
   include moz_slurm
+  include moz_slurm::users
   include moz_slurm::packages
   include moz_slurm::head::nfs
 

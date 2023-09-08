@@ -3,6 +3,10 @@ class roles::slurm_head_post {
   #   the things in this file take too long to run for CI,
   #   so split up convergence.
 
+  # it's too risky to converge slurm due to version drift and infrequency
+  # of convergence/updates to this repo.
+  #include slurm
+
   # TODO: should moz_slurm's children include this?
   include moz_slurm
 
