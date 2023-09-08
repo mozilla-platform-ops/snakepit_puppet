@@ -34,12 +34,12 @@ repos:
       exclude: '^Gemfile*'
 
 - repo: https://github.com/psf/black
-  rev: 23.3.0
+  rev: 23.7.0
   hooks:
     - id: black
 
 - repo: https://github.com/Yelp/detect-secrets
-  rev: v1.0.3
+  rev: v1.4.0
   # 1.1.0 has problems with py3.9+
   # https://github.com/Yelp/detect-secrets/issues/452
   hooks:
