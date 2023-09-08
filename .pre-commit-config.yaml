@@ -27,11 +27,11 @@ repos:
   hooks:
     - id: shellcheck
 
-- repo: https://github.com/aerickson/pre-commit-hooks
-  rev:  2.1.4-aerickson
-  hooks:
-    - id: standardrb
-      exclude: '^Gemfile*'
+#- repo: https://github.com/aerickson/pre-commit-hooks
+#  rev:  2.1.4-aerickson
+#  hooks:
+#    - id: standardrb
+#      exclude: '^Gemfile*'
 
 - repo: https://github.com/psf/black
   rev: 23.7.0
