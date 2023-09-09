@@ -1,49 +1,15 @@
 class moz_slurm::users {
   # currently used user ids across the cluster:
+  #   nothing between 1999 and 60000
   #
-  # 0
-  # 1
-  # 2
-  # 3
-  # 4
-  # 5
-  # 6
-  # 7
-  # 8
-  # 9
-  # 10
-  # 13
-  # 33
-  # 34
-  # 38
-  # 39
-  # 41
-  # 100
-  # 101
-  # 102
-  # 103
-  # 104
-  # 105
-  # 106
-  # 107
-  # 108
-  # 109
-  # 110
-  # 111
-  # 112
-  # 113
-  # 114
-  # 999
-  # 1000
-  # 1003
-  # 1777
-  # 1877
-  # 65534
+  # plan:
+  #   users:
+  #     relops and releng: 2000
+  #     translations: 2100
+  #   groups:
+  #     3000
 
-  # plan: human users start at id 2000
-
-  # TODO: create slurm group while we are disabling 'slurm' module convergence
-
+  # create slurm group while we are disabling 'slurm' module convergence
   $slurm_user_group = 'slurm'
   $slurm_user_gid = lookup('slurm::slurm_group_gid')
   group { 'slurm':
@@ -57,7 +23,7 @@ class moz_slurm::users {
   group { 'admin':
     ensure     => present,
     name       => 'admin',
-    gid        => 2005,
+    gid        => 3000,
     forcelocal => true,
     system     => true,
   }

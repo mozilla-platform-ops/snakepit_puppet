@@ -4,6 +4,7 @@
 
 define users::single_user (
   String $user                 = $title,
+  Integer $uid                 = $uid,
   String $shell                = '/bin/bash',
   Array $ssh_keys              = [],
   Array $groups                = [],
@@ -39,6 +40,7 @@ define users::single_user (
         }
       } else {
         user { $user:
+          uid     => $uid,
           gid     => $group,
           shell   => $shell,
           home    => $home,
