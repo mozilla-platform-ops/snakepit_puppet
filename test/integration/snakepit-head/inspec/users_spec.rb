@@ -15,11 +15,18 @@ describe "users" do
 
   describe user("epavlov") do
     it { should exist }
-    its('groups') { should eq ['users', 'slurm', 'admin']}
+    its('groups') { should eq ['users', 'slurm']}
   end
 
   describe user("gtatum") do
     it { should exist }
     its('groups') { should eq ['users', 'slurm']}
   end
+end
+
+describe file('/etc/sudoers') do
+  # pragma: allowlist nextline secret
+  its('content') { should match(%r{%admin ALL=\(ALL\) NOPASSWD: ALL}) }
+  # pragma: allowlist nextline secret
+  its('content') { should match(%r{epavlov  ALL=\(slurm\) NOPASSWD:ALL}) }
 end
