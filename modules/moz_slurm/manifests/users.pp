@@ -9,13 +9,25 @@ class moz_slurm::users {
   #   groups:
   #     3000
 
-  # create slurm group while we are disabling 'slurm' module convergence
+  # create slurm group and user while we are disabling 'slurm' module convergence
+  $slurm_user_name = 'slurm'
   $slurm_user_group = 'slurm'
+  $slurm_user_uid = lookup('slurm::slurm_user_uid')
   $slurm_user_gid = lookup('slurm::slurm_group_gid')
   group { 'slurm':
     ensure     => present,
     name       => $slurm_user_group,
     gid        => $slurm_user_gid,
+    forcelocal => true,
+    system     => true,
+  }
+  user { 'slurm':
+    ensure     => present,
+    name       => $slurm_user_name,
+    uid        => $slurm_user_uid,
+    gid        => $slurm_user_gid,
+    home       => "/home/${slurm_user_name}",
+    managehome => true,
     forcelocal => true,
     system     => true,
   }
@@ -56,10 +68,7 @@ class moz_slurm::users {
     User<| title == $user |> { groups +> ['slurm', 'users'] }
   }
 
-  # add evgeny to admin
-  User<| title == epavlov |> { groups +> ['admin'] }
-
-  # TODO: place sudoers file
+  # place sudoers file
   #   in files dir in module
   file { '/etc/sudoers':
     ensure  => 'file',
