@@ -15,17 +15,16 @@ define users::single_user (
   # include users::global
 
   $group = $facts['os']['name'] ? {
-    'Darwin' => 'staff',
-    default  => $user
+    # 'Darwin' => 'staff',
+    default  => '',
   }
 
   $home = $facts['os']['name'] ? {
-    'Darwin' => "/Users/${user}",
     default  => "/home/${user}"
   }
 
   case $facts['os']['family'] {
-    'Darwin', 'Debian': {
+    'Debian': {
       # If values for password, salt and iteration are passed, then set the user with a password
       if $password and $salt and $iterations {
         user { $user:
