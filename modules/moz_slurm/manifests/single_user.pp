@@ -1,0 +1,62 @@
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+define moz_slurm::single_user (
+  String $user                 = $title,
+  String $shell                = '/bin/bash',
+  Array $ssh_keys              = [],
+  Array $groups                = [],
+  Optional[String] $password   = undef,  # pragma: allowlist secret
+  Optional[String] $salt       = undef,
+  Optional[String] $iterations = undef,
+) {
+  # include resources common to ALL users
+  # include users::global
+
+  $group = $facts['os']['name'] ? {
+    'Darwin' => 'staff',
+    default  => $user
+  }
+
+  $home = $facts['os']['name'] ? {
+    'Darwin' => "/Users/${user}",
+    default  => "/home/${user}"
+  }
+
+  case $facts['os']['family'] {
+    'Darwin', 'Debian': {
+      # If values for password, salt and iteration are passed, then set the user with a password
+      if $password and $salt and $iterations {
+        user { $user:
+          gid        => $group,
+          shell      => $shell,
+          home       => $home,
+          groups     => $groups,
+          comment    => $user,
+          password   => $password,  # pragma: allowlist secret
+          salt       => $salt,
+          iterations => $iterations,
+        }
+      } else {
+        user { $user:
+          gid     => $group,
+          shell   => $shell,
+          home    => $home,
+          groups  => $groups,
+          comment => $user,
+        }
+      }
+    }
+    default: {
+      fail("${module_name} does not support ${facts['os']['family']}")
+    }
+  }
+
+  # Create home dir
+  users::home_dir { $home:
+    user     => $user,
+    group    => $group,
+    ssh_keys => $ssh_keys,
+  }
+}
