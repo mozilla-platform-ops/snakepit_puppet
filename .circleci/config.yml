@@ -66,6 +66,9 @@ jobs:
       - checkout
       - gem_cache
       - apt_cache_restore
+      - run:
+          name: fix netssh
+          command: sudo apt install -y ruby-net-ssh
       # - run:
       #     name: fix vagrant
       #     command: |
