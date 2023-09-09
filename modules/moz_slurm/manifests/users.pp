@@ -68,8 +68,17 @@ class moz_slurm::users {
   }
 
   $relops = lookup('user_groups.relops', Array, undef, undef)
+  # TODO: how to put these users in sudoers group?
   realize(Users::Single_user[$relops])
-  # $relops.each |String $user| {
-  #   User<| title == $user |> { groups +> ['slurm'] }
-  # }
+
+  $translations = lookup('user_groups.translations', Array, undef, undef)
+  realize(Users::Single_user[$translations])
+
+  # add translations and translations users to slurm group
+  $relops.each |String $user| {
+    User<| title == $user |> { groups +> ['slurm'] }
+  }
+  $translations.each |String $user| {
+    User<| title == $user |> { groups +> ['slurm'] }
+  }
 }

@@ -162,7 +162,7 @@ user_groups:
   releng:
     - bhearsum
   translations:
-    - evgeny
+    - epavlov
     - marco
     - sylvestre
     - gtatum
