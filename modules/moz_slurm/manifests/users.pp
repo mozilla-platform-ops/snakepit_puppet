@@ -44,10 +44,12 @@ class moz_slurm::users {
 
   # TODO: create slurm group while we are disabling 'slurm' module convergence
 
+  $slurm_user_group = 'slurm'
+  $slurm_user_gid = lookup('slurm::slurm_group_gid')
   group { 'slurm':
     ensure     => present,
-    name       => $slurm::slurm_user_group,
-    gid        => $slurm::slurm_group_gid,
+    name       => $slurm_user_group,
+    gid        => $slurm_user_gid,
     forcelocal => true,
     system     => true,
   }
@@ -66,6 +68,7 @@ class moz_slurm::users {
   }
 
   $relops = lookup('user_groups.relops', Array, undef, undef)
+  realize(moz_slurm::single_user[$relops])
   $relops.each |String $user| {
     User<| title == $user |> { groups +> ['slurm'] }
   }
