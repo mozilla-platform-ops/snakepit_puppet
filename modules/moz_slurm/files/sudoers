@@ -33,6 +33,7 @@ kitchen 	ALL=(ALL)	NOPASSWD: ALL
 %sudo   ALL=(ALL:ALL) ALL
 
 # allow evgeny to su to slurm
+#   how to: `sudo -i -u slurm`
 # pragma: allowlist nextline secret
 epavlov  ALL=(slurm) NOPASSWD:ALL
 

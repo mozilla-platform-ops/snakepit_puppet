@@ -27,6 +27,7 @@ class moz_slurm::users {
     uid        => $slurm_user_uid,
     gid        => $slurm_user_gid,
     home       => "/home/${slurm_user_name}",
+    shell      => '/bin/bash',
     managehome => true,
     forcelocal => true,
     system     => true,
