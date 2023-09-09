@@ -16,7 +16,7 @@ define users::single_user (
 
   $group = $facts['os']['name'] ? {
     # 'Darwin' => 'staff',
-    default  => '',
+    default  => 'users',
   }
 
   $home = $facts['os']['name'] ? {
