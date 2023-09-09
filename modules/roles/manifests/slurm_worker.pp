@@ -9,7 +9,6 @@ class roles::slurm_worker {
   include moz_slurm
   include moz_slurm::users
   include moz_slurm::packages
-  include moz_slurm::worker::nfs
   include moz_slurm::worker::disable_automated_upgrades
 
   # TODO: configure worker's env vars to use proxy

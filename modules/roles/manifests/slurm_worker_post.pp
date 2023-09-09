@@ -13,6 +13,7 @@ class roles::slurm_worker_post {
   # TODO: should moz_slurm's children include this?
   include moz_slurm
 
+  include moz_slurm::worker::nfs
   include moz_slurm::worker::install_cuda
   include moz_slurm::worker::fix_slurmd_service
 
