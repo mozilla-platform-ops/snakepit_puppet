@@ -175,6 +175,12 @@ rake pkg_config_test
 
 ## misc
 
+### puppet lookup
+
+```
+puppet lookup  --hiera_config ./hiera.yaml --explain slurm::cluster_name
+```
+
 ### links
 
 - puppet module used for slurm
