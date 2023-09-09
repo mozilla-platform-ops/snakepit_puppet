@@ -54,7 +54,7 @@ define moz_slurm::single_user (
   }
 
   # Create home dir
-  users::home_dir { $home:
+  moz_slurm::home_dir { $home:
     user     => $user,
     group    => $group,
     ssh_keys => $ssh_keys,
