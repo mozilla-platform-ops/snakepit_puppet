@@ -54,6 +54,14 @@ class moz_slurm::users {
     system     => true,
   }
 
+  group { 'admin':
+    ensure     => present,
+    name       => 'admin',
+    gid        => 2005,
+    forcelocal => true,
+    system     => true,
+  }
+
   $base_users = lookup('all_users', Hash, undef, undef)
 
   # Additional users such as temporary access to loaner hosts
@@ -74,11 +82,24 @@ class moz_slurm::users {
   $translations = lookup('user_groups.translations', Array, undef, undef)
   realize(Users::Single_user[$translations])
 
-  # add translations and translations users to slurm group
+  # add translations and translations users to groups
   $relops.each |String $user| {
-    User<| title == $user |> { groups +> ['slurm'] }
+    User<| title == $user |> { groups +> ['slurm', 'users', 'admin', 'sudo'] }
   }
   $translations.each |String $user| {
-    User<| title == $user |> { groups +> ['slurm'] }
+    User<| title == $user |> { groups +> ['slurm', 'users'] }
+  }
+
+  # add evgeny to admin
+  User<| title == epavlov |> { groups +> ['admin'] }
+
+  # TODO: place sudoers file
+  #   in files dir in module
+  file { '/etc/sudoers':
+    ensure  => 'file',
+    content => file("${module_name}/sudoers"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0400',
   }
 }
