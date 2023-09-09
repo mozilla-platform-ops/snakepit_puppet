@@ -66,11 +66,11 @@ jobs:
       - checkout
       - gem_cache
       - apt_cache_restore
-      - run:
-          name: fix netssh
-          command: |
-            export DEBIAN_FRONTEND=noninteractive
-            sudo apt install -y ruby-net-ssh
+      # - run:
+      #     name: fix netssh
+      #     command: |
+      #       export DEBIAN_FRONTEND=noninteractive
+      #       sudo apt install -y ruby-net-ssh
           # command: sudo apt update && sudo apt upgrade -y
       # - run:
       #     name: fix vagrant
