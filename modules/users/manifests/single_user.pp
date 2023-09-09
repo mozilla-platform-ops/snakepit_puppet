@@ -2,7 +2,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-define moz_slurm::single_user (
+define users::single_user (
   String $user                 = $title,
   String $shell                = '/bin/bash',
   Array $ssh_keys              = [],
@@ -54,7 +54,7 @@ define moz_slurm::single_user (
   }
 
   # Create home dir
-  moz_slurm::home_dir { $home:
+  users::home_dir { $home:
     user     => $user,
     group    => $group,
     ssh_keys => $ssh_keys,

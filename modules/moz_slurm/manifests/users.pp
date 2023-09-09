@@ -63,13 +63,13 @@ class moz_slurm::users {
   $all_users = $base_users + $additional_users
 
   # rename to materialize users
-  class { 'moz_slurm::all_users':
+  class { 'users::all_users':
     all_users => $all_users,
   }
 
   $relops = lookup('user_groups.relops', Array, undef, undef)
-  realize(moz_slurm::single_user[$relops])
-  $relops.each |String $user| {
-    User<| title == $user |> { groups +> ['slurm'] }
-  }
+  realize(Users::Single_user[$relops])
+  # $relops.each |String $user| {
+  #   User<| title == $user |> { groups +> ['slurm'] }
+  # }
 }
