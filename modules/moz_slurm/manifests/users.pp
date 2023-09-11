@@ -80,6 +80,6 @@ class moz_slurm::users {
     content => file("${module_name}/sudoers"),
     owner   => 'root',
     group   => 'root',
-    mode    => '0400',
+    mode    => '0440',
   }
 }
