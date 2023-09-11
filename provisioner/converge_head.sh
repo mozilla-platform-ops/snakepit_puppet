@@ -50,6 +50,9 @@ function update_puppet {
     git fetch --all --prune || return 1
     git checkout --force "origin/${PUPPET_BRANCH}" || return 1
 
+    # show where we're at
+    git --no-pager show
+
     # TODO: bolt module purge or equivalent?
 
     # Install bolt modules
@@ -79,6 +82,9 @@ function run_puppet {
     # PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
     # debugging
     PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--debug' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=true' '--detailed-exitcodes' './manifests/')
+    # debugging noop
+    #PUPPET_OPTIONS=("--noop" "--modulepath=./modules:${BOLT_DIR}" '--debug' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=true' '--detailed-exitcodes' './manifests/')
+
 
     # check for 'Error:' in the output; this catches errors even
     # when the puppet exit status is incorrect.
