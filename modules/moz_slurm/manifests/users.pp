@@ -63,8 +63,9 @@ class moz_slurm::users {
   realize(Users::Single_user[$releng])
 
   # add users to groups
+  # - we don't want 'sudo' as it requires a password
   $relops.each |String $user| {
-    User<| title == $user |> { groups +> ['slurm', 'users', 'admin', 'sudo'] }
+    User<| title == $user |> { groups +> ['slurm', 'users', 'admin'] }
   }
   $translations.each |String $user| {
     User<| title == $user |> { groups +> ['slurm', 'users'] }
