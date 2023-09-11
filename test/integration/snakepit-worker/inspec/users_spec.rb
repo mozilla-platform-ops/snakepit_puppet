@@ -18,7 +18,7 @@ end
 
 describe user("aerickson") do
   it { should exist }
-  its('groups') { should eq ["users", "sudo", "slurm", "admin"]}
+  its('groups') { should eq ["users", "slurm", "admin"]}
 end
 
 describe user("epavlov") do
