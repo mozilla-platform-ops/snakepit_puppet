@@ -161,6 +161,7 @@ user_groups:
     - rcurran
   releng:
     - bhearsum
+    - gabriel
   translations:
     - epavlov
     - marco
@@ -207,6 +208,11 @@ all_users:
     ssh_keys:
       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOtBhVQFi++zDdhoDzh/eCVrnRwnuUAIzDa5LQr0LBjX
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2fC5l1mt0f0wM+xKA/sEgEMq/nPfFSTrNK42XOicnyXBF7WyGP+bFrLnCBOfBSHMTW0zW5Km5Ewotu7JR/VZ74CZv3wgv0eGoTWkm6zBD7G0AvcI5HRuBJMjrGPoXcbdpkKUPDLG4I4Ijp3avCi//tcFOTdXv2Y9XSMR827YhMS7IsamVsaCEYmKJrv/gYy0kH4wrtLCiCv+bKz4vQ0aNB+qa93715/KzbZmZ0kWAOUcz869950qz8c5uSM/CqoOhq9SCKU6zoaR8gF3rJk7OTQpWnMeegWS1GBNWSXU2pB6zrijUjjBZHIFFcYCP3Wz+pxQBmuFqzSN62TKvbLezzomyJBXjBwYxRBGLRDm/1wk3y++INkHYWuzi93RdnUg1t+0u/eHw4pguqyNp+m7FPrc6iZkOncQLbhZmTvZFlopVrMZAB/UwTz1+srDG3rBmRT571t27eAaY5A+OuvWh4u0akS8QzhO2uhY+QjixuXsFyNipsEpoq+GwxwjKuoM= bhearsum@voot
+
+  gabriel:
+    uid: 2009
+    ssh_keys:
+      -     ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDckeV1kqxcageX4KWL9Shq+sig7tUTYexXmB5dMC3oIAOl5pSYu0f6AOA1xkzlJPRturYJG10O1Kuzv4EY3EyoF+DQG0Gremb+iWdGvZutzGwWSXitcwZZ8bUoq3TADuEdhWDfsyGf3vYlO/IbmoO1Sedc4cD//Xre8q0D1rXWDkV+Ik43WA9qcpIo1pIklS8Y1iT4r6oSC0fFM5ELqyJilZj/gy3vjT8fWSXt6KTIs2Qkc5Ayz5Y7FUlRf9MplzyQKoxKtT+MsaaNoVgKJea/OVnwyFcEvMGZytJZN7GpqSUJO4W9Fp8PQX1bJ5PxjKVcHZ/Pmt9XnmkBAaSpvr5nCSZ1sleO/z5Att6NulUbqUChSKeoFacCyQ7IYwX1myVOFCi4rLrDzCYwPxIjroWh+VuNZoXUUrAL4BFHB7Df2skDsyznm1OqUTqk06TNfCQOf7Xt5DGsw2eAPA5xD0qlOrVBNhOVIVwETNqZSTSvBQgqcIGBh1XbbbJSbi8tww96tXK831hQ+83EASUi3MpMz3ZcoeFVE6P/TMJCiGygRsvgyv4z0AJ1AYi9viWxAfmQVd661k84qiN547GU9A6HwMABsw4p+mg3LsvMtU7ka1aiKwpmIFJq+8HNmBvdYKGXsMwxQwmXpuYgry2yV+2GYn4XbArNz8qPUszxzXZwqQ== Mozilla_key
 
   # external users
 
