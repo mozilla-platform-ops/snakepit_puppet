@@ -48,7 +48,10 @@ function update_puppet {
 
     # Fetch and checkout production branch
     git fetch --all --prune || return 1
-    git checkout --force origin/${PUPPET_BRANCH} || return 1
+    git checkout --force "origin/${PUPPET_BRANCH}" || return 1
+
+    # show where we're at
+    git --no-pager show
 
     # TODO: bolt module purge or equivalent?
 
@@ -62,7 +65,8 @@ function update_puppet {
     cat <<EOF > "${PUPPET_REPO_PATH}/manifests/nodes/nodes.pp"
     node '${FQDN}' {
         include ::roles::${ROLE}
-        include ::roles::${ROLE}_post
+        # only converge base
+        # include ::roles::${ROLE}_post
     }
 EOF
 
@@ -78,6 +82,9 @@ function run_puppet {
     # PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--hiera_config=./hiera.yaml' '--logdest=console' '--color=false' '--detailed-exitcodes' './manifests/')
     # debugging
     PUPPET_OPTIONS=("--modulepath=./modules:${BOLT_DIR}" '--debug' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=true' '--detailed-exitcodes' './manifests/')
+    # debugging noop
+    #PUPPET_OPTIONS=("--noop" "--modulepath=./modules:${BOLT_DIR}" '--debug' '--hiera_config=./hiera.yaml' '--logdest=console' '--color=true' '--detailed-exitcodes' './manifests/')
+
 
     # check for 'Error:' in the output; this catches errors even
     # when the puppet exit status is incorrect.
@@ -121,7 +128,7 @@ else
     # first run
     echo "Please set a role in '$ROLE_FILE'!"
     exit 1
-    echo "$ROLE" > $ROLE_FILE
+    # echo "$ROLE" > "$ROLE_FILE"
 fi
 
 # This file should be set by the provisioner and is an error to not have a role

@@ -15,7 +15,7 @@ slurm::slurm_user_shell: /bin/bash
 
 slurm::slurmdbd_host: mlchead
 slurm::slurmdbd_storage_pass: "another_testing_password"
-slurm::slurmdbd_storage_host: 'localhost'  # used for StorageHost and mysql grant
+slurm::slurmdbd_storage_host: "localhost" # used for StorageHost and mysql grant
 # slurm::export_database: true
 # slurm::export_database_tag: "%{lookup('slurm::slurmdbd_storage_host')}"
 slurm::slurm_conf_override:
@@ -28,7 +28,7 @@ slurm::greses:
     auto_detect: nvml
 slurm::partitions:
   txp:
-    default: 'YES'
+    default: "YES"
     def_mem_per_cpu: 2000
     max_mem_per_cpu: 2300
     nodes:
@@ -37,14 +37,14 @@ slurm::partitions:
       - mlc2
       - mlc3
   g2080:
-    default: 'YES'
+    default: "YES"
     def_mem_per_cpu: 2000
     max_mem_per_cpu: 2300
     nodes:
       - mlc4
       - mlc5
   q6000:
-    default: 'YES'
+    default: "YES"
     def_mem_per_cpu: 2000
     max_mem_per_cpu: 2300
     nodes: mlc6
@@ -113,8 +113,8 @@ slurm::nodes:
 
 mysql::root_password: abc123_testing_only
 mysql::server::override_options:
-  'mysqld':
-    'bind-address': '0.0.0.0'
+  "mysqld":
+    "bind-address": "0.0.0.0"
 
 # pragma: allowlist nextline secret
 munge::munge_key_content: !!binary |-
@@ -151,3 +151,88 @@ munge::munge_key_content: !!binary |-
   vQpp77+9Ge+/vT/aiO+/ve+/ve+/vVpK77+96aOF77+977+9Ci3vv718bjMr77+977+9AiXvv70K
   77+9a++/vVBCThU/Ne+/ve+/vR9uN3jvv70n77+9CdCbamzvv73foDEO77+977+9Du+/vX4Q77+9
   77+9
+
+user_groups:
+  relops:
+    - mcornmesser
+    - aerickson
+    - jmoss
+    - mgoossens
+    - rcurran
+  releng:
+    - bhearsum
+    - gabriel
+  translations:
+    - epavlov
+    - marco
+    - sylvestre
+    - gtatum
+
+all_users:
+
+  aerickson:
+    uid: 2001
+    ssh_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCVIzgS4A6o6HZ5QoQvYbRz2Ztwdu1saKSFHz2PfvDiLrhbNzrxekJ+KCYIo0KjmxQGbPFfWYmLQCm1ARdqtU2hBTcm/NQrKZDendLwiX1EGBHvrwy4bwdlm72Hp+O1czb8tyvwgJMfVjmwWMG0FTRHunrv8eFyp9AmSlnDP+BQkEii41f7UY8tdZGbYChLKjHz2px2lhKj1jRt879Vy4zLw9l6wjfJ40A88Cf1rfsblfKP7iS5umeGvtqtSDbOU1dbiH73IJci/GTQiptr/Scu7MBMq/clzD/WGC+cIdregaG7AhZLcr4kqpk2lrAWpfRK/LgHa7vYy8XvRHt+oTpF aerickson@aerickson-45094.local
+
+  mcornmesser:
+    uid: 2002
+    ssh_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAgEAgl+gdJm/ugZQJhjWRldBMoijBAxX9aK4djspM+X+59SqdLidnHG7IyOyzniUVa5IgL8ak91v59zgTM4K9VmLdbH1EttiryJ2juYygBClFQC3p7NiHLhtuJOrrMbb7K53I6dJVxui8f3Rj58nV7Y3wvrdmoxKboVYGLNCWcVhEOFpfvr+RftMPfAgOTBgAXqWt3954OGmDLAPVCUruuNrZpFYZ4WBEVsZYFvljXz7eBZCS1HyeYtDDmNECGSKMvyR1C32kGpDfK+I8cngaZAdhUpEYVWJeIQmACUoilgx8A/K0GfPmnncfi3QJUrucFAmA8f87k4PczamTMszmdmOiXVzKCID2DtH/uunTtDe7toIuA2A0fCYeFGkvEgIUAIifhifduJdbvNuVJ/AmEcOAN9PIAzhGQh7WhPRagJeydgtB2hQihRSaVVQgSNUJA8trAQKAArB/cJSZgIu9PED6ZuRzUWpA3HPzVxyx9v73d/c0ZnacF8VP74ucOaqi+z/QUe3dPKg14x4kJQHthPJm8oVS04sWQjRVTyXgcEnHyYiEOhAq5XCd1Pss7hLICKuc9L4/AKMoKpzf2mqPuhfEHJ77MGHXfGFwY08rFpU54wRiO7tyX09w+S1CKImjoz3mjYZu42W6gIyLbCzxbMaV9aRK27Tn/A1j1NBcQvGEn0= rsa-key-20170619
+      - ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEA1zBG1hfe9OgISQxo0tQgy9VfTWk81mIadB90aSowIfdUZdGg0qoDKY5JHKMxi1BOwzN/UnEO+PeS3pIRY/2Xr7ywMgnoqYo9mkF/Q0EHnjVwjJxWfza9eEvI0SoBpPu1FlCgk+unzedEaJTc0KzNKEjRxVL4/XXvIgV4U/BukYAEYAsPFWXIvkSNi9GrNrAkKRuXCVOItBQjYGP+hg9vbnGOAmzIzgAmxxxos/LH7+z/59H0Cmm4wgzgm5JCRyIIHueYkHJYswx1crr1KQTooghJf+mGV1Iif+ymVylk2nnsdfQLqYHgSte4BnXV9NZGa1PIGmA/+wHVUfaiXNtjOQ== rsa-key-20170620
+
+  jmoss:
+    uid: 2003
+    ssh_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB/I95HQM/Wr9XZkQzXfhFSpqmIiGx0fIegDNtkkoOHW jwmoss88@gmail.com
+
+  mgoossens:
+    uid: 2004
+    ssh_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC0m3qIAdqfCARGJDDeCl65M3UGEpE0uNOvHHw/f+of/XJrnA2vsLdpLEM9M3J5/7MtuB2ePpqHf2K46O2mvCvHq/cJuwUJ7au9OiG6NQngTIYuCjS/u+39vVQz30g25cHpWohsmZce0huSFwXo8+JNgAHUSUcnpExWalCE2zNQ/3ua9xHKoCEg5Radusy2suoQVx+BeD5vy3BV2swjUXBhNCG302NaSE6PhX9zZOyfLjLcdgmltjrsl2jKk0yFdAPNdTOBOSZnZQjD85ATR9gcZwPpPhBMjd+wnqXd5jJJ0MyUcUzkB/8dri+DT5LrhyHCi88exfp8dsHJHN/THaQJalwYtZzKNa30qBotwpjxNp56uZgdynZVZqw3KED8mdOD5/CDSTfSqBpRl0Yv5ITAQ/N901u714xUEzHO3AIW2e7XTLMuOQm5TlCoAHq9Df1z+jKK0tfa1l3U53c9JO18gRmpLYWLnvkcYsjwyDVg60rGaBKhHue2jadQNUD74n8= michellemoz
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDsrIZwueImmSOERVYfVdLa99WnNKVYJRVkPgF/f4S9hzXBSBu+vyINBY9S9dg/ZXpS+gLtHSbmAf5oUCWjPLQvmqWFyG49JtHkinYUbIxghp+/MTlsqP3JA/P1BWUKE1aACOgEENi7v6QG4CkrpYD7/jbBar2kPXe/jYm0gtKirIMVylejk1Kt6xdvCnAo57QXVHXm6HM7JAXH7YjE27i/XZICR2c2Uc8DxjyIfmRZZ3uacOJPXrxO6iq727Anu04gkr1ckhinUhkqwDLqLLJwUyBc0gsXE8bTiskPqCYaGNKR8YJKcrBCVhYAplYh2UNEVkzXW5uZE9PP0osGRB347St/y8BebkAEPlmPgrHFDtRbPc1qX592H6Xq5IcUB/18htgPcE2Jp+W4YywoYT14oYbhbtGW3OySmhOk58dR8Q+uAQBzAd4oOxK3shDGEJi1lWkClpZ4uhHHQWbeyaKq62oY0qSmzPjAZt1nt3Dd9h58R/X/s32hNlP55xPNgHQbroIYqAIERWUaaB9hRUCciKG3ZbJoTgsVOoEIj60Tt29J4vysddBc8Sha31ImM4wMGhMR75lJE4y9mFTNxkSl2q4PzIiar0xoIa0K57E8xrqNXWP3b4zLT6d/0qfeAFKdVbgJTGuaHGQ42L2Ri0RxLvroYjxiOY9zfOCW+7CrLQ== mozyubi01
+
+  rcurran:
+    uid: 2006
+    ssh_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF1CXyzAMcQKec/QAYuprXjtMAZeSdbxMuJ107DIF45j rcurran@mozilla.com
+
+  # from relops_common_keys_2020-09-08.yml
+  relops:
+    uid: 2007
+    ssh_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILB0k0dwdH7h8j+zRPprLFeTgRwkgI6mcjQCeEoaqOY2 Relops ed25519 Key
+
+  bhearsum:
+    uid: 2008
+    ssh_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOtBhVQFi++zDdhoDzh/eCVrnRwnuUAIzDa5LQr0LBjX
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC2fC5l1mt0f0wM+xKA/sEgEMq/nPfFSTrNK42XOicnyXBF7WyGP+bFrLnCBOfBSHMTW0zW5Km5Ewotu7JR/VZ74CZv3wgv0eGoTWkm6zBD7G0AvcI5HRuBJMjrGPoXcbdpkKUPDLG4I4Ijp3avCi//tcFOTdXv2Y9XSMR827YhMS7IsamVsaCEYmKJrv/gYy0kH4wrtLCiCv+bKz4vQ0aNB+qa93715/KzbZmZ0kWAOUcz869950qz8c5uSM/CqoOhq9SCKU6zoaR8gF3rJk7OTQpWnMeegWS1GBNWSXU2pB6zrijUjjBZHIFFcYCP3Wz+pxQBmuFqzSN62TKvbLezzomyJBXjBwYxRBGLRDm/1wk3y++INkHYWuzi93RdnUg1t+0u/eHw4pguqyNp+m7FPrc6iZkOncQLbhZmTvZFlopVrMZAB/UwTz1+srDG3rBmRT571t27eAaY5A+OuvWh4u0akS8QzhO2uhY+QjixuXsFyNipsEpoq+GwxwjKuoM= bhearsum@voot
+
+  gabriel:
+    uid: 2009
+    ssh_keys:
+      -     ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDckeV1kqxcageX4KWL9Shq+sig7tUTYexXmB5dMC3oIAOl5pSYu0f6AOA1xkzlJPRturYJG10O1Kuzv4EY3EyoF+DQG0Gremb+iWdGvZutzGwWSXitcwZZ8bUoq3TADuEdhWDfsyGf3vYlO/IbmoO1Sedc4cD//Xre8q0D1rXWDkV+Ik43WA9qcpIo1pIklS8Y1iT4r6oSC0fFM5ELqyJilZj/gy3vjT8fWSXt6KTIs2Qkc5Ayz5Y7FUlRf9MplzyQKoxKtT+MsaaNoVgKJea/OVnwyFcEvMGZytJZN7GpqSUJO4W9Fp8PQX1bJ5PxjKVcHZ/Pmt9XnmkBAaSpvr5nCSZ1sleO/z5Att6NulUbqUChSKeoFacCyQ7IYwX1myVOFCi4rLrDzCYwPxIjroWh+VuNZoXUUrAL4BFHB7Df2skDsyznm1OqUTqk06TNfCQOf7Xt5DGsw2eAPA5xD0qlOrVBNhOVIVwETNqZSTSvBQgqcIGBh1XbbbJSbi8tww96tXK831hQ+83EASUi3MpMz3ZcoeFVE6P/TMJCiGygRsvgyv4z0AJ1AYi9viWxAfmQVd661k84qiN547GU9A6HwMABsw4p+mg3LsvMtU7ka1aiKwpmIFJq+8HNmBvdYKGXsMwxQwmXpuYgry2yV+2GYn4XbArNz8qPUszxzXZwqQ== Mozilla_key
+
+  # external users
+
+  # TODO: check/compare usernames with phonebook.
+  epavlov:
+    uid: 2100
+    ssh_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDb6LUzoc8YPetUGjDAit0cVXYWVIzT4wigXd+yDdxA15380qvWJzit1mQI7zs713I/hj17PL2JeDMywN4BUWYixmZZ3O5aY1MZAyVD6DSVKfl7P4gTIPBABTI7z+g11bQTFpExzIbJLvbYTFTsYkz7QM0IfzYjHOFI18zYeU2wqg1E9Iluq1mlVI2rmFZ8k4fd2xuNk2agFAqHgdeQIYnLvvadQeuwKw0qp5KeRzA7ONc7fuRBFDv9aBZkZgRBy6AZGU8sspi5Km2ofnJmfD/N1LxzdNK0L/tMmZos0Ldp/SEq8qpa0l3HInlZO/iWH2eNUhwr2hnUNP8NKDqafQ0YYZ+Z4lZChpVzEGjmkpV9TqWJpYeL0fMm4wdm97zab+2Ze0LpriFxOr2rjDq8/kQJIWZGk+Hr+hySur5nWYJMK/9P0n9JPaCbgD2ZrSZeglp95HPxVnGzToBqwWNAfpMMrUYCxyo8hQsQuIPWb7TI4Hphl9R1pwqYo0JHvVaxadJgbNL6o09w1OZ52lz5Prb9s5r13O1kgNPY5Hf6B1bk8HQulTlCQUfFcchWmDIRrYNJP+qqcSfvMf1blw1/aWkeAmQIJDBpHBBie0Buwk7LkNmKyZn2qMgTIRDAkruI4LmGb35vAcNJMldaJsxfdY89jjOqfKtth6DXxR8OfiAbDw== Mozilla_key
+
+  marco:
+    uid: 2101
+    ssh_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBTegMjKcArfphyQu1UNQIJDytGDa2MUYiKOLeeusITm
+
+  gtatum:
+    uid: 2102
+    ssh_keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGi4XBeEsfB6Cm5G0wERRJjv+/WoHjuZXw76K/RbpBAF gtatum@mozilla.com
+
+  sylvestre:
+    uid: 2103
+    ssh_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCd44oAGXWBvYT4UKQ13KJ90dtQI+wUvkmpy/rHJB0l4M2EUf0JBLKAQAWt7eOeb8IkD3L7xggw4Ri85hxLmHA83S63FamX+PKFwJtNl3S1mdd9EBrH6bLA+wnZUeg5/ASMVdfseC+GfQ6qJMD3AuxhvNmtuPH7eIAGyQnd4soLBy59Nbv+qQFkW3fNwmCNLpfS08FOjDVxfyV8GCgKMQRqXGs5eD/8TBSd4cmXsY9Mime9IJWNURbc2T9yZuRmUyJQvvnFYvU0qMUS8SKIr1YckCrWh1QmxNKVrXXr1HIZOkmeSk8cjT7gA3HBEIntPbApzaEuJ6pl4Xm5yXIFRFNV0X9qk1vGugRgwd3gBi3ZErSlsc7CEmbqG/52abZ6oVLpBbSD73dGCniVBolzNmONFDWlWODc6bxUx91LkD6xwVdPrhM2vktVT/B/L6liIuRNhsWMNATysfDQzD+46fU2KriAge+aJgUZvW5lOPnaGpFvYlqguExLj1gkpi687vc= sylvestre@mindoro

@@ -5,7 +5,7 @@ repos:
   - id: check-executables-have-shebangs
   - id: check-json
   - id: check-yaml
-  - id: detect-private-key
+  # - id: detect-private-key
   - id: end-of-file-fixer
   - id: trailing-whitespace
 
@@ -27,14 +27,14 @@ repos:
   hooks:
     - id: shellcheck
 
-- repo: https://github.com/aerickson/pre-commit-hooks
-  rev:  2.1.4-aerickson
-  hooks:
-    - id: standardrb
-      exclude: '^Gemfile*'
+#- repo: https://github.com/aerickson/pre-commit-hooks
+#  rev:  2.1.4-aerickson
+#  hooks:
+#    - id: standardrb
+#      exclude: '^Gemfile*'
 
 - repo: https://github.com/psf/black
-  rev: 23.3.0
+  rev: 23.7.0
   hooks:
     - id: black
 
